@@ -78,7 +78,7 @@ input[type=file]{padding:9px}
 footer{display:grid;gap:18px;justify-items:center;position:relative;z-index:1;text-align:center;color:var(--mut);padding:50px 5vw 40px;font-size:.78rem;border-top:1px solid var(--ln);margin-top:80px}
 #admbar{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0));z-index:30;display:none;gap:4px;background:var(--chip);border:1px solid var(--ln);border-radius:99px;padding:4px;box-shadow:0 8px 28px rgba(0,0,0,.35);animation:fade .5s both}body.adm #admbar{display:flex}
 #admbar button{color:#000;border:0;padding:9px 14px;min-height:0}#admbar button:hover{background:#000;color:#fff}
-#ebar{position:fixed;top:calc(74px + env(safe-area-inset-top,0));left:50%;transform:translateX(-50%);z-index:35;display:none;align-items:center;gap:12px;background:var(--chip);color:#000;border-radius:99px;padding:6px 6px 6px 16px;font-size:.82rem;box-shadow:0 8px 28px rgba(0,0,0,.35);white-space:nowrap;animation:fade .4s both}body.edit #ebar{display:flex}
+#ebar{max-width:calc(100vw - 16px);position:fixed;top:calc(74px + env(safe-area-inset-top,0));left:50%;transform:translateX(-50%);z-index:35;display:none;align-items:center;gap:12px;background:var(--chip);color:#000;border-radius:99px;padding:6px 6px 6px 16px;font-size:.82rem;box-shadow:0 8px 28px rgba(0,0,0,.35);white-space:nowrap;animation:fade .4s both}body.edit #ebar{display:flex}
 #ebar button{padding:8px 16px}
 body.edit [data-k]{outline:1px dashed var(--mut);outline-offset:5px;border-radius:4px;cursor:text}body.edit [data-k]:focus{outline:2px solid var(--fg)}
 .modal{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .35s,visibility 0s .35s}
@@ -500,6 +500,22 @@ html.c-right body.adm #admbar{right:auto;left:14px}
 .stat small{font-size:inherit;opacity:.6}
 @keyframes spl{70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
 html[data-bold=on] body,html[data-bold=on] body *:not(svg):not(svg *){font-weight:700}
+
+/* ===== per-word text styling (bold + color) ===== */
+i.fx{font-style:normal}
+[data-k] b{font-weight:700}
+#fbar{position:fixed;left:0;right:0;margin:0 auto;width:max-content;max-width:calc(100vw - 20px);bottom:calc(14px + env(safe-area-inset-bottom,0));z-index:36;display:none;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 12px;background:var(--chip);color:#000;border-radius:22px;padding:8px 12px;box-shadow:0 8px 28px rgba(0,0,0,.35);animation:fadeo .35s both}
+@keyframes fadeo{from{opacity:0}}
+body.edit #fbar{display:flex}body.edit #admbar{display:none}
+#fbar .g{display:flex;align-items:center;gap:6px}
+#fbar button{color:#000;background:#fff;border:1px solid #cfcfcf;min-height:0;height:32px;padding:0 12px;border-radius:99px;font-size:.78rem;-webkit-user-select:none;user-select:none}
+#fbar button:hover{background:#000;color:#fff;border-color:#000}
+#fbar #fb{width:38px;padding:0;font-size:.95rem}#fbar #fb.on{background:#000;color:#fff;border-color:#000}
+#fbar .sw button{width:26px;height:26px;padding:0;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #bdbdbd}
+#fbar .sw button:hover{transform:scale(1.15);border-color:#fff}
+#fbar .cus{position:relative;width:26px;height:26px;border-radius:50%;box-shadow:0 0 0 1px #bdbdbd;border:2px solid #fff;background:conic-gradient(#f87171,#facc15,#4ade80,#22d3ee,#a78bfa,#f472b6,#f87171);overflow:hidden;cursor:pointer;display:block}
+#fbar .cus input{position:absolute;inset:-6px;width:calc(100% + 12px);height:calc(100% + 12px);min-height:0;opacity:0;cursor:pointer;padding:0;border:0}
+@media(max-width:520px){#fbar{padding:8px 10px;gap:8px}}
 </style></head><body class="ld">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"></path><path d="M5 10v10h14V10"></path><path d="M10 20v-6h4v6"></path></symbol>
@@ -569,15 +585,16 @@ html[data-bold=on] body,html[data-bold=on] body *:not(svg):not(svg *){font-weigh
 <footer class="mono"><span data-k="foot">© 2026 John Eduard Bonilo · BSEE · Caraga State University – Cabadbaran Campus</span><button data-go="hero"><svg class="i"><use href="#up"></use></svg>Back to top</button></footer>
 
 <div id="admbar"><button id="admcmd" title="Command palette (Ctrl+K)"><svg class="i"><use href="#bolt"></use></svg>Commands</button><button id="admopen"><svg class="i"><use href="#gear"></use></svg>Admin</button><button class="lo2"><svg class="i"><use href="#out"></use></svg>Log out</button></div>
-<div id="ebar"><svg class="i"><use href="#edit"></use></svg>Tap any text to edit it<button class="solid" id="edone">Done</button></div>
+<div id="ebar"><svg class="i"><use href="#edit"></use></svg>Tap to edit · select a word to style it<button class="solid" id="edone">Done</button></div>
+<div id="fbar" role="toolbar" aria-label="Text style"><div class="g"><button type="button" id="fb" aria-label="Bold" title="Bold (Ctrl+B)"><b style="font-weight:800">B</b></button><label class="cus" title="Custom color"><input type="color" id="fcol" value="#facc15" aria-label="Custom color"></label><button type="button" id="fclr" title="Remove bold and color from the selected word">Clear</button></div><div class="g sw" id="fsw"></div></div>
 <div class="modal" id="m1"><div class="box"><div class="top"><span class="chip"><svg class="i"><use href="#lock"></use></svg></span><div><h3>Admin sign-in</h3><p class="sub">Enter your password to edit this site.</p></div></div>
 <label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password"><div class="row"><button class="solid" id="login" style="flex:1">Sign in</button><button data-close="">Cancel</button></div><p class="note" style="margin-top:14px;text-align:center"><a href="#" id="forgot" style="color:var(--fg)">Forgot password?</a></p></div></div>
 <div class="modal side" id="m2"><div class="box"><div class="top"><span class="chip"><svg class="i"><use href="#gear"></use></svg></span><div><h3>Admin</h3><p class="sub">Edit mode</p></div><button class="lo"><svg class="i"><use href="#out"></use></svg>Log out</button><button class="ib x" data-close="" aria-label="Close"><svg class="i"><use href="#x"></use></svg></button></div>
 <div class="tabs"><button data-t="p" class=""><svg class="i"><use href="#user"></use></svg>Profile</button><button data-t="j" class=""><svg class="i"><use href="#work"></use></svg>Projects</button><button data-t="g" class=""><svg class="i"><use href="#image"></use></svg>Gallery</button><button data-t="t"><svg class="i"><use href="#edit"></use></svg>Texts</button><button data-t="e" class="act"><svg class="i"><use href="#down"></use></svg>Publish</button><button data-t="m" class=""><svg class="i"><use href="#mail"></use></svg>Inbox</button><button data-t="s"><svg class="i"><use href="#gear"></use></svg>Settings</button><button data-t="a"><svg class="i"><use href="#lock"></use></svg>Account</button></div>
-<div class="pane" data-p="p"><label for="aIn">About text</label><textarea id="aIn" rows="5"></textarea><label for="pIn">Profile photo</label><div class="pv"><img id="pv" alt=""><input type="file" id="pIn" accept="image/*"></div><div class="row"><button id="rmP"><svg class="i"><use href="#trash"></use></svg>Remove photo</button></div><label for="fIn">Contact form link (Formspree, optional)</label><input id="fIn" placeholder="https://formspree.io/f/xxxx"></div>
+<div class="pane" data-p="p"><label for="aIn">About text <span style="opacity:.6;text-transform:none">(typing here removes per-word styling; style words from Texts → Edit texts on the page)</span></label><textarea id="aIn" rows="5"></textarea><label for="pIn">Profile photo</label><div class="pv"><img id="pv" alt=""><input type="file" id="pIn" accept="image/*"></div><div class="row"><button id="rmP"><svg class="i"><use href="#trash"></use></svg>Remove photo</button></div><label for="fIn">Contact form link (Formspree, optional)</label><input id="fIn" placeholder="https://formspree.io/f/xxxx"></div>
 <div class="pane" data-p="j"><label for="ptT">Title</label><input id="ptT"><label for="ptD">Description</label><textarea id="ptD" rows="3"></textarea><label for="ptI">Photo (optional)</label><input type="file" id="ptI" accept="image/*"><p class="note" id="epNote" style="display:none"></p><div class="row"><button class="solid" id="addP" style="flex:1"><svg class="i"><use href="#plus"></use></svg><span id="addPT">Add project</span></button><button id="rmPI" style="display:none"><svg class="i"><use href="#trash"></use></svg>Remove photo</button><button id="cancelP" style="display:none">Cancel</button></div><div id="alist"></div></div>
 <div class="pane" data-p="g"><label for="gIn">Add photos</label><input type="file" id="gIn" accept="image/*" multiple=""><div class="thumbs" id="agl"></div></div>
-<div class="pane" data-p="t"><p class="note" style="margin-top:16px">Edit the words right on the page. Tap your name, a heading, the About text, or a label and type. Changes save automatically.</p><div class="row"><button class="solid" id="etEdit" style="flex:1"><svg class="i"><use href="#edit"></use></svg>Edit texts on the page</button></div><label for="rIn">Typing words under your name (separate with commas)</label><input id="rIn"><div class="row"><button id="rst"><svg class="i"><use href="#trash"></use></svg>Reset headings and labels</button></div></div>
+<div class="pane" data-p="t"><p class="note" style="margin-top:16px">Edit the words right on the page. Tap your name, a heading, the About text, or a label and type. Then select a single word (or just tap inside it) and use the bar at the bottom to make it bold or give it its own color. Changes save automatically.</p><div class="row"><button class="solid" id="etEdit" style="flex:1"><svg class="i"><use href="#edit"></use></svg>Edit texts on the page</button></div><label for="rIn">Typing words under your name (separate with commas)</label><input id="rIn"><div class="row"><button id="rst"><svg class="i"><use href="#trash"></use></svg>Reset headings and labels</button></div></div>
 <div class="pane" data-p="m"><div class="row" style="align-items:center;margin-top:16px"><b style="flex:1">Messages <small id="mcount" class="mono" style="opacity:.6">(0)</small></b><button id="mref">Refresh</button></div><div id="mlist"><p class="note">No messages yet.</p></div></div>
 <div class="pane" data-p="s" id="spane"></div>
 <div class="pane" data-p="a"><p class="note" style="margin-top:16px">Change your admin password. Signed in as <b id="acEmail">bonillojohneduard@gmail.com</b>.</p><label for="cp0">Current password</label><input id="cp0" type="password" autocomplete="current-password"><label for="cp1">New password (at least 8 characters)</label><input id="cp1" type="password" autocomplete="new-password"><label for="cp2">Confirm new password</label><input id="cp2" type="password" autocomplete="new-password"><div class="row"><button class="solid" id="cpGo" style="flex:1">Change password</button></div><p class="note">Forgot it? Log out, open the sign-in box and tap "Forgot password?". A reset link is sent to your email.</p></div>
@@ -605,15 +622,64 @@ const ADMIN_EMAIL='bonillojohneduard@gmail.com';
 // ================================================================
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const S=JSON.parse($('#state').textContent);S.v=S.v||0;const B=S.v;
-S.t=S.t||{};
+S.t=S.t||{};S.h=S.h||{};
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);let pt,hasRow=false;
 const persist=()=>{S.v=Date.now();clearTimeout(pt);pt=setTimeout(async()=>{const{error}=await sb.from('site_state').upsert({id:1,data:S,updated_at:new Date().toISOString()});if(error)toast('Not saved: '+(error.message||'sign in again'));else{hasRow=true;try{localStorage.setItem('ej_cache',JSON.stringify(S))}catch(e){}}},500)};
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.i);toast.i=setTimeout(()=>t.classList.remove('on'),2600)};
 const ic=n=>`<svg class="i"><use href="#${n}"/></svg>`;
 const DF={};$$('[data-k]').forEach(e=>DF[e.dataset.k]=e.textContent);
+
+// ===== rich text: per-word bold + color =====
+const toHex=v=>{if(!v)return null;v=String(v).trim().toLowerCase();let m;
+ if(m=v.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/)){let h=m[1];if(h.length===3)h=h.replace(/./g,'$&$&');return'#'+h}
+ if(m=v.match(/^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.]+)\s*)?\)$/)){if(m[4]!=null&&+m[4]===0)return null;return'#'+[m[1],m[2],m[3]].map(n=>Math.min(255,+n).toString(16).padStart(2,'0')).join('')}
+ return null};
+// flatten an element into characters + formatting so we can restyle exactly the picked word
+function flat(el){
+ const T=[],F=[],U=[],pre=new Map(),post=new Map();
+ let base=null;try{if(el.isConnected)base=toHex(getComputedStyle(el).color)}catch(e){}
+ (function w(n,b,c){
+  for(const x of n.childNodes){
+   pre.set(x,T.length);
+   if(x.nodeType===3){const v=x.nodeValue;U.push({n:x,s:T.length,l:v.length,t:3});for(let i=0;i<v.length;i++){T.push(v[i]);F.push({b,c})}}
+   else if(x.nodeType===1){
+    const tag=x.nodeName;
+    if(tag==='BR'){U.push({n:x,s:T.length,l:1,t:1});T.push('\n');F.push({b,c});post.set(x,T.length);continue}
+    let nb=b,nc=c;
+    if(tag==='B'||tag==='STRONG')nb=true;
+    let col=x.style?toHex(x.style.color):null;if(!col&&tag==='FONT')col=toHex(x.getAttribute('color'));
+    if(col&&col!==base)nc=col;
+    if(/^(DIV|P|LI|H[1-6]|UL|OL|BLOCKQUOTE|PRE)$/.test(tag)&&T.length&&T[T.length-1]!=='\n'){T.push('\n');F.push({b:nb,c:nc})}
+    w(x,nb,nc);post.set(x,T.length);
+   }
+  }
+ })(el,false,null);
+ return{el,T,F,U,pre,post}
+}
+// turn characters back into clean, safe html (only <b> and <i class="fx" style="color">)
+function gen(T,F){
+ let out='',i=0;
+ while(i<T.length){
+  let j=i;const f=F[i];
+  while(j<T.length&&F[j].b===f.b&&F[j].c===f.c)j++;
+  let h=T.slice(i,j).join('').split('\n').map(esc).join('<br>');
+  if(f.c)h='<i class="fx" style="color:'+f.c+';-webkit-text-fill-color:'+f.c+'">'+h+'</i>';
+  if(f.b)h='<b>'+h+'</b>';
+  out+=h;i=j;
+ }
+ return out
+}
+function clean(h){try{const d=new DOMParser().parseFromString('<body>'+h+'</body>','text/html');const f=flat(d.body);return gen(f.T,f.F)}catch(e){return null}}
+function saveRich(el){
+ const k=el.dataset.k,f=flat(el),txt=f.T.join('');
+ S.h=S.h||{};
+ if(k==='about')S.about=txt;else S.t[k]=txt;
+ if(f.F.some(x=>x.b||x.c))S.h[k]=gen(f.T,f.F);else delete S.h[k];
+ persist()
+}
 function render(){
- $$('[data-k]').forEach(e=>{const k=e.dataset.k,v=k==='about'?S.about:S.t[k];if(v!=null&&e!==document.activeElement)e.textContent=v});
+ $$('[data-k]').forEach(e=>{const k=e.dataset.k,v=k==='about'?S.about:S.t[k];if(e===document.activeElement)return;const h=S.h&&S.h[k];if(h){const c=clean(h);if(c!==null){e.innerHTML=c;return}}if(v!=null)e.textContent=v});
  const p=$('#photo');if(S.photo){p.src=S.photo;p.style.display='block'}else p.style.display='none';
  $('#pv').src=S.photo||'data:,';
  const X=(a,v)=>`<button class="del" ${a}="${v}" aria-label="Remove">${ic('x')}</button>`;
@@ -735,10 +801,74 @@ const logout=()=>{sb.auth.signOut();try{sessionStorage.removeItem('adm')}catch(e
 $$('.lo,.lo2').forEach(b=>b.onclick=logout);
 $('#etEdit').onclick=()=>{$$('.modal').forEach(m=>m.classList.remove('on'));setEdit(true);scrollTo({top:0,behavior:'smooth'})};
 $('#edone').onclick=()=>{setEdit(false);toast('Texts saved')};
-document.addEventListener('input',e=>{const k=e.target.dataset&&e.target.dataset.k;if(!k||!document.body.classList.contains('edit'))return;if(k==='about')S.about=e.target.textContent;else S.t[k]=e.target.textContent;persist()});
+// ----- per-word style bar -----
+(()=>{
+ const COL=['#facc15','#fb923c','#f87171','#f472b6','#a78bfa','#60a5fa','#22d3ee','#4ade80'];
+ const bar=$('#fbar'),sw=$('#fsw'),fb=$('#fb');let saved=null;
+ sw.innerHTML=COL.map(c=>'<button type="button" data-c="'+c+'" style="background:'+c+'" aria-label="Color '+c+'"></button>').join('');
+ // keep the text selection alive when tapping the bar
+ bar.addEventListener('mousedown',e=>{if(!e.target.closest('.cus'))e.preventDefault()});
+ const ed=()=>document.body.classList.contains('edit');
+ function pick(){
+  if(!saved||!saved.el.isConnected)return null;
+  const f=flat(saved.el),r=saved.r;
+  const off=(n,o)=>{if(n.nodeType===3){const u=f.U.find(u=>u.n===n);return u?u.s+o:0}const k=n.childNodes;if(o<k.length){const v=f.pre.get(k[o]);if(v!=null)return v}const v=n===f.el?f.T.length:f.post.get(n);return v!=null?v:f.T.length};
+  let s=off(r.startContainer,r.startOffset),e=off(r.endContainer,r.endOffset);
+  if(s>e)[s,e]=[e,s];
+  if(s===e){while(s>0&&!/\s/.test(f.T[s-1]))s--;while(e<f.T.length&&!/\s/.test(f.T[e]))e++}
+  const idx=[];for(let i=s;i<e;i++)if(f.T[i]!=='\n')idx.push(i);
+  return{f,s,e,idx}
+ }
+ function point(f,i,end){
+  for(const u of f.U){
+   if(u.t===3){if(end?(i>u.s&&i<=u.s+u.l):(i>=u.s&&i<u.s+u.l))return[u.n,i-u.s]}
+   else if(!end&&i===u.s)return[u.n.parentNode,[...u.n.parentNode.childNodes].indexOf(u.n)];
+   else if(end&&i===u.s+1)return[u.n.parentNode,[...u.n.parentNode.childNodes].indexOf(u.n)+1]
+  }
+  return[f.el,f.el.childNodes.length]
+ }
+ function apply(kind,val){
+  if(!ed())return;
+  const p=pick();
+  if(!p){toast('Tap on some text first, then select a word');return}
+  if(!p.idx.length){toast('Select a word first');return}
+  const{f,s,e,idx}=p,F=f.F;
+  if(kind==='b'){const all=idx.every(i=>F[i].b);idx.forEach(i=>F[i].b=!all)}
+  else if(kind==='c')idx.forEach(i=>F[i].c=val);
+  else idx.forEach(i=>{F[i].b=false;F[i].c=null});
+  const el=f.el;el.innerHTML=gen(f.T,F);
+  const g=flat(el),a=point(g,s,false),z=point(g,e,true),r=document.createRange();
+  try{r.setStart(a[0],a[1]);r.setEnd(z[0],z[1]);el.focus({preventScroll:true});const sel=getSelection();sel.removeAllRanges();sel.addRange(r);saved={el,r:r.cloneRange()}}catch(x){}
+  saveRich(el);refresh()
+ }
+ function refresh(){const p=ed()?pick():null;fb.classList.toggle('on',!!(p&&p.idx.length&&p.idx.every(i=>p.f.F[i].b)))}
+ document.addEventListener('selectionchange',()=>{
+  if(!ed())return;
+  const s=getSelection();if(!s.rangeCount)return;
+  const r=s.getRangeAt(0),n=r.commonAncestorContainer,el=(n.nodeType===3?n.parentElement:n);
+  const k=el&&el.closest?el.closest('[data-k]'):null;
+  if(k&&k.isContentEditable){saved={el:k,r:r.cloneRange()};refresh()}
+ });
+ fb.onclick=()=>apply('b');
+ $('#fclr').onclick=()=>apply('x');
+ sw.onclick=e=>{const b=e.target.closest('[data-c]');if(b)apply('c',b.dataset.c)};
+ $('#fcol').onchange=e=>apply('c',e.target.value);
+ document.addEventListener('keydown',e=>{
+  if(!ed()||!(e.ctrlKey||e.metaKey)||!e.target.closest||!e.target.closest('[data-k]'))return;
+  const k=e.key.toLowerCase();
+  if(k==='b'){e.preventDefault();apply('b')}else if(k==='i'||k==='u')e.preventDefault()
+ });
+ // paste as plain text so nothing foreign sneaks in
+ document.addEventListener('paste',e=>{
+  if(!ed()||!e.target.closest||!e.target.closest('[data-k]'))return;
+  e.preventDefault();const t=(e.clipboardData||window.clipboardData).getData('text/plain');document.execCommand('insertText',false,t)
+ });
+})();
+
+document.addEventListener('input',e=>{const k=e.target.dataset&&e.target.dataset.k;if(!k||!document.body.classList.contains('edit'))return;saveRich(e.target)});
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.dataset&&e.target.dataset.k&&e.target.dataset.k!=='about'){e.preventDefault();e.target.blur()}});
 $('#rIn').oninput=e=>{S.roles=e.target.value.split(',').map(x=>x.trim()).filter(Boolean);W=S.roles.length?S.roles:DW;wi=0;ci=0;del=false;persist()};
-$('#rst').onclick=()=>{S.t={};S.roles=null;W=DW;wi=0;ci=0;del=false;$$('[data-k]').forEach(e=>{if(e.dataset.k!=='about')e.textContent=DF[e.dataset.k]});$('#rIn').value=DW.join(', ');persist();toast('Headings and labels reset')};
+$('#rst').onclick=()=>{S.t={};S.roles=null;W=DW;wi=0;ci=0;del=false;if(S.h)Object.keys(S.h).forEach(k=>{if(k!=='about')delete S.h[k]});$$('[data-k]').forEach(e=>{if(e.dataset.k!=='about')e.textContent=DF[e.dataset.k]});$('#rIn').value=DW.join(', ');persist();toast('Headings and labels reset')};
 
 // ===== gallery view size =====
 function setGV(v,save){const g=$('#glist');g.classList.toggle('lg',v==='lg');g.classList.toggle('sm',v!=='lg');$('#vL').classList.toggle('act',v==='lg');$('#vS').classList.toggle('act',v!=='lg');$('#vL').setAttribute('aria-pressed',v==='lg');$('#vS').setAttribute('aria-pressed',v!=='lg');if(save){try{localStorage.setItem('gv',v)}catch(e){}}}
@@ -855,7 +985,7 @@ async function loadInbox(){const box=$('#mlist');box.innerHTML='<p class="note">
   return `<div class="imc" data-mo="${esc(m.id)}" role="button" tabindex="0" aria-label="Open message from ${esc(nm)}">${av}<div class="imb"><div class="imh"><b>${esc(nm)}</b><small class="mono">${esc(fmt(m.created_at))}</small></div><p class="imp">${esc(t)}</p><div class="imo">Open &amp; save as photo</div></div><button class="ib" data-dm="${esc(m.id)}" aria-label="Delete message">${ic('trash')}</button></div>`}).join(''):'<p class="note">No messages yet.</p>'}
 document.addEventListener('click',async e=>{if(e.target.closest('[data-t="m"]')||e.target.closest('#mref'))loadInbox();const d=e.target.closest('[data-dm]');if(d){const{error}=await sb.from('messages').delete().eq('id',d.dataset.dm);if(error)toast('Could not delete: '+error.message);else{toast('Message deleted');loadInbox()}}});
 $('#fIn').oninput=e=>{S.form=e.target.value.trim();persist()};
-$('#aIn').oninput=e=>{S.about=e.target.value;render();persist()};
+$('#aIn').oninput=e=>{S.about=e.target.value;if(S.h)delete S.h.about;render();persist()};
 $('#pIn').onchange=async e=>{if(e.target.files[0]){S.photo=await img(e.target.files[0]);render();persist();toast('Profile photo updated')}};
 $('#rmP').onclick=()=>{S.photo='';render();persist();toast('Photo removed')};
 $('#addP').onclick=async()=>{const t=$('#ptT').value.trim();if(!t){toast('Add a title first');return}const f=$('#ptI').files[0],b=$('#addP');b.disabled=true;
