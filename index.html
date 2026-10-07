@@ -798,7 +798,13 @@ addEventListener('keydown',e=>{if(e.key==='Escape')$$('.modal').forEach(m=>m.cla
 try{const t=localStorage.getItem('th');if(t)document.documentElement.dataset.theme=t}catch(e){}
 $('#theme').onclick=()=>{const r=document.documentElement,n=r.dataset.theme==='light'?'dark':'light';r.dataset.theme=n;try{localStorage.setItem('th',n)}catch(e){}};
 addEventListener('pointermove',e=>{if(document.documentElement.dataset.glow!=='on')return;const s=$('#glow').style;s.setProperty('--x',e.clientX+'px');s.setProperty('--y',e.clientY+'px')});
-const io=new IntersectionObserver(a=>a.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.08});$$('.rv').forEach(e=>io.observe(e));
+/* animations replay every time a section enters the screen (scroll down OR up) */
+const noMotion=()=>matchMedia('(prefers-reduced-motion: reduce)').matches||document.documentElement.dataset.anim==='off';
+const io=new IntersectionObserver(a=>a.forEach(x=>{const t=x.target;if(x.isIntersecting&&x.intersectionRatio>=.08)t.classList.add('in');else if(!x.isIntersecting&&!noMotion())t.classList.remove('in')}),{threshold:[0,.08]});$$('.rv').forEach(e=>io.observe(e));
+function replayAnim(sel){const els=$$(sel);els.forEach(e=>e.style.animationName='none');void document.body.offsetWidth;els.forEach(e=>e.style.animationName='')}
+function replayOnReenter(target,sel){let out=false;new IntersectionObserver(a=>a.forEach(x=>{if(!x.isIntersecting){out=true}else if(out){out=false;if(!noMotion())replayAnim(sel)}}),{threshold:[0,.2]}).observe(target)}
+replayOnReenter($('#hero'),'#hero .ann,#hero .stat,#hero .school,#hero h1 span,#hero .typed,#hero .cta,#photo');
+replayOnReenter($('footer'),'footer [data-k]');
 // typing
 const DW=['Circuits & Electronics','Power Systems','Signals & Control','Energy & Innovation'];let W=S.roles&&S.roles.length?S.roles:DW;let wi=0,ci=0,del=false;
 (function ty(){const w=W[wi];ci+=del?-1:1;$('#typed').textContent=w.slice(0,ci);let d=del?35:80;if(!del&&ci===w.length){del=true;d=1400}else if(del&&ci===0){del=false;wi=(wi+1)%W.length;d=300}setTimeout(ty,d)})();
