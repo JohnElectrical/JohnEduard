@@ -857,6 +857,13 @@ html.mlock #bg{visibility:hidden}
 #sOrder .tord .mv{width:32px;height:32px;min-height:0;padding:0;display:grid;place-items:center;border-radius:9px;font-size:.8rem}
 #sOrder .tord .mv:disabled{opacity:.3}
 </style>
+<style id="fixes2">
+#sfList .sfg{cursor:grab;touch-action:none;padding:8px 4px;font-size:1.15rem;line-height:1;color:var(--mut);letter-spacing:-2px;user-select:none;-webkit-user-select:none;flex:none}
+#sfList .sfa.drg{border-color:var(--fg);box-shadow:0 8px 22px rgba(0,0,0,.35);position:relative;z-index:2}
+#sfList .sfa.drg .sfg{cursor:grabbing}
+#sfList .sfmv{width:30px;height:30px;min-height:0;padding:0;font-size:.7rem;display:grid;place-items:center}
+#sfList .sfmv:disabled{opacity:.3}
+</style>
 </head><body class="ld">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="srch" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></symbol>
@@ -1748,7 +1755,7 @@ function rs(){const el=$('#slist');if(!el)return;const A=adm(),list=L(),lock=!A&
  const vis=A?list:list.filter(x=>x.ap!==false);
  el.innerHTML=vis.length?vis.map(x=>{const ok=/^https:\/\//.test(x.u||''),u=ok?esc(x.u):'#',d=ok?esc(x.u+'?download='+encodeURIComponent(x.n+(x.e?'.'+x.e:''))):'#',cl=x.cl===true,pe=x.ap===false,can=A||!cl,tag=pe?'Pending':cl?'Closed':'';
   return '<article class="card sf'+(pe?' pend':'')+'" data-sid="'+x.id+'"><button type="button" class="sfh" aria-expanded="false"><span class="chip">'+ic('file')+'</span><span class="sfn">'+esc(x.n)+'</span>'+(tag?'<span class="sft mono">'+tag+'</span>':'')+'<svg class="i sfv" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></button><div class="sfb"><div><div class="sfi">'+(A&&(pe||cl)?'<p>'+esc([pe?'Waiting for your approval':'',cl?'Closed to visitors':''].filter(Boolean).join(' · '))+'</p>':'')+(!A&&cl?'<p>This file is closed right now.</p>':'')+'<div class="acts">'+(can?'<a class="btn solid" href="'+u+'" target="_blank" rel="noopener noreferrer">'+ic('ext')+'Open</a><a class="btn" href="'+d+'" download>'+ic('down')+'Download</a>':'')+'<button type="button" class="btn" data-sx>'+ic('x')+'Close</button>'+(A?'<button type="button" class="btn" data-se="'+x.id+'">'+ic('edit')+'Rename</button><button type="button" class="btn" data-sd="'+x.id+'">'+ic('trash')+'Delete</button>':'')+'</div></div></div></div></article>'}).join(''):''}
-function al(){$('#sfList').innerHTML=L().map(x=>{const pe=x.ap===false,cl=x.cl===true;return '<div class="it sfa"><span class="chip">'+ic('file')+'</span><div class="sfm"><b>'+esc(x.n)+'</b><small>'+(pe?'Pending approval · hidden from visitors':'Approved')+(cl?' · Closed (visitors cannot open it)':'')+'</small></div><button class="ib" data-se="'+x.id+'" aria-label="Rename">'+ic('edit')+'</button><button class="ib" data-sd="'+x.id+'" aria-label="Delete">'+ic('trash')+'</button><div class="sfx"><button type="button" class="btn'+(pe?' solid':'')+'" data-sa="'+x.id+'">'+ic('check')+(pe?'Approve':'Unapprove')+'</button><button type="button" class="btn" data-sc="'+x.id+'">'+ic(cl?'ext':'lock')+(cl?'Reopen file':'Close file')+'</button></div></div>'}).join('')||'<p class="note">No files yet.</p>'}
+function al(){$('#sfList').innerHTML=L().map(x=>{const pe=x.ap===false,cl=x.cl===true;return '<div class="it sfa" data-sid="'+x.id+'"><span class="grip sfg" role="img" aria-label="Drag to reorder" title="Drag to reorder">⋮⋮</span><span class="chip">'+ic('file')+'</span><div class="sfm"><b>'+esc(x.n)+'</b><small>'+(pe?'Pending approval · hidden from visitors':'Approved')+(cl?' · Closed (visitors cannot open it)':'')+'</small></div><button type="button" class="ib sfmv" data-mv="-1" aria-label="Move up">▲</button><button type="button" class="ib sfmv" data-mv="1" aria-label="Move down">▼</button><button class="ib" data-se="'+x.id+'" aria-label="Rename">'+ic('edit')+'</button><button class="ib" data-sd="'+x.id+'" aria-label="Delete">'+ic('trash')+'</button><div class="sfx"><button type="button" class="btn'+(pe?' solid':'')+'" data-sa="'+x.id+'">'+ic('check')+(pe?'Approve':'Unapprove')+'</button><button type="button" class="btn" data-sc="'+x.id+'">'+ic(cl?'ext':'lock')+(cl?'Reopen file':'Close file')+'</button></div></div>'}).join('')||'<p class="note">No files yet.</p>'}
 function hl(){$$('#spane [data-sk]').forEach(b=>{const k=b.dataset.sk;if(k in D)b.classList.toggle('act',String(g(k))===b.dataset.v)});
  $('#vwCus').style.display=g('vw')==='custom'?'grid':'none';
  $('#sCodeBox').style.display=g('studyLock')==='on'?'':'none';
@@ -1984,6 +1991,23 @@ apply();
 const kick=()=>requestAnimationFrame(()=>{const b=$('#m2 .box'),pn=$('#m2 .pane.on');if(!b||!pn)return;pn.style.willChange='transform';void pn.offsetHeight;b.scrollTop=b.scrollTop;requestAnimationFrame(()=>{pn.style.willChange=''})});
 document.addEventListener('click',e=>{if(e.target.closest('#m2 [data-t],#admopen,#tOrdGo'))kick()},true);
 new MutationObserver(()=>{if($('#m2').classList.contains('on')){kick();setTimeout(kick,350)}}).observe($('#m2'),{attributes:true,attributeFilter:['class']});
+})();
+</script>
+<script id="fixes2-js">
+(function(){
+const $=s=>document.querySelector(s),L=$('#sfList');if(!L)return;let drag=null;
+const kids=()=>[...L.querySelectorAll('.sfa')];
+const mark=()=>{const k=kids();k.forEach((e,i)=>{const u=e.querySelector('[data-mv="-1"]'),d=e.querySelector('[data-mv="1"]');if(u)u.disabled=i===0;if(d)d.disabled=i===k.length-1})};
+const save=()=>{const ids=kids().map(e=>e.dataset.sid);const cur=S.study||[];const out=ids.map(id=>cur.find(x=>String(x.id)===id)).filter(Boolean);cur.forEach(x=>{if(!out.includes(x))out.push(x)});S.study=out;persist();if(window.__applySet)window.__applySet();toast('Order saved')};
+new MutationObserver(mark).observe(L,{childList:true});mark();
+L.addEventListener('pointerdown',e=>{const h=e.target.closest('.sfg');if(!h)return;e.preventDefault();drag=h.closest('.sfa');drag.classList.add('drg');try{L.setPointerCapture(e.pointerId)}catch(_){}});
+L.addEventListener('pointermove',e=>{if(!drag)return;let before=null;for(const s of kids()){if(s===drag)continue;const r=s.getBoundingClientRect();if(e.clientY<r.top+r.height/2){before=s;break}}
+ if(before!==drag.nextElementSibling&&before!==drag)L.insertBefore(drag,before)});
+const end=()=>{if(!drag)return;drag.classList.remove('drg');drag=null;mark();save()};
+L.addEventListener('pointerup',end);L.addEventListener('pointercancel',end);
+L.addEventListener('click',e=>{const b=e.target.closest('.sfmv');if(!b)return;const li=b.closest('.sfa'),d=+b.dataset.mv;
+ if(d<0&&li.previousElementSibling)L.insertBefore(li,li.previousElementSibling);else if(d>0&&li.nextElementSibling)L.insertBefore(li.nextElementSibling,li);
+ mark();save()});
 })();
 </script>
 </body></html>
