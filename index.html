@@ -653,6 +653,51 @@ html.h-snote .sfnote{display:none}
 #spane .sgi{overflow:hidden;min-height:0;padding-bottom:10px}
 #spane .sgrp.shut .sgi{visibility:hidden;transition:visibility 0s .35s}
 #spane .sgi>.sl:first-child{margin-top:2px}
+
+/* ===== v9: layout fixes (computer + phone), study message, better settings ===== */
+section>*,.hin>div{min-width:0}
+.card h3,.card p,#slist .sfn{overflow-wrap:anywhere}
+.sfnote{margin:0 0 18px;padding:14px 16px;border:1px solid var(--ln);border-left:3px solid var(--acc,var(--fg));border-radius:14px;background:var(--card);color:var(--mut);font-size:.95rem;line-height:1.6;max-width:680px;overflow-wrap:anywhere}
+.sfnote:empty{display:none}
+body.edit .sfnote:empty{display:block;min-height:2.8em}
+html.h-snote .sfnote{display:none}
+#slist:empty{display:none!important}
+@media(min-width:900px){
+ #study{align-items:start}
+ #study .sfnote{font-size:1rem}
+ .side .box{max-width:520px}
+}
+@media(max-width:899px){
+ .sfnote{font-size:.9rem;padding:12px 14px}
+ .side .tabs{display:flex;overflow-x:auto;gap:4px;scrollbar-width:none;position:sticky;top:0;z-index:4}
+ .side .tabs::-webkit-scrollbar{display:none}
+ .side .tabs button{flex:0 0 auto;flex-direction:row;gap:6px;padding:9px 13px;font-size:.74rem;min-height:40px}
+ .side .tabs button .i{width:15px;height:15px}
+}
+/* settings panel */
+.hid{display:none!important}
+#spane .srch{position:relative;margin-top:14px}
+#spane .srch input{padding-left:38px}
+#spane .srch .i{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:16px;height:16px;opacity:.55;pointer-events:none}
+#spane .sgrp{border:1px solid var(--ln);border-radius:16px;background:var(--bg);margin-top:10px;overflow:hidden}
+#spane .sh{justify-content:flex-start;gap:10px;padding:14px 16px;color:var(--fg);font-size:.74rem;letter-spacing:.1em}
+#spane .sh .i{width:16px;height:16px;opacity:.75}
+#spane .sh::after{margin-left:auto}
+#spane .sgrp:not(.shut) .sh{border-bottom:1px solid var(--ln)}
+#spane .sgi{padding:0 16px 6px}
+#spane .srow{padding:14px 0;border-top:1px solid var(--ln)}
+#spane .srow:first-child{border-top:0}
+#spane .srow .sl{margin:0}
+#spane .srow .seg,#spane .srow .fgr,#spane .srow .sws,#spane .srow .sbn,#spane .srow>.row{margin-top:10px}
+#spane .srow.tgl{display:flex;align-items:center;justify-content:space-between;gap:14px}
+#spane .srow.tgl .sl{flex:1;min-width:0}
+#spane .srow.tgl .sw2{margin:0}
+#spane .seg.tg{display:none}
+#spane .srow .note{margin-top:10px}
+.sw2{position:relative;width:46px;height:26px;min-height:0!important;padding:0!important;border-radius:99px!important;border:1px solid var(--ln)!important;background:var(--card)!important;flex:none;transition:background .25s,border-color .25s!important}
+.sw2::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:var(--mut);transition:transform .3s cubic-bezier(.3,1.4,.4,1),background .25s}
+.sw2[aria-checked=true]{background:var(--acc,var(--fg))!important;border-color:var(--acc,var(--fg))!important}
+.sw2[aria-checked=true]::after{transform:translateX(20px);background:var(--accfg,var(--bg))}
 </style></head><body class="ld">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="rfsh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-3-6.7L21 8"></path><path d="M21 3v5h-5"></path></symbol>
@@ -719,7 +764,7 @@ html.h-snote .sfnote{display:none}
 
 <section id="projects" class="rv"><div class="hd"><span class="chip"><svg class="i"><use href="#work"></use></svg></span><h2 data-k="h-projects">Projects</h2></div><div><div class="grid" id="plist"></div></div></section>
 <section id="gallery" class="rv"><div class="hd"><span class="chip"><svg class="i"><use href="#image"></use></svg></span><h2 data-k="h-gallery">Gallery</h2></div><div><div class="vt" role="group" aria-label="Photo view size"><button id="vS" aria-pressed="true" class="act"><svg class="i"><use href="#gridv"></use></svg>Small</button><button id="vL" aria-pressed="false"><svg class="i"><use href="#bigv"></use></svg>Large</button></div><div class="grid sm" id="glist"></div></div></section>
-<section id="study" class="rv"><div class="hd"><span class="chip"><svg class="i"><use href="#book"></use></svg></span><h2 data-k="h-study">Calculus study files</h2></div><p class="sfnote" data-k="study-note">John will add some files soon.</p><div><div class="grid" id="slist"></div></div></section>
+<section id="study" class="rv"><div class="hd"><span class="chip"><svg class="i"><use href="#book"></use></svg></span><h2 data-k="h-study">Calculus study files</h2></div><div><p class="sfnote" data-k="study-note">John will add some files soon.</p><div class="grid" id="slist"></div></div></section>
 <section id="contact" class="rv"><div class="hd"><span class="chip"><svg class="i"><use href="#mail"></use></svg></span><h2 data-k="h-contact">Get in touch</h2></div><div class="contact">
 <div class="info"><a href="mailto:bonillojohneduard@gmail.com"><span class="chip"><svg class="i"><use href="#mail"></use></svg></span>bonillojohneduard@gmail.com</a><div class="school"><span class="chip"><svg class="i"><use href="#cap"></use></svg></span>Caraga State University – Cabadbaran Campus</div><div class="row" style="margin:0"><button id="copy"><svg class="i"><use href="#clip"></use></svg>Copy email</button><button class="solid" id="anon"><svg class="i"><use href="#lock"></use></svg>Anonymous message</button></div></div>
 <div class="card"><label style="margin-top:0" for="cn">Your name</label><input id="cn" autocomplete="name"><label for="ce">Your email (so I can reply)</label><input id="ce" type="email" autocomplete="email"><label for="cm">Message</label><textarea id="cm" rows="4"></textarea>
@@ -739,7 +784,7 @@ html.h-snote .sfnote{display:none}
 <div class="pane" data-p="g"><label for="gIn">Add photos</label><input type="file" id="gIn" accept="image/*" multiple=""><div class="thumbs" id="agl"></div></div>
 <div class="pane" data-p="t"><p class="note" style="margin-top:16px">Edit the words right on the page. Tap your name, a heading, the About text, or a label and type. Then select a single word (or just tap inside it) and use the bar at the bottom to make it bold or give it its own color. Changes save automatically.</p><div class="row"><button class="solid" id="etEdit" style="flex:1"><svg class="i"><use href="#edit"></use></svg>Edit texts on the page</button></div><label for="rIn">Typing words under your name (separate with commas)</label><input id="rIn"><div class="row"><button id="rst"><svg class="i"><use href="#trash"></use></svg>Reset headings and labels</button></div></div>
 <div class="pane" data-p="m"><div class="row" style="align-items:center;margin-top:16px"><b style="flex:1">Messages <small id="mcount" class="mono" style="opacity:.6">(0)</small></b><button id="mref">Refresh</button></div><div id="mlist"><p class="note">No messages yet.</p></div></div>
-<div class="pane" data-p="c"><label for="sfNote" style="margin-top:16px">Text under the heading</label><textarea id="sfNote" rows="2" maxlength="200" placeholder="John will add some files soon."></textarea><p class="note">Visitors see this line above the files. Leave it empty to hide it. You can also tap it on the page in Edit texts mode.</p><label for="sfName" style="margin-top:16px">File name</label><input id="sfName" maxlength="80" placeholder="e.g. Limits and Continuity reviewer"><label for="sfIn">File (PDF, Word, PowerPoint, image…)</label><input type="file" id="sfIn"><div class="row"><button class="solid" id="sfAdd" style="flex:1"><svg class="i"><use href="#plus"></use></svg>Add study file</button></div><div id="sfList"></div><p class="note">New files wait for your Approve button unless you change that in Settings → Study files. Close file keeps the name visible but visitors cannot open it. Max 50 MB per file.</p></div>
+<div class="pane" data-p="c"><label for="sfNote" style="margin-top:16px">Message for visitors</label><textarea id="sfNote" rows="2" maxlength="200" placeholder="John will add some files soon."></textarea><p class="note">Shown under the Study heading, for example “John will add some files soon.” Leave it empty to hide it. You can also tap it on the page in Edit texts mode.</p><label for="sfName" style="margin-top:16px">File name</label><input id="sfName" maxlength="80" placeholder="e.g. Limits and Continuity reviewer"><label for="sfIn">File (PDF, Word, PowerPoint, image…)</label><input type="file" id="sfIn"><div class="row"><button class="solid" id="sfAdd" style="flex:1"><svg class="i"><use href="#plus"></use></svg>Add study file</button></div><div id="sfList"></div><p class="note">New files wait for your Approve button unless you change that in Settings → Study files. Close file keeps the name visible but visitors cannot open it.</p></div>
 <div class="pane" data-p="s" id="spane">
 <p class="sh">Status</p>
 <p class="sl">Availability<small>Shown as a small pill at the top of your homepage.</small></p><div class="seg"><button type="button" data-sk="st" data-v="online">Online</button><button type="button" data-sk="st" data-v="busy">Busy</button><button type="button" data-sk="st" data-v="away">Away</button><button type="button" data-sk="st" data-v="offline">Offline</button><button type="button" data-sk="st" data-v="hide" class="act">Hidden</button></div>
@@ -1574,12 +1619,12 @@ async function saveCode(){const v=$('#sCode').value.trim();if(!v){toast('Type a 
 
 /* ---- render study files ---- */
 const fsz=n=>n>1048576?(n/1048576).toFixed(1)+' MB':Math.max(1,Math.round(n/1024))+' KB';
-function rs(){const el=$('#slist');if(!el)return;const A=adm(),lock=!A&&g('studyLock')==='on'&&!unl(),list=L();
+function rs(){const el=$('#slist');if(!el)return;const A=adm(),list=L(),lock=!A&&g('studyLock')==='on'&&!unl()&&list.some(x=>x.ap!==false);
  const s=JSON.stringify([A,lock,list.map(x=>[x.id,x.n,x.ap,x.cl,x.e,x.s])]);if(s===sig)return;sig=s;
  if(lock){el.innerHTML='<div class="card slock"><span class="chip">'+ic('lock')+'</span><h3>Study files are locked</h3><p>You need permission from John first. Enter the access code you were given.</p><div class="row"><input id="sUi" placeholder="Access code" autocomplete="off" style="flex:1 1 160px"><button class="solid" id="sUb">'+ic('check')+'Unlock</button></div></div>';return}
  const vis=A?list:list.filter(x=>x.ap!==false);
  el.innerHTML=vis.length?vis.map(x=>{const ok=/^https:\/\//.test(x.u||''),u=ok?esc(x.u):'#',d=ok?esc(x.u+'?download='+encodeURIComponent(x.n+(x.e?'.'+x.e:''))):'#',cl=x.cl===true,pe=x.ap===false,can=A||!cl,tag=pe?'Pending':cl?'Closed':'';
-  return '<article class="card sf'+(pe?' pend':'')+'" data-sid="'+x.id+'"><button type="button" class="sfh" aria-expanded="false"><span class="chip">'+ic('file')+'</span><span class="sfn">'+esc(x.n)+'</span>'+(tag?'<span class="sft mono">'+tag+'</span>':'')+'<svg class="i sfv" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></button><div class="sfb"><div><div class="sfi">'+(A?'<p>'+esc([(x.e||'file').toUpperCase(),x.s?fsz(x.s):''].filter(Boolean).join(' · '))+(pe?' · Waiting for your approval':'')+(cl?' · Closed to visitors':'')+'</p>':'')+(!A&&cl?'<p>This file is closed right now.</p>':'')+'<div class="acts">'+(can?'<a class="btn solid" href="'+u+'" target="_blank" rel="noopener noreferrer">'+ic('ext')+'Open</a><a class="btn" href="'+d+'" download>'+ic('down')+'Download</a>':'')+'<button type="button" class="btn" data-sx>'+ic('x')+'Close</button>'+(A?'<button type="button" class="btn" data-se="'+x.id+'">'+ic('edit')+'Rename</button><button type="button" class="btn" data-sd="'+x.id+'">'+ic('trash')+'Delete</button>':'')+'</div></div></div></div></article>'}).join(''):'<div class="empty mono"><span class="chip">'+ic('book')+'</span><span>No study files yet. Please check back soon.</span></div>'}
+  return '<article class="card sf'+(pe?' pend':'')+'" data-sid="'+x.id+'"><button type="button" class="sfh" aria-expanded="false"><span class="chip">'+ic('file')+'</span><span class="sfn">'+esc(x.n)+'</span>'+(tag?'<span class="sft mono">'+tag+'</span>':'')+'<svg class="i sfv" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></button><div class="sfb"><div><div class="sfi">'+(A&&(pe||cl)?'<p>'+esc([pe?'Waiting for your approval':'',cl?'Closed to visitors':''].filter(Boolean).join(' · '))+'</p>':'')+(!A&&cl?'<p>This file is closed right now.</p>':'')+'<div class="acts">'+(can?'<a class="btn solid" href="'+u+'" target="_blank" rel="noopener noreferrer">'+ic('ext')+'Open</a><a class="btn" href="'+d+'" download>'+ic('down')+'Download</a>':'')+'<button type="button" class="btn" data-sx>'+ic('x')+'Close</button>'+(A?'<button type="button" class="btn" data-se="'+x.id+'">'+ic('edit')+'Rename</button><button type="button" class="btn" data-sd="'+x.id+'">'+ic('trash')+'Delete</button>':'')+'</div></div></div></div></article>'}).join(''):''}
 function al(){$('#sfList').innerHTML=L().map(x=>{const pe=x.ap===false,cl=x.cl===true;return '<div class="it sfa"><span class="chip">'+ic('file')+'</span><div class="sfm"><b>'+esc(x.n)+'</b><small>'+(pe?'Pending approval · hidden from visitors':'Approved')+(cl?' · Closed (visitors cannot open it)':'')+'</small></div><button class="ib" data-se="'+x.id+'" aria-label="Rename">'+ic('edit')+'</button><button class="ib" data-sd="'+x.id+'" aria-label="Delete">'+ic('trash')+'</button><div class="sfx"><button type="button" class="btn'+(pe?' solid':'')+'" data-sa="'+x.id+'">'+ic('check')+(pe?'Approve':'Unapprove')+'</button><button type="button" class="btn" data-sc="'+x.id+'">'+ic(cl?'ext':'lock')+(cl?'Reopen file':'Close file')+'</button></div></div>'}).join('')||'<p class="note">No files yet.</p>'}
 function hl(){$$('#spane [data-sk]').forEach(b=>{const k=b.dataset.sk;if(k in D)b.classList.toggle('act',String(g(k))===b.dataset.v)});
  $('#vwCus').style.display=g('vw')==='custom'?'grid':'none';
