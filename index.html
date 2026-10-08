@@ -613,6 +613,32 @@ html.h-study #study,html.h-study [data-go=study]{display:none!important}
 #vwN{display:inline-block;min-width:1ch}
 .sf h3{word-break:break-word}.sf .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.sf .acts .btn{padding:8px 14px}
 #slist .slock{grid-column:1/-1}#slist .slock .row{align-items:center}
+/* compact study list: names only, press to open */
+#slist{display:flex!important;flex-direction:column;gap:8px}
+#slist .sf{padding:0;border-radius:14px}
+#slist .sfh{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:10px;width:100%;padding:9px 12px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#slist .sfh:focus-visible{outline:2px solid var(--mut);outline-offset:-2px;border-radius:14px}
+#slist .sfh .chip{width:30px;height:30px;border-radius:9px}
+#slist .sfh .chip .i{width:15px;height:15px}
+#slist .sfn{flex:1;min-width:0;font-size:.92rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#slist .sft{font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);border:1px solid var(--ln);border-radius:99px;padding:2px 8px;flex:none}
+#slist .sfv{width:16px;height:16px;flex:none;color:var(--mut);transition:transform .3s ease}
+#slist .sf.open .sfv{transform:rotate(180deg)}
+#slist .sfb{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+#slist .sf.open .sfb{grid-template-rows:1fr}
+#slist .sfb>div{overflow:hidden;min-height:0}
+#slist .sfi{padding:2px 14px 14px 52px}
+#slist .sfi p{margin:0;font-size:.8rem;color:var(--mut)}
+#slist .sfi .acts{margin-top:12px}
+#slist .sfi .acts .btn{padding:7px 12px;font-size:.78rem;flex:0 1 auto}
+#slist .sf.pend{border-style:dashed}
+.sfa{flex-wrap:wrap}
+.sfa .sfm{flex:1;min-width:0}
+.sfa .sfm b{display:block;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sfa .sfm small{display:block;font-size:.74rem;color:var(--mut);margin-top:2px}
+.sfa .sfx{flex-basis:100%;display:flex;gap:8px;flex-wrap:wrap}
+.sfa .sfx .btn{padding:7px 12px;font-size:.78rem;flex:0 1 auto}
+@media(max-width:600px){#slist .sfi{padding-left:14px}}
 </style></head><body class="ld">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="rfsh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-3-6.7L21 8"></path><path d="M21 3v5h-5"></path></symbol>
@@ -699,7 +725,7 @@ html.h-study #study,html.h-study [data-go=study]{display:none!important}
 <div class="pane" data-p="g"><label for="gIn">Add photos</label><input type="file" id="gIn" accept="image/*" multiple=""><div class="thumbs" id="agl"></div></div>
 <div class="pane" data-p="t"><p class="note" style="margin-top:16px">Edit the words right on the page. Tap your name, a heading, the About text, or a label and type. Then select a single word (or just tap inside it) and use the bar at the bottom to make it bold or give it its own color. Changes save automatically.</p><div class="row"><button class="solid" id="etEdit" style="flex:1"><svg class="i"><use href="#edit"></use></svg>Edit texts on the page</button></div><label for="rIn">Typing words under your name (separate with commas)</label><input id="rIn"><div class="row"><button id="rst"><svg class="i"><use href="#trash"></use></svg>Reset headings and labels</button></div></div>
 <div class="pane" data-p="m"><div class="row" style="align-items:center;margin-top:16px"><b style="flex:1">Messages <small id="mcount" class="mono" style="opacity:.6">(0)</small></b><button id="mref">Refresh</button></div><div id="mlist"><p class="note">No messages yet.</p></div></div>
-<div class="pane" data-p="c"><label for="sfName" style="margin-top:16px">File name</label><input id="sfName" maxlength="80" placeholder="e.g. Limits and Continuity reviewer"><label for="sfIn">File (PDF, Word, PowerPoint, image…)</label><input type="file" id="sfIn"><div class="row"><button class="solid" id="sfAdd" style="flex:1"><svg class="i"><use href="#plus"></use></svg>Add study file</button></div><div id="sfList"></div><p class="note">Show/hide the section and require an access code in Settings → Study files. Max 50 MB per file.</p></div>
+<div class="pane" data-p="c"><label for="sfName" style="margin-top:16px">File name</label><input id="sfName" maxlength="80" placeholder="e.g. Limits and Continuity reviewer"><label for="sfIn">File (PDF, Word, PowerPoint, image…)</label><input type="file" id="sfIn"><div class="row"><button class="solid" id="sfAdd" style="flex:1"><svg class="i"><use href="#plus"></use></svg>Add study file</button></div><div id="sfList"></div><p class="note">New files stay hidden until you press Approve. Close file keeps the name visible but visitors cannot open it. Show/hide the section and require an access code in Settings → Study files. Max 50 MB per file.</p></div>
 <div class="pane" data-p="s" id="spane">
 <p class="sh">Status</p>
 <p class="sl">Availability<small>Shown as a small pill at the top of your homepage.</small></p><div class="seg"><button type="button" data-sk="st" data-v="online">Online</button><button type="button" data-sk="st" data-v="busy">Busy</button><button type="button" data-sk="st" data-v="away">Away</button><button type="button" data-sk="st" data-v="offline">Offline</button><button type="button" data-sk="st" data-v="hide" class="act">Hidden</button></div>
@@ -1531,11 +1557,12 @@ async function saveCode(){const v=$('#sCode').value.trim();if(!v){toast('Type a 
 /* ---- render study files ---- */
 const fsz=n=>n>1048576?(n/1048576).toFixed(1)+' MB':Math.max(1,Math.round(n/1024))+' KB';
 function rs(){const el=$('#slist');if(!el)return;const A=adm(),lock=!A&&g('studyLock')==='on'&&!unl(),list=L();
- const s=JSON.stringify([A,lock,list.map(x=>[x.id,x.n])]);if(s===sig)return;sig=s;
+ const s=JSON.stringify([A,lock,list.map(x=>[x.id,x.n,x.ap,x.cl,x.e,x.s])]);if(s===sig)return;sig=s;
  if(lock){el.innerHTML='<div class="card slock"><span class="chip">'+ic('lock')+'</span><h3>Study files are locked</h3><p>You need permission from John first. Enter the access code you were given.</p><div class="row"><input id="sUi" placeholder="Access code" autocomplete="off" style="flex:1 1 160px"><button class="solid" id="sUb">'+ic('check')+'Unlock</button></div></div>';return}
- el.innerHTML=list.length?list.map(x=>{const ok=/^https:\/\//.test(x.u||''),u=ok?esc(x.u):'#',d=ok?esc(x.u+'?download='+encodeURIComponent(x.n+(x.e?'.'+x.e:''))):'#';
-  return '<article class="card sf"><span class="chip">'+ic('file')+'</span><h3>'+esc(x.n)+'</h3><p>'+esc([(x.e||'file').toUpperCase(),x.s?fsz(x.s):''].filter(Boolean).join(' · '))+'</p><div class="acts"><a class="btn solid" href="'+u+'" target="_blank" rel="noopener noreferrer">'+ic('ext')+'Open</a><a class="btn" href="'+d+'" download>'+ic('down')+'Download</a></div><button class="del edt" data-se="'+x.id+'" aria-label="Rename">'+ic('edit')+'</button><button class="del" data-sd="'+x.id+'" aria-label="Delete">'+ic('x')+'</button></article>'}).join(''):'<div class="empty mono"><span class="chip">'+ic('book')+'</span><span>No study files yet. Please check back soon.</span></div>'}
-function al(){$('#sfList').innerHTML=L().map(x=>'<div class="it"><span class="chip">'+ic('file')+'</span><span>'+esc(x.n)+'</span><button class="ib" data-se="'+x.id+'" aria-label="Rename">'+ic('edit')+'</button><button class="ib" data-sd="'+x.id+'" aria-label="Delete">'+ic('trash')+'</button></div>').join('')||'<p class="note">No files yet.</p>'}
+ const vis=A?list:list.filter(x=>x.ap!==false);
+ el.innerHTML=vis.length?vis.map(x=>{const ok=/^https:\/\//.test(x.u||''),u=ok?esc(x.u):'#',d=ok?esc(x.u+'?download='+encodeURIComponent(x.n+(x.e?'.'+x.e:''))):'#',cl=x.cl===true,pe=x.ap===false,can=A||!cl,tag=pe?'Pending':cl?'Closed':'';
+  return '<article class="card sf'+(pe?' pend':'')+'" data-sid="'+x.id+'"><button type="button" class="sfh" aria-expanded="false"><span class="chip">'+ic('file')+'</span><span class="sfn">'+esc(x.n)+'</span>'+(tag?'<span class="sft mono">'+tag+'</span>':'')+'<svg class="i sfv" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></button><div class="sfb"><div><div class="sfi"><p>'+esc([(x.e||'file').toUpperCase(),x.s?fsz(x.s):''].filter(Boolean).join(' · '))+(A&&pe?' · Waiting for your approval':'')+(A&&cl?' · Closed to visitors':'')+'</p>'+(!A&&cl?'<p>This file is closed right now.</p>':'')+'<div class="acts">'+(can?'<a class="btn solid" href="'+u+'" target="_blank" rel="noopener noreferrer">'+ic('ext')+'Open</a><a class="btn" href="'+d+'" download>'+ic('down')+'Download</a>':'')+'<button type="button" class="btn" data-sx>'+ic('x')+'Close</button>'+(A?'<button type="button" class="btn" data-se="'+x.id+'">'+ic('edit')+'Rename</button><button type="button" class="btn" data-sd="'+x.id+'">'+ic('trash')+'Delete</button>':'')+'</div></div></div></div></article>'}).join(''):'<div class="empty mono"><span class="chip">'+ic('book')+'</span><span>No study files yet. Please check back soon.</span></div>'}
+function al(){$('#sfList').innerHTML=L().map(x=>{const pe=x.ap===false,cl=x.cl===true;return '<div class="it sfa"><span class="chip">'+ic('file')+'</span><div class="sfm"><b>'+esc(x.n)+'</b><small>'+(pe?'Pending approval · hidden from visitors':'Approved')+(cl?' · Closed (visitors cannot open it)':'')+'</small></div><button class="ib" data-se="'+x.id+'" aria-label="Rename">'+ic('edit')+'</button><button class="ib" data-sd="'+x.id+'" aria-label="Delete">'+ic('trash')+'</button><div class="sfx"><button type="button" class="btn'+(pe?' solid':'')+'" data-sa="'+x.id+'">'+ic('check')+(pe?'Approve':'Unapprove')+'</button><button type="button" class="btn" data-sc="'+x.id+'">'+ic(cl?'ext':'lock')+(cl?'Reopen file':'Close file')+'</button></div></div>'}).join('')||'<p class="note">No files yet.</p>'}
 function hl(){$$('#spane [data-sk]').forEach(b=>{const k=b.dataset.sk;if(k in D)b.classList.toggle('act',String(g(k))===b.dataset.v)});
  $('#vwCus').style.display=g('vw')==='custom'?'grid':'none';
  $('#sCodeS').textContent=g('studyHash')?'A code is set. Saving a new one replaces it.':'No code set yet.'}
@@ -1545,6 +1572,11 @@ const o=window.__applySet;window.__applySet=function(){ensure();o();sync()};
 /* ---- events ---- */
 document.addEventListener('click',async e=>{
  const se=e.target.closest('[data-se]'),sd=e.target.closest('[data-sd]');
+ const hd=e.target.closest('#slist .sfh'),sx=e.target.closest('#slist [data-sx]'),sa=e.target.closest('[data-sa]'),sc=e.target.closest('[data-sc]');
+ if(hd){const c=hd.closest('.sf'),was=c.classList.contains('open');$$('#slist .sf.open').forEach(o=>{o.classList.remove('open');o.querySelector('.sfh').setAttribute('aria-expanded','false')});if(!was){c.classList.add('open');hd.setAttribute('aria-expanded','true')}}
+ if(sx){const c=sx.closest('.sf');c.classList.remove('open');c.querySelector('.sfh').setAttribute('aria-expanded','false')}
+ if(sa){const x=L().find(y=>y.id==sa.dataset.sa);if(x){x.ap=x.ap===false;persist();sig='';sync();toast(x.ap===false?'File hidden until approved':'File approved')}}
+ if(sc){const x=L().find(y=>y.id==sc.dataset.sc);if(x){x.cl=!x.cl;persist();sig='';sync();toast(x.cl?'File closed':'File reopened')}}
  if(se){const x=L().find(y=>y.id==se.dataset.se);if(!x)return;const n=prompt('New name',x.n);if(n&&n.trim()){x.n=n.trim().slice(0,80);persist();sync();sig='';rs()}}
  if(sd){const x=L().find(y=>y.id==sd.dataset.sd);if(!x||!confirm('Delete "'+x.n+'"?'))return;S.study=L().filter(y=>y!==x);persist();try{Promise.resolve(sb.storage.from('site-images').remove([x.p])).catch(()=>{})}catch(_){}sync();toast('File removed')}
  if(e.target.closest('#sUb'))unlock();
@@ -1560,7 +1592,7 @@ $('#sfAdd').onclick=async()=>{const f=$('#sfIn').files[0];if(!f){toast('Choose a
  b.disabled=true;b.textContent='Uploading…';
  const{error}=await sb.storage.from('site-images').upload(p,f,{contentType:f.type||'application/octet-stream',cacheControl:'31536000'});
  if(error)toast('Upload failed: '+error.message);
- else{L().unshift({id:Date.now(),n:n.slice(0,80),e,s:f.size,p,u:sb.storage.from('site-images').getPublicUrl(p).data.publicUrl});persist();$('#sfName').value='';$('#sfIn').value='';sync();toast('Study file added')}
+ else{L().unshift({id:Date.now(),ap:false,n:n.slice(0,80),e,s:f.size,p,u:sb.storage.from('site-images').getPublicUrl(p).data.publicUrl});persist();$('#sfName').value='';$('#sfIn').value='';sync();toast('Study file added. Press Approve to show it')}
  b.disabled=false;b.innerHTML=h};
 
 sync();
