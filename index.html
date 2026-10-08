@@ -1056,7 +1056,6 @@ addEventListener('scroll',()=>{const h=document.documentElement;$('#prog').style
 // ===== AI chat =====
 (()=>{const fab=$('#cfab'),pan=$('#cpan'),log=$('#clog'),inp=$('#cin'),snd=$('#csnd');const hist=[];let busy=false,last=0;const mc=$('#mst');
 const add=(role,text)=>{const d=document.createElement('div');d.className='cm '+role;d.textContent=text;log.appendChild(d);log.scrollTop=log.scrollHeight;return d};
-add('bot',"Hi! I'm Capy, John's assistant. Ask me about his studies, projects, or how to contact him.");
 const toggle=on=>{pan.classList.toggle('on',on);fab.setAttribute('aria-expanded',on);if(on){mc.classList.add('wave');setTimeout(()=>mc.classList.remove('wave'),2700);setTimeout(()=>inp.focus(),50)}};
 fab.onclick=()=>toggle(!pan.classList.contains('on'));$('#cx').onclick=()=>toggle(false);
 async function send(){const t=inp.value.trim();if(!t||busy)return;if(Date.now()-last<3000){toast('Please wait a moment');return}
