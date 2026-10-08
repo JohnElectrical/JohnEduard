@@ -866,6 +866,73 @@ html.mlock #bg{visibility:hidden}
 #sfList .sfmv{width:30px;height:30px;min-height:0;padding:0;font-size:.7rem;display:grid;place-items:center}
 #sfList .sfmv:disabled{opacity:.3}
 </style>
+<style id="capy-emo">
+#mst{cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+#mst .emo>*,#mst .fx>*{opacity:0;pointer-events:none;transform-box:fill-box;transform-origin:center}
+#mst .mlab{position:absolute;left:50%;bottom:7px;transform:translate(-50%,6px);background:var(--chip);color:#000;border:1px solid var(--ln);border-radius:99px;padding:3px 11px;font:700 .68rem/1.2 'JetBrains Mono',ui-monospace,monospace;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;white-space:nowrap}
+#mst .mlab.show{opacity:1;transform:translate(-50%,0)}
+/* faces */
+#mst:is([data-emo=joy],[data-emo=laugh]) .x-hap,#mst[data-emo=shy] .x-hap,
+#mst:is([data-emo=joy],[data-emo=laugh]) .x-bigsmile,#mst[data-emo=love] .x-heart,
+#mst[data-emo=sleepy] .x-closed,#mst:is([data-emo=sleepy],[data-emo=shy]) .x-tiny,
+#mst[data-emo=sad] :is(.x-brow-sad,.x-frown,.x-tear),#mst[data-emo=wink] .x-winkr,
+#mst[data-emo=confused] :is(.x-brow-conf,.x-wavy),#mst[data-emo=grumpy] :is(.x-brow-ang,.x-frown),
+#mst[data-emo=cool] :is(.x-shades,.x-smirk),#mst[data-emo=shy] .x-sweat{opacity:1}
+#mst:is([data-emo=joy],[data-emo=laugh],[data-emo=love],[data-emo=sleepy],[data-emo=shy],[data-emo=cool]) .mpu{opacity:0}
+#mst[data-emo=wink] .mpr{opacity:0}
+#mst:is([data-emo=joy],[data-emo=laugh],[data-emo=sleepy],[data-emo=sad],[data-emo=confused],[data-emo=grumpy],[data-emo=cool],[data-emo=shy],[data-emo=surprised]) .ms{opacity:0}
+#mst[data-emo=surprised] .mmo{opacity:1;transform-box:fill-box;transform-origin:center;transform:scale(1.7)}
+#mst[data-emo=surprised] .ey{animation:none;transform:scale(1.35)}
+#mst:is([data-emo=shy],[data-emo=love]) .mh>circle{transform-box:fill-box;transform-origin:center;transform:scale(1.3)}
+/* effects around the head */
+#mst[data-emo=joy] .fx-note,#mst[data-emo=love] .fx-heart,#mst[data-emo=sleepy] .fx-z,#mst[data-emo=surprised] .fx-bang,#mst[data-emo=confused] .fx-q,#mst[data-emo=grumpy] .fx-anger{opacity:1;animation:mcfloat 1.6s ease-in-out infinite}
+#mst[data-emo=love] .fx-heart:nth-child(2),#mst[data-emo=sleepy] .fx-z:nth-child(2){animation-delay:.35s}
+#mst[data-emo=love] .fx-heart:nth-child(3),#mst[data-emo=sleepy] .fx-z:nth-child(3){animation-delay:.7s}
+#mst[data-emo=surprised] .fx-bang,#mst[data-emo=confused] .fx-q{animation:mcpopfx .5s cubic-bezier(.3,1.6,.5,1) both}
+#mst[data-emo=grumpy] .fx-anger{animation:mcpulse .5s ease-in-out infinite}
+#mst[data-emo=sad] .x-tear{animation:mcdrop 1.3s ease-in infinite}
+#mst[data-emo=shy] .x-sweat{animation:mcdrop 1.8s ease-in infinite}
+#mst[data-emo=love] .x-heart{animation:mcpulse .8s ease-in-out infinite}
+/* body motion */
+#mst[data-emo=joy] .mo{animation:mchop .7s cubic-bezier(.3,1.6,.5,1) infinite}
+#mst[data-emo=laugh] .mo{animation:mcshake .32s ease-in-out infinite}
+#mst[data-emo=love] .mo{animation:mcsway 1.6s ease-in-out infinite}
+#mst[data-emo=sleepy] .mh{animation:mcnod 3s ease-in-out infinite}
+#mst[data-emo=surprised] .mo{animation:mchop .5s cubic-bezier(.3,1.6,.5,1) 1}
+#mst[data-emo=sad] .mh{animation:none;transform:translateY(3px) rotate(-3deg)}
+#mst[data-emo=confused] .mh{animation:mctilt 1.6s ease-in-out infinite}
+#mst[data-emo=grumpy] .mo{animation:mcshake .6s ease-in-out infinite}
+#mst[data-emo=cool] .mh{animation:mcnod 2.2s ease-in-out infinite}
+#mst[data-emo=shy] .mh{animation:mcsway 2s ease-in-out infinite}
+@keyframes mcfloat{0%{transform:translateY(7px) scale(.6);opacity:0}30%{opacity:1}100%{transform:translateY(-9px) scale(1);opacity:0}}
+@keyframes mcpopfx{from{transform:scale(.2);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes mcpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+@keyframes mcdrop{0%{transform:translateY(-3px);opacity:0}25%{opacity:1}100%{transform:translateY(12px);opacity:0}}
+@keyframes mcshake{0%,100%{transform:translateX(0) rotate(0)}25%{transform:translateX(-1.5px) rotate(-2deg)}75%{transform:translateX(1.5px) rotate(2deg)}}
+@keyframes mcsway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@keyframes mcnod{0%,100%{transform:rotate(5deg) translateY(2px)}50%{transform:rotate(8deg) translateY(4px)}}
+@media(prefers-reduced-motion:reduce){#mst .emo>*,#mst .fx>*{animation:none!important}}
+
+/* typing + picker */
+#mst .fx-kb{transform-box:fill-box}
+#mst[data-emo=typing] .fx-kb{opacity:1}
+#mst[data-emo=typing] .mpu{transform:translate(0,2.4px)}
+#mst[data-emo=typing] .mh{animation:mctype .5s ease-in-out infinite}
+#mst[data-emo=typing] .mla{transform-origin:46px 94px;animation:mctapL .26s ease-in-out infinite}
+#mst[data-emo=typing] .mw{animation:mctapR .26s .13s ease-in-out infinite}
+@keyframes mctapL{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(3px) rotate(-6deg)}}
+@keyframes mctapR{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(3px) rotate(6deg)}}
+@keyframes mctype{0%,100%{transform:rotate(0) translateY(1px)}50%{transform:rotate(-1.5deg) translateY(2.4px)}}
+#emoBtn{position:absolute;right:10px;width:30px;height:30px;min-height:0;padding:0;border-radius:50%;display:grid;place-items:center;background:var(--chip);color:#000;border:1px solid var(--ln);box-shadow:0 3px 10px rgba(0,0,0,.25);z-index:3;cursor:pointer;transition:transform .2s}
+#emoBtn:hover{transform:scale(1.1)}#emoBtn:active{transform:scale(.94)}
+#emoBtn[aria-expanded=true]{background:#000;color:#fff}
+#emoBtn .i{width:18px;height:18px}
+#emoPop{position:absolute;right:10px;z-index:4;width:226px;max-width:calc(100% - 20px);background:var(--card);border:1px solid var(--ln);border-radius:16px;padding:8px;box-shadow:0 12px 30px rgba(0,0,0,.4);display:none;grid-template-columns:repeat(5,1fr);gap:4px}
+#emoPop.on{display:grid;animation:pop .18s both}
+#emoPop button{display:grid;place-items:center;gap:1px;padding:6px 0 4px;min-height:0;border-radius:11px;border:1px solid transparent;background:transparent;color:var(--fg);font-size:1.15rem;line-height:1.1}
+#emoPop button small{font-size:.5rem;font-family:'JetBrains Mono',ui-monospace,monospace;color:var(--mut);letter-spacing:.02em}
+#emoPop button:hover,#emoPop button.act{background:var(--bg);border-color:var(--ln)}
+</style>
 </head><body class="ld">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="srch" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></symbol>
@@ -939,7 +1006,7 @@ html.mlock #bg{visibility:hidden}
 <div class="card"><label style="margin-top:0" for="cn">Your name</label><input id="cn" autocomplete="name"><label for="ce">Your email (so I can reply)</label><input id="ce" type="email" autocomplete="email"><label for="cm">Message</label><textarea id="cm" rows="4"></textarea>
 <div class="row"><button class="solid" id="send"><svg class="i"><use href="#plane"></use></svg>Send message</button><a class="btn" href="mailto:bonillojohneduard@gmail.com"><svg class="i"><use href="#mail"></use></svg>Open mail app</a></div></div>
 </div></section>
-<footer class="mono"><span data-k="foot" style="">© 2026 John Eduard Bonilo · BSEE · Caraga State University – Cabadbaran Campus</span><button data-go="hero"><svg class="i"><use href="#up"></use></svg>Back to top</button></footer>
+<footer class="mono"><span data-k="foot" style="">© 2026 John Eduard Bonilo · BSEE</span><button data-go="hero"><svg class="i"><use href="#up"></use></svg>Back to top</button></footer>
 
 <div id="admbar"><button id="admcmd" title="Command palette (Ctrl+K)"><svg class="i"><use href="#bolt"></use></svg>Commands</button><button id="admopen"><svg class="i"><use href="#gear"></use></svg>Admin</button><button class="lo2"><svg class="i"><use href="#out"></use></svg>Log out</button></div>
 <div id="ebar"><svg class="i"><use href="#edit"></use></svg>Tap to edit · select a word to style it<button class="solid" id="edone">Done</button></div>
@@ -1142,11 +1209,11 @@ const add=(role,text)=>{const d=document.createElement('div');d.className='cm '+
 const toggle=on=>{pan.classList.toggle('on',on);fab.setAttribute('aria-expanded',on);if(on){mc.classList.add('wave');setTimeout(()=>mc.classList.remove('wave'),2700);setTimeout(()=>inp.focus(),50)}};
 fab.onclick=()=>toggle(!pan.classList.contains('on'));$('#cx').onclick=()=>toggle(false);
 async function send(){const t=inp.value.trim();if(!t||busy)return;if(Date.now()-last<3000){toast('Please wait a moment');return}
- busy=true;last=Date.now();mc.classList.add('think');snd.disabled=true;inp.value='';add('me',t);hist.push({role:'user',content:t});
+ busy=true;last=Date.now();window.__capyUser=t;window.__capyEmo&&window.__capyEmo('');mc.classList.add('think');snd.disabled=true;inp.value='';add('me',t);hist.push({role:'user',content:t});
  const w=add('bot','Typing…');w.classList.add('wait');
  try{const{data,error}=await sb.functions.invoke('chat',{body:{messages:hist.slice(-8)}});if(error||!data||!data.reply)throw error||new Error('no reply');
-  w.textContent=data.reply;hist.push({role:'assistant',content:data.reply})}
- catch(e){w.textContent='Sorry, the assistant is not available right now. Please try again later or email John.';hist.pop()}
+  w.textContent=data.reply;window.__capyReact&&window.__capyReact(data.reply);hist.push({role:'assistant',content:data.reply})}
+ catch(e){window.__capyEmo&&window.__capyEmo('sad',3600);w.textContent='Sorry, the assistant is not available right now. Please try again later or email John.';hist.pop()}
  w.classList.remove('wait');mc.classList.remove('think');mc.classList.add('hap');setTimeout(()=>mc.classList.remove('hap'),900);busy=false;snd.disabled=false;log.scrollTop=log.scrollHeight}
 snd.onclick=send;inp.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();send()}});
 addEventListener('keydown',e=>{if(e.key==='Escape')toggle(false)});
@@ -2013,6 +2080,58 @@ L.addEventListener('pointerup',end);L.addEventListener('pointercancel',end);
 L.addEventListener('click',e=>{const b=e.target.closest('.sfmv');if(!b)return;const li=b.closest('.sfa'),d=+b.dataset.mv;
  flip(()=>kids(),e=>e.dataset.sid,()=>{if(d<0&&li.previousElementSibling)L.insertBefore(li,li.previousElementSibling);else if(d>0&&li.nextElementSibling)L.insertBefore(li.nextElementSibling,li);
  mark();save()})});
+})();
+</script>
+<script id="capy-emo-js">
+(function(){
+const $=s=>document.querySelector(s),mc=$('#mst'),pan=$('#cpan'),inp=$('#cin');if(!mc||!pan)return;
+const svg=mc.querySelector('svg'),head=mc.querySelector('.mh');if(!svg||!head)return;
+const mp=mc.querySelectorAll('.mpu');if(mp[1])mp[1].classList.add('mpr');
+const la=[...svg.querySelectorAll('path')].find(x=>x.getAttribute('d')==='M46 94L52 114');if(la&&la.parentNode)la.parentNode.classList.add('mla');
+head.insertAdjacentHTML('beforeend',`<g class="emo"><path class="x-hap" d="M48 54Q53 47 58 54M82 54Q87 47 92 54" fill="none" stroke="#4a2a1c" stroke-width="2.6" stroke-linecap="round"/><path class="x-winkr" d="M82 54Q87 48 92 54" fill="none" stroke="#4a2a1c" stroke-width="2.6" stroke-linecap="round"/><path class="x-closed" d="M48 52Q53 57 58 52M82 52Q87 57 92 52" fill="none" stroke="#4a2a1c" stroke-width="2.4" stroke-linecap="round"/><g class="x-heart"><path transform="translate(53,52)" d="M0 5C-7 -1 -7 -8 -3 -8C-1 -8 0 -6.5 0 -5.5C0 -6.5 1 -8 3 -8C7 -8 7 -1 0 5Z" fill="#ef4b6c"/><path transform="translate(87,52)" d="M0 5C-7 -1 -7 -8 -3 -8C-1 -8 0 -6.5 0 -5.5C0 -6.5 1 -8 3 -8C7 -8 7 -1 0 5Z" fill="#ef4b6c"/></g><path class="x-brow-ang" d="M45 44L60 49M95 44L80 49" fill="none" stroke="#5a3320" stroke-width="2.6" stroke-linecap="round"/><path class="x-brow-sad" d="M46 49L59 44M94 49L81 44" fill="none" stroke="#5a3320" stroke-width="2.4" stroke-linecap="round"/><path class="x-brow-conf" d="M47 46L59 46M81 41Q87 37 93 42" fill="none" stroke="#5a3320" stroke-width="2.4" stroke-linecap="round"/><path class="x-bigsmile" d="M59 68Q70 84 81 68Z" fill="#4a2a1c" stroke="#4a2a1c" stroke-width="1.6" stroke-linejoin="round"/><path class="x-bigsmile" d="M65 75Q70 80 75 75Q70 73 65 75Z" fill="#f09478"/><path class="x-frown" d="M63 76Q70 68 77 76" fill="none" stroke="#4a2a1c" stroke-width="1.9" stroke-linecap="round"/><path class="x-wavy" d="M62 73q4 -4 8 0t8 0" fill="none" stroke="#4a2a1c" stroke-width="1.9" stroke-linecap="round"/><path class="x-tiny" d="M66 72Q70 75 74 72" fill="none" stroke="#4a2a1c" stroke-width="1.9" stroke-linecap="round"/><path class="x-smirk" d="M63 73Q71 77 79 70" fill="none" stroke="#4a2a1c" stroke-width="2" stroke-linecap="round"/><path class="x-tear" d="M91 58Q95 64 91 68Q87 64 91 58Z" fill="#7cc4ff" stroke="#3b8fd6" stroke-width="1"/><path class="x-sweat" d="M100 44Q104 50 100 54Q96 50 100 44Z" fill="#7cc4ff" stroke="#3b8fd6" stroke-width="1"/><g class="x-shades"><path d="M43 47h20v9q0 4-4 4h-12q-4 0-4-4z" fill="#17171b"/><path d="M77 47h20v9q0 4-4 4h-12q-4 0-4-4z" fill="#17171b"/><path d="M63 49h14" stroke="#17171b" stroke-width="2.4"/><path d="M47 50l5 0M81 50l5 0" stroke="#fff" stroke-width="1.5" stroke-linecap="round" opacity=".6"/></g></g>`);svg.insertAdjacentHTML('beforeend',`<g class="fx"><g class="fx-heart"><path transform="translate(112,40)" d="M0 5C-7 -1 -7 -8 -3 -8C-1 -8 0 -6.5 0 -5.5C0 -6.5 1 -8 3 -8C7 -8 7 -1 0 5Z" fill="#ef4b6c"/></g><g class="fx-heart"><path transform="translate(124,28) scale(.8)" d="M0 5C-7 -1 -7 -8 -3 -8C-1 -8 0 -6.5 0 -5.5C0 -6.5 1 -8 3 -8C7 -8 7 -1 0 5Z" fill="#f472b6"/></g><g class="fx-heart"><path transform="translate(26,34) scale(.9)" d="M0 5C-7 -1 -7 -8 -3 -8C-1 -8 0 -6.5 0 -5.5C0 -6.5 1 -8 3 -8C7 -8 7 -1 0 5Z" fill="#ef4b6c"/></g><text class="fx-z" x="108" y="38" font-size="11" font-weight="700" font-family="system-ui,sans-serif" fill="#6b7fd7">z</text><text class="fx-z" x="118" y="28" font-size="14" font-weight="700" font-family="system-ui,sans-serif" fill="#6b7fd7">z</text><text class="fx-z" x="128" y="16" font-size="17" font-weight="700" font-family="system-ui,sans-serif" fill="#6b7fd7">Z</text><text class="fx-note" x="108" y="34" font-size="16" font-weight="700" font-family="system-ui,sans-serif" fill="#f0a43a">♪</text><text class="fx-note" x="22" y="30" font-size="14" font-weight="700" font-family="system-ui,sans-serif" fill="#f09478">♫</text><text class="fx-bang" x="112" y="38" font-size="30" font-weight="800" font-family="system-ui,sans-serif" fill="#e5484d">!</text><text class="fx-q" x="110" y="38" font-size="30" font-weight="800" font-family="system-ui,sans-serif" fill="#6b7fd7">?</text><g class="fx-anger" fill="none" stroke="#e5484d" stroke-width="2.6" stroke-linecap="round"><path d="M104 24l3 6 6-3M122 24l-3 6-6-3M104 42l3-6 6 3M122 42l-3-6-6 3"/></g><g class="fx-kb"><rect x="42" y="120" width="56" height="12" rx="3" fill="#33333b" stroke="#17171b" stroke-width="1.2"/><path d="M47 124h46M47 128h46" stroke="#9a9aa8" stroke-width="2" stroke-dasharray="3 2" stroke-linecap="round"/></g></g>`);
+const lab=document.createElement('span');lab.className='mlab';mc.appendChild(lab);
+const NAMES={joy:'Yay!',laugh:'Haha!',love:'Love it!',sleepy:'Zzz…',surprised:'Whoa!',sad:'Aww…',wink:'Wink!',confused:'Hmm?',grumpy:'Grr!',cool:'Cool!',shy:'Hehe…',typing:'Typing…'};
+const ALL=Object.keys(NAMES).filter(k=>k!=='typing');let tm=0,lastEmo='',act=0;
+function setEmo(n,ms,label){clearTimeout(tm);lab.classList.remove('show');
+ if(!n||!NAMES[n]){mc.removeAttribute('data-emo');syncPick();return}
+ mc.dataset.emo=n;lastEmo=n;if(label){lab.textContent=NAMES[n];lab.classList.add('show')}
+ syncPick();tm=setTimeout(()=>{mc.removeAttribute('data-emo');lab.classList.remove('show');syncPick()},ms||2600)}
+const wave=()=>{mc.classList.add('wave');setTimeout(()=>mc.classList.remove('wave'),2700)};
+window.__capyEmo=(n,ms)=>{act=Date.now();setEmo(n,ms)};
+const RULES=[[/<3|❤|♥|\b(love|loved|thank|thanks|thx|cute|adorable|best)\b/i,'love'],[/:'?D\b|\b(haha|hehe|lol|lmao|funny|joke)\b|😂/i,'laugh'],[/:-?o\b|\b(wow|omg|whoa|no way|incredible)\b/i,'surprised'],[/:-?\(|\b(sorry|sad|unfortunately|unable|not available|error|failed?)\b/i,'sad'],[/\bzzz+\b|\b(sleep|sleepy|tired|night|bored)\b/i,'sleepy'],[/\bB-?\)|\b(cool|epic|dope|awesome|amazing)\b/i,'cool'],[/\b(angry|mad|annoy\w*|hate)\b|>:-?\(/i,'grumpy'],[/\b(shy|blush|pretty|compliment)\b|\^_?\^/i,'shy'],[/;-?\)/,'wink'],[/:-?\)|\b(yay|congrat\w*|excited|happy|great|win|welcome)\b/i,'joy'],[/:-?\/|\b(huh|confused|not sure|unsure)\b/i,'confused']];
+const pick=t=>{for(const r of RULES)if(r[0].test(t||''))return r[1];return ''};
+window.__capyReact=reply=>{act=Date.now();setEmo(pick(reply)||pick(window.__capyUser)||'joy',3000)};
+/* chat opens: little hello */
+{let was=false;new MutationObserver(()=>{const on=pan.classList.contains('on');if(on&&!was){act=Date.now();setEmo('joy',1500);place()}was=on}).observe(pan,{attributes:true,attributeFilter:['class']})}
+/* typing: Capy types too, then reacts to what was written */
+let pt=0;
+if(inp){inp.addEventListener('input',()=>{act=Date.now();clearTimeout(pt);
+ if(mc.classList.contains('think'))return;
+ const v=inp.value;if(!v.trim()){setEmo('');return}
+ setEmo('typing',1200);
+ pt=setTimeout(()=>{if(mc.classList.contains('think')||!inp.value.trim())return;const e=pick(inp.value);setEmo(e||'',2600)},800)});
+ inp.addEventListener('blur',()=>{clearTimeout(pt);if(mc.dataset.emo==='typing')setEmo('')})}
+/* tap Capy: random mood */
+mc.addEventListener('click',()=>{act=Date.now();const o=ALL.filter(x=>x!==lastEmo);setEmo(o[Math.floor(Math.random()*o.length)],2800,true)});
+/* idle moods while chat is open */
+setInterval(()=>{if(!pan.classList.contains('on')||document.hidden||mc.classList.contains('think')||mc.dataset.emo||Date.now()-act<5000)return;
+ const o=['wink','joy','love','sleepy','shy','cool','surprised','laugh'].filter(x=>x!==lastEmo);setEmo(o[Math.floor(Math.random()*o.length)],2400)},7000);
+/* ---- public emote picker (small icon, bottom right of Capy) ---- */
+const LIST=[['joy','😄','Joy'],['laugh','😂','Haha'],['love','😍','Love'],['wink','😉','Wink'],['cool','😎','Cool'],['shy','😊','Shy'],['surprised','😮','Wow'],['confused','🤔','Hmm'],['sad','😢','Sad'],['grumpy','😠','Grr'],['sleepy','😴','Sleep'],['typing','⌨️','Type'],['wave','👋','Wave']];
+const btn=document.createElement('button');btn.type='button';btn.id='emoBtn';btn.setAttribute('aria-label','Choose an emote for Capy');btn.setAttribute('aria-expanded','false');btn.title='Emotes';
+btn.innerHTML='<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.2q3.5 3.4 7 0"/><path d="M9 9.5h.01M15 9.5h.01"/></svg>';
+const pop=document.createElement('div');pop.id='emoPop';pop.setAttribute('role','group');pop.setAttribute('aria-label','Capy emotes');
+pop.innerHTML=LIST.map(e=>'<button type="button" data-e="'+e[0]+'" aria-label="'+e[2]+'" title="'+e[2]+'">'+e[1]+'<small>'+e[2]+'</small></button>').join('');
+pan.appendChild(btn);pan.appendChild(pop);
+function place(){const t=mc.offsetTop,h=mc.offsetHeight;btn.style.top=(t+h-38)+'px';pop.style.top=(t+h+4)+'px'}
+function syncPick(){pop.querySelectorAll('button').forEach(b=>b.classList.toggle('act',b.dataset.e===mc.dataset.emo))}
+const closePop=()=>{pop.classList.remove('on');btn.setAttribute('aria-expanded','false')};
+btn.addEventListener('click',e=>{e.stopPropagation();place();const on=pop.classList.toggle('on');btn.setAttribute('aria-expanded',on);syncPick()});
+pop.addEventListener('click',e=>{const b=e.target.closest('button[data-e]');if(!b)return;e.stopPropagation();act=Date.now();const n=b.dataset.e;
+ if(n==='wave'){wave();setEmo('joy',1800,false)}else setEmo(n,n==='typing'?3500:4000,true);closePop()});
+document.addEventListener('click',e=>{if(pop.classList.contains('on')&&!pop.contains(e.target)&&e.target!==btn&&!btn.contains(e.target))closePop()});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&pop.classList.contains('on')){closePop();btn.focus()}},true);
+addEventListener('resize',place);place();
 })();
 </script>
 </body></html>
