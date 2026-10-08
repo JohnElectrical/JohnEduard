@@ -639,6 +639,20 @@ html.h-study #study,html.h-study [data-go=study]{display:none!important}
 .sfa .sfx{flex-basis:100%;display:flex;gap:8px;flex-wrap:wrap}
 .sfa .sfx .btn{padding:7px 12px;font-size:.78rem;flex:0 1 auto}
 @media(max-width:600px){#slist .sfi{padding-left:14px}}
+.sfnote{color:var(--mut);font-size:.92rem;line-height:1.6;margin:-4px 0 18px}.sfnote:empty{display:none}
+html.h-snote .sfnote{display:none}
+/* collapsible settings groups */
+#spane .sgrp{border-top:1px solid var(--ln);margin-top:8px}
+#spane .sgrp:first-of-type{margin-top:16px}
+#spane .sh{cursor:pointer;display:flex;align-items:center;justify-content:space-between;border-top:0;margin:0;padding:14px 4px;user-select:none;-webkit-tap-highlight-color:transparent;transition:color .25s}
+#spane .sh:hover,#spane .sh:focus-visible{color:var(--fg);outline:0}
+#spane .sh::after{content:"";width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(-135deg) translate(-2px,-2px);transition:transform .3s ease;margin-right:6px;flex:none}
+#spane .sgrp.shut .sh::after{transform:rotate(45deg)}
+#spane .sgb{display:grid;grid-template-rows:1fr;transition:grid-template-rows .35s ease}
+#spane .sgrp.shut .sgb{grid-template-rows:0fr}
+#spane .sgi{overflow:hidden;min-height:0;padding-bottom:10px}
+#spane .sgrp.shut .sgi{visibility:hidden;transition:visibility 0s .35s}
+#spane .sgi>.sl:first-child{margin-top:2px}
 </style></head><body class="ld">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="rfsh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-3-6.7L21 8"></path><path d="M21 3v5h-5"></path></symbol>
@@ -705,7 +719,7 @@ html.h-study #study,html.h-study [data-go=study]{display:none!important}
 
 <section id="projects" class="rv"><div class="hd"><span class="chip"><svg class="i"><use href="#work"></use></svg></span><h2 data-k="h-projects">Projects</h2></div><div><div class="grid" id="plist"></div></div></section>
 <section id="gallery" class="rv"><div class="hd"><span class="chip"><svg class="i"><use href="#image"></use></svg></span><h2 data-k="h-gallery">Gallery</h2></div><div><div class="vt" role="group" aria-label="Photo view size"><button id="vS" aria-pressed="true" class="act"><svg class="i"><use href="#gridv"></use></svg>Small</button><button id="vL" aria-pressed="false"><svg class="i"><use href="#bigv"></use></svg>Large</button></div><div class="grid sm" id="glist"></div></div></section>
-<section id="study" class="rv"><div class="hd"><span class="chip"><svg class="i"><use href="#book"></use></svg></span><h2 data-k="h-study">Calculus study files</h2></div><div><div class="grid" id="slist"></div></div></section>
+<section id="study" class="rv"><div class="hd"><span class="chip"><svg class="i"><use href="#book"></use></svg></span><h2 data-k="h-study">Calculus study files</h2></div><p class="sfnote" data-k="study-note">John will add some files soon.</p><div><div class="grid" id="slist"></div></div></section>
 <section id="contact" class="rv"><div class="hd"><span class="chip"><svg class="i"><use href="#mail"></use></svg></span><h2 data-k="h-contact">Get in touch</h2></div><div class="contact">
 <div class="info"><a href="mailto:bonillojohneduard@gmail.com"><span class="chip"><svg class="i"><use href="#mail"></use></svg></span>bonillojohneduard@gmail.com</a><div class="school"><span class="chip"><svg class="i"><use href="#cap"></use></svg></span>Caraga State University – Cabadbaran Campus</div><div class="row" style="margin:0"><button id="copy"><svg class="i"><use href="#clip"></use></svg>Copy email</button><button class="solid" id="anon"><svg class="i"><use href="#lock"></use></svg>Anonymous message</button></div></div>
 <div class="card"><label style="margin-top:0" for="cn">Your name</label><input id="cn" autocomplete="name"><label for="ce">Your email (so I can reply)</label><input id="ce" type="email" autocomplete="email"><label for="cm">Message</label><textarea id="cm" rows="4"></textarea>
@@ -725,7 +739,7 @@ html.h-study #study,html.h-study [data-go=study]{display:none!important}
 <div class="pane" data-p="g"><label for="gIn">Add photos</label><input type="file" id="gIn" accept="image/*" multiple=""><div class="thumbs" id="agl"></div></div>
 <div class="pane" data-p="t"><p class="note" style="margin-top:16px">Edit the words right on the page. Tap your name, a heading, the About text, or a label and type. Then select a single word (or just tap inside it) and use the bar at the bottom to make it bold or give it its own color. Changes save automatically.</p><div class="row"><button class="solid" id="etEdit" style="flex:1"><svg class="i"><use href="#edit"></use></svg>Edit texts on the page</button></div><label for="rIn">Typing words under your name (separate with commas)</label><input id="rIn"><div class="row"><button id="rst"><svg class="i"><use href="#trash"></use></svg>Reset headings and labels</button></div></div>
 <div class="pane" data-p="m"><div class="row" style="align-items:center;margin-top:16px"><b style="flex:1">Messages <small id="mcount" class="mono" style="opacity:.6">(0)</small></b><button id="mref">Refresh</button></div><div id="mlist"><p class="note">No messages yet.</p></div></div>
-<div class="pane" data-p="c"><label for="sfName" style="margin-top:16px">File name</label><input id="sfName" maxlength="80" placeholder="e.g. Limits and Continuity reviewer"><label for="sfIn">File (PDF, Word, PowerPoint, image…)</label><input type="file" id="sfIn"><div class="row"><button class="solid" id="sfAdd" style="flex:1"><svg class="i"><use href="#plus"></use></svg>Add study file</button></div><div id="sfList"></div><p class="note">New files stay hidden until you press Approve. Close file keeps the name visible but visitors cannot open it. Show/hide the section and require an access code in Settings → Study files. Max 50 MB per file.</p></div>
+<div class="pane" data-p="c"><label for="sfNote" style="margin-top:16px">Text under the heading</label><textarea id="sfNote" rows="2" maxlength="200" placeholder="John will add some files soon."></textarea><p class="note">Visitors see this line above the files. Leave it empty to hide it. You can also tap it on the page in Edit texts mode.</p><label for="sfName" style="margin-top:16px">File name</label><input id="sfName" maxlength="80" placeholder="e.g. Limits and Continuity reviewer"><label for="sfIn">File (PDF, Word, PowerPoint, image…)</label><input type="file" id="sfIn"><div class="row"><button class="solid" id="sfAdd" style="flex:1"><svg class="i"><use href="#plus"></use></svg>Add study file</button></div><div id="sfList"></div><p class="note">New files wait for your Approve button unless you change that in Settings → Study files. Close file keeps the name visible but visitors cannot open it. Max 50 MB per file.</p></div>
 <div class="pane" data-p="s" id="spane">
 <p class="sh">Status</p>
 <p class="sl">Availability<small>Shown as a small pill at the top of your homepage.</small></p><div class="seg"><button type="button" data-sk="st" data-v="online">Online</button><button type="button" data-sk="st" data-v="busy">Busy</button><button type="button" data-sk="st" data-v="away">Away</button><button type="button" data-sk="st" data-v="offline">Offline</button><button type="button" data-sk="st" data-v="hide" class="act">Hidden</button></div>
@@ -1522,7 +1536,8 @@ b.addEventListener('click',async function(){
 /* ===== viewer pill + calculus study files ===== */
 (function(){
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const D={vw:'20',vwMin:'',vwMax:'',study:'show',studyLock:'off',studyHash:''};
+const D={vw:'20',vwMin:'',vwMax:'',study:'show',studyLock:'off',studyHash:'',studyNoteOn:'show',studyAuto:'off'};
+const NOTE='John will add some files soon.',noteVal=()=>{const v=S.t&&S.t['study-note'];return v==null?NOTE:v};
 const ensure=()=>{S.set=S.set||{};for(const k in D)if(S.set[k]==null)S.set[k]=D[k]};
 const g=k=>{const v=S.set&&S.set[k];return v==null?D[k]:v};
 const adm=()=>document.body.classList.contains('adm');
@@ -1532,9 +1547,12 @@ const L=()=>S.study||(S.study=[]);
 const seg=(k,o)=>'<div class="seg">'+o.map(x=>'<button type="button" data-sk="'+k+'" data-v="'+x[0]+'">'+x[1]+'</button>').join('')+'</div>';
 const anchor=$$('#spane .sh').find(p=>p.textContent==='Admin tools');
 anchor.insertAdjacentHTML('beforebegin','<p class="sh">Visitor counter</p><p class="sl">Viewers now<small>Shows a small "viewing now" pill that drifts up and down by itself between 1 and your max.</small></p>'+seg('vw',[['off','Off'],['10','1-10'],['20','1-20'],['30','1-30'],['50','1-50'],['100','1-100'],['custom','Custom']])+'<div class="fgr" id="vwCus" style="display:none"><input type="number" min="1" max="999" data-si="vwMin" placeholder="Min" aria-label="Minimum viewers"><input type="number" min="1" max="999" data-si="vwMax" placeholder="Max" aria-label="Maximum viewers"></div>'+
-'<p class="sh">Study files</p><p class="sl">Study section<small>Add the files from the Study tab.</small></p>'+seg('study',[['show','Show'],['hide','Hide']])+
+'<p class="sh">Study files</p>'+
+'<p class="sl">Study section<small>Show or hide the whole Study section on the site.</small></p>'+seg('study',[['show','Show'],['hide','Hide']])+
+'<p class="sl">Text under the heading<small>The line above the files, like “John will add some files soon.” Edit it in the Study tab.</small></p>'+seg('studyNoteOn',[['show','Show'],['hide','Hide']])+
+'<p class="sl">New files<small>Should a new upload wait for your Approve button, or appear right away?</small></p>'+seg('studyAuto',[['off','Wait for approval'],['on','Show right away']])+
 '<p class="sl">Who can open the files<small>Public, or visitors must enter an access code you give them.</small></p>'+seg('studyLock',[['off','Public'],['on','Needs access code']])+
-'<p class="sl">Access code<small id="sCodeS"></small></p><input class="sbn" id="sCode" maxlength="40" placeholder="Type a new code" autocomplete="off" aria-label="Access code"><div class="row"><button type="button" id="sCs">Save code</button></div>');
+'<div id="sCodeBox"><p class="sl">Access code<small id="sCodeS"></small></p><input class="sbn" id="sCode" maxlength="40" placeholder="Type a new code" autocomplete="off" aria-label="Access code"><div class="row"><button type="button" id="sCs">Save code</button></div></div>');
 
 /* ---- fake viewer count (random walk, looks natural) ---- */
 let cur=0,tm;
@@ -1561,12 +1579,14 @@ function rs(){const el=$('#slist');if(!el)return;const A=adm(),lock=!A&&g('study
  if(lock){el.innerHTML='<div class="card slock"><span class="chip">'+ic('lock')+'</span><h3>Study files are locked</h3><p>You need permission from John first. Enter the access code you were given.</p><div class="row"><input id="sUi" placeholder="Access code" autocomplete="off" style="flex:1 1 160px"><button class="solid" id="sUb">'+ic('check')+'Unlock</button></div></div>';return}
  const vis=A?list:list.filter(x=>x.ap!==false);
  el.innerHTML=vis.length?vis.map(x=>{const ok=/^https:\/\//.test(x.u||''),u=ok?esc(x.u):'#',d=ok?esc(x.u+'?download='+encodeURIComponent(x.n+(x.e?'.'+x.e:''))):'#',cl=x.cl===true,pe=x.ap===false,can=A||!cl,tag=pe?'Pending':cl?'Closed':'';
-  return '<article class="card sf'+(pe?' pend':'')+'" data-sid="'+x.id+'"><button type="button" class="sfh" aria-expanded="false"><span class="chip">'+ic('file')+'</span><span class="sfn">'+esc(x.n)+'</span>'+(tag?'<span class="sft mono">'+tag+'</span>':'')+'<svg class="i sfv" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></button><div class="sfb"><div><div class="sfi"><p>'+esc([(x.e||'file').toUpperCase(),x.s?fsz(x.s):''].filter(Boolean).join(' · '))+(A&&pe?' · Waiting for your approval':'')+(A&&cl?' · Closed to visitors':'')+'</p>'+(!A&&cl?'<p>This file is closed right now.</p>':'')+'<div class="acts">'+(can?'<a class="btn solid" href="'+u+'" target="_blank" rel="noopener noreferrer">'+ic('ext')+'Open</a><a class="btn" href="'+d+'" download>'+ic('down')+'Download</a>':'')+'<button type="button" class="btn" data-sx>'+ic('x')+'Close</button>'+(A?'<button type="button" class="btn" data-se="'+x.id+'">'+ic('edit')+'Rename</button><button type="button" class="btn" data-sd="'+x.id+'">'+ic('trash')+'Delete</button>':'')+'</div></div></div></div></article>'}).join(''):'<div class="empty mono"><span class="chip">'+ic('book')+'</span><span>No study files yet. Please check back soon.</span></div>'}
+  return '<article class="card sf'+(pe?' pend':'')+'" data-sid="'+x.id+'"><button type="button" class="sfh" aria-expanded="false"><span class="chip">'+ic('file')+'</span><span class="sfn">'+esc(x.n)+'</span>'+(tag?'<span class="sft mono">'+tag+'</span>':'')+'<svg class="i sfv" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></button><div class="sfb"><div><div class="sfi">'+(A?'<p>'+esc([(x.e||'file').toUpperCase(),x.s?fsz(x.s):''].filter(Boolean).join(' · '))+(pe?' · Waiting for your approval':'')+(cl?' · Closed to visitors':'')+'</p>':'')+(!A&&cl?'<p>This file is closed right now.</p>':'')+'<div class="acts">'+(can?'<a class="btn solid" href="'+u+'" target="_blank" rel="noopener noreferrer">'+ic('ext')+'Open</a><a class="btn" href="'+d+'" download>'+ic('down')+'Download</a>':'')+'<button type="button" class="btn" data-sx>'+ic('x')+'Close</button>'+(A?'<button type="button" class="btn" data-se="'+x.id+'">'+ic('edit')+'Rename</button><button type="button" class="btn" data-sd="'+x.id+'">'+ic('trash')+'Delete</button>':'')+'</div></div></div></div></article>'}).join(''):'<div class="empty mono"><span class="chip">'+ic('book')+'</span><span>No study files yet. Please check back soon.</span></div>'}
 function al(){$('#sfList').innerHTML=L().map(x=>{const pe=x.ap===false,cl=x.cl===true;return '<div class="it sfa"><span class="chip">'+ic('file')+'</span><div class="sfm"><b>'+esc(x.n)+'</b><small>'+(pe?'Pending approval · hidden from visitors':'Approved')+(cl?' · Closed (visitors cannot open it)':'')+'</small></div><button class="ib" data-se="'+x.id+'" aria-label="Rename">'+ic('edit')+'</button><button class="ib" data-sd="'+x.id+'" aria-label="Delete">'+ic('trash')+'</button><div class="sfx"><button type="button" class="btn'+(pe?' solid':'')+'" data-sa="'+x.id+'">'+ic('check')+(pe?'Approve':'Unapprove')+'</button><button type="button" class="btn" data-sc="'+x.id+'">'+ic(cl?'ext':'lock')+(cl?'Reopen file':'Close file')+'</button></div></div>'}).join('')||'<p class="note">No files yet.</p>'}
 function hl(){$$('#spane [data-sk]').forEach(b=>{const k=b.dataset.sk;if(k in D)b.classList.toggle('act',String(g(k))===b.dataset.v)});
  $('#vwCus').style.display=g('vw')==='custom'?'grid':'none';
- $('#sCodeS').textContent=g('studyHash')?'A code is set. Saving a new one replaces it.':'No code set yet.'}
-function sync(){ensure();document.documentElement.classList.toggle('h-study',g('study')==='hide');hl();tick(false);rs();al()}
+ $('#sCodeBox').style.display=g('studyLock')==='on'?'':'none';
+ $('#sCodeS').textContent=g('studyHash')?'A code is set. Saving a new one replaces it.':'No code set yet.';
+ const n=$('#sfNote');if(n&&document.activeElement!==n)n.value=noteVal()}
+function sync(){ensure();const R=document.documentElement;R.classList.toggle('h-study',g('study')==='hide');R.classList.toggle('h-snote',g('studyNoteOn')==='hide');hl();tick(false);rs();al()}
 const o=window.__applySet;window.__applySet=function(){ensure();o();sync()};
 
 /* ---- events ---- */
@@ -1592,8 +1612,23 @@ $('#sfAdd').onclick=async()=>{const f=$('#sfIn').files[0];if(!f){toast('Choose a
  b.disabled=true;b.textContent='Uploading…';
  const{error}=await sb.storage.from('site-images').upload(p,f,{contentType:f.type||'application/octet-stream',cacheControl:'31536000'});
  if(error)toast('Upload failed: '+error.message);
- else{L().unshift({id:Date.now(),ap:false,n:n.slice(0,80),e,s:f.size,p,u:sb.storage.from('site-images').getPublicUrl(p).data.publicUrl});persist();$('#sfName').value='';$('#sfIn').value='';sync();toast('Study file added. Press Approve to show it')}
+ else{L().unshift({id:Date.now(),ap:g('studyAuto')==='on',n:n.slice(0,80),e,s:f.size,p,u:sb.storage.from('site-images').getPublicUrl(p).data.publicUrl});persist();$('#sfName').value='';$('#sfIn').value='';sync();toast(g('studyAuto')==='on'?'Study file added':'Study file added. Press Approve to show it')}
  b.disabled=false;b.innerHTML=h};
+
+$('#sfNote').addEventListener('input',e=>{const v=e.target.value.slice(0,200);S.t=S.t||{};S.t['study-note']=v;if(S.h)delete S.h['study-note'];const el=$('[data-k="study-note"]');if(el&&document.activeElement!==el)el.textContent=v;persist()});
+
+/* ---- collapsible settings groups ---- */
+(function(){const P=$('#spane');if(!P||P.querySelector('.sgrp'))return;
+ [...P.children].filter(n=>n.classList.contains('sh')).forEach((h,i)=>{
+  const w=document.createElement('div'),bd=document.createElement('div'),inn=document.createElement('div');
+  w.className='sgrp'+(i?' shut':'');bd.className='sgb';inn.className='sgi';
+  let n=h.nextSibling;while(n&&!(n.nodeType===1&&n.classList.contains('sh'))){const nx=n.nextSibling;inn.appendChild(n);n=nx}
+  h.parentNode.insertBefore(w,h);w.appendChild(h);bd.appendChild(inn);w.appendChild(bd);
+  h.setAttribute('role','button');h.tabIndex=0;h.setAttribute('aria-expanded',i?'false':'true')});
+ const tg=h=>{const w=h.closest('.sgrp');if(!w)return;const sh=w.classList.toggle('shut');h.setAttribute('aria-expanded',sh?'false':'true')};
+ P.addEventListener('click',e=>{const h=e.target.closest('.sh');if(h&&P.contains(h))tg(h)});
+ P.addEventListener('keydown',e=>{const h=e.target.closest&&e.target.closest('.sh');if(h&&(e.key==='Enter'||e.key===' ')){e.preventDefault();tg(h)}});
+})();
 
 sync();
 })();
