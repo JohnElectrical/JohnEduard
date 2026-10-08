@@ -743,6 +743,16 @@ body.edit #study .sfnote{outline:1px dashed var(--mut);outline-offset:3px}
 #spane .sw2:hover{background:var(--card)!important}
 #spane .sw2[aria-checked=true]:hover{background:var(--acc,var(--fg))!important}
 @media(max-width:899px){#spane .srow.tgl .sw2{width:50px;height:28px}#spane .sw2::after{width:20px;height:20px}#spane .sw2[aria-checked=true]::after{transform:translateX(22px)}}
+
+/* study note: plain text, no box (edit-mode dashed outline kept for admin) */
+#study .sfnote,.sfnote{border:0!important;background:none!important;box-shadow:none!important;border-radius:0!important;padding:0!important;max-width:680px}
+/* gallery reorder (admin) */
+.thumbs button.gm{right:auto;left:4px;top:4px;font-size:1.1rem;line-height:1;font-weight:700}
+.thumbs button.gm.r{left:36px}
+.thumbs button.gm:disabled{opacity:.35;cursor:default}
+.thumbs div[data-gi] img{cursor:grab}
+.thumbs div.dg{opacity:.4}
+.thumbs div.ov{outline:2px dashed var(--fg);outline-offset:2px;border-radius:10px}
 </style></head><body class="ld">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="srch" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></symbol>
@@ -965,7 +975,7 @@ function render(){
  $('#glist').innerHTML=S.gallery.length?S.gallery.map(x=>`<figure class="card ph" data-lb style="margin:0"><img src="${x.img}" alt="Gallery photo" loading="lazy" decoding="async">${x.c?`<figcaption class="mono" style="padding:8px 6px 2px;color:var(--mut);font-size:.8rem">${esc(x.c)}</figcaption>`:''}${X('data-dg',x.id)}</figure>`).join(''):`<div class="empty mono"><span class="chip">${ic('image')}</span><span>John has not shared any photos yet. Please check back soon.</span></div>`;
  const T=(a,v)=>`<button class="ib" ${a}="${v}" aria-label="Remove">${ic('trash')}</button>`;
  $('#alist').innerHTML=S.projects.map(x=>`<div class="it">${x.img?`<img src="${x.img}" alt="">`:`<span class="chip">${ic('work')}</span>`}<span>${esc(x.t)}</span><button class="ib" data-ep="${x.id}" aria-label="Edit">${ic('edit')}</button>${T('data-dp',x.id)}</div>`).join('');
- $('#agl').innerHTML=S.gallery.map(x=>`<div><img src="${x.img}" alt="">${T('data-dg',x.id)}<input class="gc" data-gc="${x.id}" placeholder="Caption (optional)" value="${esc(x.c||'')}" maxlength="120" aria-label="Photo caption"></div>`).join('')||'<p class="note">No photos yet.</p>';
+ $('#agl').innerHTML=S.gallery.map((x,i,a)=>`<div data-gi="${x.id}"><img src="${x.img}" alt="" draggable="true"><button type="button" class="gm" data-gm="-1" data-id="${x.id}" aria-label="Move photo earlier" title="Move earlier"${i===0?' disabled':''}>‹</button><button type="button" class="gm r" data-gm="1" data-id="${x.id}" aria-label="Move photo later" title="Move later"${i===a.length-1?' disabled':''}>›</button>${T('data-dg',x.id)}<input class="gc" data-gc="${x.id}" placeholder="Caption (optional)" value="${esc(x.c||'')}" maxlength="120" aria-label="Photo caption"></div>`).join('')||'<p class="note">No photos yet.</p>';
  if(window.__applySet)window.__applySet();
 }
 render();
@@ -1166,6 +1176,13 @@ $('#cancelP').onclick=resetPF;
 $('#rmPI').onclick=()=>{editRmImg=true;$('#rmPI').style.display='none';toast('Photo will be removed when you save')};
 $('#agl').addEventListener('input',e=>{const i=e.target.closest('[data-gc]');if(!i)return;const x=S.gallery.find(y=>y.id==i.dataset.gc);if(x){x.c=i.value;persist()}});
 $('#agl').addEventListener('change',e=>{if(e.target.closest('[data-gc]'))render()});
+{const A=$('#agl');let dragId=null;
+ const mv=(from,to)=>{if(from<0||to<0||to>=S.gallery.length||from===to)return;const[it]=S.gallery.splice(from,1);S.gallery.splice(to,0,it);render();persist();toast('Photo order saved')};
+ A.addEventListener('click',e=>{const b=e.target.closest('[data-gm]');if(!b||b.disabled)return;e.stopPropagation();const i=S.gallery.findIndex(y=>y.id==b.dataset.id);mv(i,i+parseInt(b.dataset.gm))});
+ A.addEventListener('dragstart',e=>{const d=e.target.closest('[data-gi]');if(!d)return;dragId=d.dataset.gi;d.classList.add('dg');try{e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',dragId)}catch(_){}});
+ A.addEventListener('dragover',e=>{if(dragId==null)return;const d=e.target.closest('[data-gi]');if(!d)return;e.preventDefault();A.querySelectorAll('.ov').forEach(x=>x!==d&&x.classList.remove('ov'));d.classList.add('ov')});
+ A.addEventListener('drop',e=>{if(dragId==null)return;e.preventDefault();const d=e.target.closest('[data-gi]');const id=dragId;dragId=null;if(!d)return;mv(S.gallery.findIndex(y=>y.id==id),S.gallery.findIndex(y=>y.id==d.dataset.gi))});
+ A.addEventListener('dragend',()=>{dragId=null;A.querySelectorAll('.dg,.ov').forEach(x=>x.classList.remove('dg','ov'))})}
 const pwOk=(a,b)=>{if(a.length<8){toast('Use at least 8 characters');return false}if(a!==b){toast('Passwords do not match');return false}return true};
 $('#forgot').onclick=async e=>{e.preventDefault();const l=e.currentTarget;l.style.pointerEvents='none';const{error}=await sb.auth.resetPasswordForEmail(ADMIN_EMAIL,{redirectTo:location.origin+location.pathname});l.style.pointerEvents='';if(error)toast('Could not send: '+error.message);else toast('Reset link sent to your email. Check spam too.')};
 sb.auth.onAuthStateChange(ev=>{if(ev==='PASSWORD_RECOVERY'){$$('.modal').forEach(m=>m.classList.remove('on'));setTimeout(()=>{show('#m3');$('#rp1').focus()},60)}});
