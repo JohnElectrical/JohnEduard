@@ -859,6 +859,8 @@ html.mlock #bg{visibility:hidden}
 </style>
 <style id="fixes2">
 #sfList .sfg{cursor:grab;touch-action:none;padding:8px 4px;font-size:1.15rem;line-height:1;color:var(--mut);letter-spacing:-2px;user-select:none;-webkit-user-select:none;flex:none}
+#sfList .sfa,#sOrder .tord li{transition:box-shadow .2s,border-color .2s,transform .2s}
+#sfList .sfa.drg,#sOrder .tord li.drg{transform:scale(1.02)}
 #sfList .sfa.drg{border-color:var(--fg);box-shadow:0 8px 22px rgba(0,0,0,.35);position:relative;z-index:2}
 #sfList .sfa.drg .sfg{cursor:grabbing}
 #sfList .sfmv{width:30px;height:30px;min-height:0;padding:0;font-size:.7rem;display:grid;place-items:center}
@@ -1928,6 +1930,7 @@ sync();
 <script id="fixes-js">
 (function(){
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const flip=(get,key,fn)=>{const rm=matchMedia('(prefers-reduced-motion: reduce)').matches,B=new Map();get().forEach(e=>B.set(key(e),e.getBoundingClientRect()));fn();if(rm)return;get().forEach(e=>{const o=B.get(key(e));if(!o)return;const n=e.getBoundingClientRect(),dx=o.left-n.left,dy=o.top-n.top;if(!dx&&!dy)return;e.animate([{transform:'translate('+dx+'px,'+dy+'px)'},{transform:'none'}],{duration:260,easing:'cubic-bezier(.2,.8,.2,1)'})})};
 /* ---------- one reliable nav + scroll-spy ---------- */
 const SEC=['hero','about','games','projects','gallery','study','contact'],BTN='nav [data-go],#tabs [data-go],#dots [data-go]';
 const vis=e=>!!(e&&e.getClientRects().length);
@@ -1955,7 +1958,7 @@ const KEYS=TABS.map(t=>t[0]);
 const parse=v=>{const u=[];String(v||'').split(',').forEach(k=>{if(KEYS.includes(k)&&!u.includes(k))u.push(k)});KEYS.forEach(k=>{if(!u.includes(k))u.push(k)});return u};
 const cloud=()=>{try{return window.__get('tabOrder')||''}catch(e){return ''}};
 const order=()=>{let v=cloud();if(!v){try{v=localStorage.getItem('ej_tabs')||''}catch(e){}}return parse(v)};
-const apply=arr=>{const b=$('#m2 .box>.tabs');if(!b)return;(arr||order()).forEach(k=>{const x=b.querySelector('[data-t="'+k+'"]');if(x)b.appendChild(x)});
+const apply=arr=>{const b=$('#m2 .box>.tabs');if(!b)return;flip(()=>[...b.children],e=>e.dataset.t,()=>{(arr||order()).forEach(k=>{const x=b.querySelector('[data-t="'+k+'"]');if(x)b.appendChild(x)})});
  if(!$('#m2 .pane.on')&&typeof openTab==='function')openTab((arr||order())[0])};
 const save=arr=>{const v=arr.join(',');try{localStorage.setItem('ej_tabs',v)}catch(e){}window.__setSet('tabOrder',v);apply(arr)};
 
@@ -1970,12 +1973,12 @@ if(P){
  const read=()=>[...ul.children].map(l=>l.dataset.k);
  ul.addEventListener('pointerdown',e=>{const h=e.target.closest('.grip');if(!h)return;e.preventDefault();drag=h.closest('li');drag.classList.add('drg');try{ul.setPointerCapture(e.pointerId)}catch(_){}});
  ul.addEventListener('pointermove',e=>{if(!drag)return;let before=null;for(const s of ul.children){if(s===drag)continue;const r=s.getBoundingClientRect();if(e.clientY<r.top+r.height/2){before=s;break}}
-  if(before!==drag.nextElementSibling&&before!==drag)ul.insertBefore(drag,before)});
+  if(before!==drag.nextElementSibling&&before!==drag)flip(()=>[...ul.children],e=>e.dataset.k,()=>ul.insertBefore(drag,before))});
  const end=()=>{if(!drag)return;drag.classList.remove('drg');drag=null;save(read());render()};
  ul.addEventListener('pointerup',end);ul.addEventListener('pointercancel',end);
  ul.addEventListener('click',e=>{const b=e.target.closest('.mv');if(!b)return;const li=b.closest('li'),d=+b.dataset.d;
-  if(d<0&&li.previousElementSibling)ul.insertBefore(li,li.previousElementSibling);else if(d>0&&li.nextElementSibling)ul.insertBefore(li.nextElementSibling,li);
-  save(read());render()});
+  flip(()=>[...ul.children],e=>e.dataset.k,()=>{if(d<0&&li.previousElementSibling)ul.insertBefore(li,li.previousElementSibling);else if(d>0&&li.nextElementSibling)ul.insertBefore(li.nextElementSibling,li);
+  save(read());render()})});
  $('#tOrdReset').addEventListener('click',()=>{try{localStorage.removeItem('ej_tabs')}catch(e){}window.__setSet('tabOrder','');apply(KEYS);render();const t=$('#toast');if(t){t.textContent='Order reset';t.classList.add('on');setTimeout(()=>t.classList.remove('on'),1800)}});
  document.addEventListener('click',e=>{if(e.target.closest('#sReset'))setTimeout(()=>{try{localStorage.removeItem('ej_tabs')}catch(_){}apply();render()},80)});
  const o=window.__applySet;window.__applySet=function(){if(o)o.apply(this,arguments);apply();render()};
@@ -1996,18 +1999,20 @@ new MutationObserver(()=>{if($('#m2').classList.contains('on')){kick();setTimeou
 <script id="fixes2-js">
 (function(){
 const $=s=>document.querySelector(s),L=$('#sfList');if(!L)return;let drag=null;
+const flip=(get,key,fn)=>{const rm=matchMedia('(prefers-reduced-motion: reduce)').matches,B=new Map();get().forEach(e=>B.set(key(e),e.getBoundingClientRect()));fn();if(rm)return;get().forEach(e=>{const o=B.get(key(e));if(!o)return;const n=e.getBoundingClientRect(),dx=o.left-n.left,dy=o.top-n.top;if(!dx&&!dy)return;e.animate([{transform:'translate('+dx+'px,'+dy+'px)'},{transform:'none'}],{duration:260,easing:'cubic-bezier(.2,.8,.2,1)'})})};
+
 const kids=()=>[...L.querySelectorAll('.sfa')];
 const mark=()=>{const k=kids();k.forEach((e,i)=>{const u=e.querySelector('[data-mv="-1"]'),d=e.querySelector('[data-mv="1"]');if(u)u.disabled=i===0;if(d)d.disabled=i===k.length-1})};
 const save=()=>{const ids=kids().map(e=>e.dataset.sid);const cur=S.study||[];const out=ids.map(id=>cur.find(x=>String(x.id)===id)).filter(Boolean);cur.forEach(x=>{if(!out.includes(x))out.push(x)});S.study=out;persist();if(window.__applySet)window.__applySet();toast('Order saved')};
 new MutationObserver(mark).observe(L,{childList:true});mark();
 L.addEventListener('pointerdown',e=>{const h=e.target.closest('.sfg');if(!h)return;e.preventDefault();drag=h.closest('.sfa');drag.classList.add('drg');try{L.setPointerCapture(e.pointerId)}catch(_){}});
 L.addEventListener('pointermove',e=>{if(!drag)return;let before=null;for(const s of kids()){if(s===drag)continue;const r=s.getBoundingClientRect();if(e.clientY<r.top+r.height/2){before=s;break}}
- if(before!==drag.nextElementSibling&&before!==drag)L.insertBefore(drag,before)});
+ if(before!==drag.nextElementSibling&&before!==drag)flip(()=>kids(),e=>e.dataset.sid,()=>L.insertBefore(drag,before))});
 const end=()=>{if(!drag)return;drag.classList.remove('drg');drag=null;mark();save()};
 L.addEventListener('pointerup',end);L.addEventListener('pointercancel',end);
 L.addEventListener('click',e=>{const b=e.target.closest('.sfmv');if(!b)return;const li=b.closest('.sfa'),d=+b.dataset.mv;
- if(d<0&&li.previousElementSibling)L.insertBefore(li,li.previousElementSibling);else if(d>0&&li.nextElementSibling)L.insertBefore(li.nextElementSibling,li);
- mark();save()});
+ flip(()=>kids(),e=>e.dataset.sid,()=>{if(d<0&&li.previousElementSibling)L.insertBefore(li,li.previousElementSibling);else if(d>0&&li.nextElementSibling)L.insertBefore(li.nextElementSibling,li);
+ mark();save()})});
 })();
 </script>
 </body></html>
