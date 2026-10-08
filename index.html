@@ -86,11 +86,13 @@ body.edit [data-k]{outline:1px dashed var(--mut);outline-offset:5px;border-radiu
 .modal.on .box{transform:none}
 .box{--bx:24px;--by:24px;background:var(--card);border:1px solid var(--ln);border-radius:22px;padding:var(--by) var(--bx);width:100%;max-width:400px;max-height:90vh;max-height:min(90dvh,calc(var(--vvh,100dvh) - 32px));overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;transform:translateY(24px) scale(.98);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
 .box h3{margin:0;font-size:1.25rem}.box .sub{color:var(--mut);font-size:.85rem;margin:4px 0 0}
-.top,.mvt{position:sticky;top:0;z-index:6;background:var(--card);margin:calc(-1*var(--by)) calc(-1*var(--bx)) 8px;padding:var(--by) var(--bx) 12px;border-bottom:1px solid transparent;transition:border-color .2s}
+.top,.mvt{position:relative;z-index:2;background:var(--card);margin:calc(-1*var(--by)) calc(-1*var(--bx)) 8px;padding:var(--by) var(--bx) 12px;border-bottom:1px solid transparent;transition:border-color .2s}
 .top{display:flex;gap:12px;align-items:center}
+/* Keep only the existing close/exit control accessible while the modal content scrolls. The header itself scrolls normally. */
+.modal .top>[data-close],.modal .top>.x,.modal .top>#gmx,.modal .mvt>#mvx{position:sticky;top:0;z-index:20;margin-left:auto;flex:none}
 .box.sc .top,.box.sc .mvt{border-bottom-color:var(--ln)}
 .box.more::after{content:"";display:block;position:sticky;bottom:calc(-1*var(--by));height:32px;margin:-32px calc(-1*var(--bx)) calc(-1*var(--by));background:linear-gradient(transparent,var(--card));pointer-events:none;z-index:4}
-.side .tabs{position:sticky;top:var(--hh,0px);z-index:5}
+.side .tabs{position:relative;top:auto;z-index:2}
 .side .box{padding-bottom:calc(var(--by) + env(safe-area-inset-bottom,0px))}
 html.mlock{overflow:hidden}html{scrollbar-gutter:stable}
 html.kbd .modal{inset:var(--vvt,0px) 0 auto 0;height:var(--vvh)}
@@ -111,7 +113,14 @@ html.mlock #totop,body.edit #totop{display:none}
 #lb[data-st=err] #lbi,#lb[data-st=load] #lbi{opacity:.15}
 @media(min-width:1100px){#dots button{position:relative}#dots button::after{content:attr(data-tip);position:absolute;right:22px;top:50%;transform:translateY(-50%);background:var(--chip);color:#000;font-size:.7rem;padding:4px 10px;border-radius:99px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s}#dots button:hover::after,#dots button:focus-visible::after{opacity:1}}
 #gm .box,#gmb button{touch-action:manipulation}#gmb .g{-webkit-user-select:none;user-select:none}.lo{margin-left:auto;padding:8px 14px;white-space:nowrap}.top>div{min-width:0}input[type=file]{border-style:dashed;color:var(--mut);font-size:.82rem}input[type=file]::file-selector-button{font:inherit;font-size:.82rem;background:var(--fg);color:var(--bg);border:0;border-radius:99px;padding:8px 14px;margin-right:10px;cursor:pointer}.lo+.x{margin-left:0}
-.side{justify-content:flex-end;padding:0}.side .box{height:100%;max-height:none;max-width:480px;border-radius:24px 0 0 24px;display:flex;flex-direction:column;transform:translateX(48px)}
+.side{align-items:center;justify-content:center;padding:16px}.side .box{height:min(92dvh,var(--vvh,92vh));max-height:none;max-width:900px;width:min(900px,calc(100vw - 32px));border-radius:24px;display:grid;grid-template-columns:150px minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);grid-template-areas:'head head' 'tabs pane';gap:0;overflow:hidden;transform:translateY(24px)}
+.side .box>.top{grid-area:head;margin-bottom:0}
+.side .box>.tabs{grid-area:tabs;align-self:stretch;margin:16px 14px 0 0;display:flex;flex-direction:column;align-items:stretch;gap:5px;background:var(--bg);border:1px solid var(--ln);border-radius:16px;padding:6px;overflow:auto;scrollbar-width:thin}
+.side .box>.tabs button{justify-content:flex-start;align-items:center;flex-direction:row;gap:9px;text-align:left;padding:10px 11px;min-height:42px;font-size:.72rem}
+.side .box>.tabs button .i{width:16px;height:16px;flex:none}
+.side .box>.tabs button.act{box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.side .box>.pane{grid-area:pane;min-width:0;min-height:0;overflow:auto;padding:0 2px 24px 8px;scrollbar-width:thin}
+.side .box>.pane.on{display:block}
 .tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;background:var(--bg);border:1px solid var(--ln);border-radius:14px;padding:4px;margin:16px 0 4px}
 .tabs button{border:0;border-radius:10px;padding:9px 2px;font-size:.64rem;flex-direction:column;gap:3px}.tabs button.act{background:var(--fg);color:var(--bg)}
 .pane{display:none;flex:1}.pane.on{display:block}
@@ -692,10 +701,13 @@ html.h-snote .sfnote{display:none}
 }
 @media(max-width:899px){
  .sfnote{font-size:.9rem;padding:12px 14px}
- .side .tabs{display:flex;overflow-x:auto;gap:4px;scrollbar-width:none;position:sticky;top:var(--hh,0px);z-index:5}
- .side .tabs::-webkit-scrollbar{display:none}
- .side .tabs button{flex:0 0 auto;flex-direction:row;gap:6px;padding:9px 13px;font-size:.74rem;min-height:40px}
- .side .tabs button .i{width:15px;height:15px}
+ .side{align-items:stretch;justify-content:center;padding:8px}
+ .side .box{width:100%;height:min(96dvh,var(--vvh,96dvh));grid-template-columns:1fr;grid-template-rows:auto auto minmax(0,1fr);grid-template-areas:'head' 'tabs' 'pane';border-radius:22px}
+ .side .box>.tabs{display:flex;flex-direction:row;overflow-x:auto;overflow-y:hidden;gap:4px;scrollbar-width:none;margin:10px 0 8px;padding:4px}
+ .side .box>.tabs::-webkit-scrollbar{display:none}
+ .side .box>.tabs button{flex:0 0 auto;justify-content:center;flex-direction:row;gap:6px;padding:9px 13px;font-size:.74rem;min-height:40px;text-align:center}
+ .side .box>.tabs button .i{width:15px;height:15px}
+ .side .box>.pane{padding:0 2px 24px 0}
 }
 /* settings panel */
 .hid{display:none!important}
@@ -776,6 +788,21 @@ body.edit #study .sfnote{outline:1px dashed var(--mut);outline-offset:3px}
 .thumbs div[data-gi] img{cursor:grab}
 .thumbs div.dg{opacity:.4}
 .thumbs div.ov{outline:2px dashed var(--fg);outline-offset:2px;border-radius:10px}
+
+/* ===== focused modal close + admin control center polish ===== */
+.modal .top>[data-close],.modal .top>.x,.modal .top>#gmx,.modal .mvt>#mvx{position:sticky!important;top:0!important;z-index:20!important}
+.side .box{max-width:900px!important;width:min(900px,calc(100vw - 32px));height:min(92dvh,var(--vvh,92vh));overflow:hidden!important}
+.side .box>.top{position:relative!important;grid-area:head}
+.side .box>.tabs{position:relative!important;top:auto!important;grid-area:tabs}
+.side .box>.pane{grid-area:pane;overflow:auto;min-height:0;min-width:0}
+@media(max-width:899px){
+ .side{align-items:stretch!important;justify-content:center!important;padding:8px!important}
+ .side .box{width:100%!important;height:min(96dvh,var(--vvh,96dvh));max-width:none!important;grid-template-columns:1fr;grid-template-rows:auto auto minmax(0,1fr);grid-template-areas:'head' 'tabs' 'pane';border-radius:22px}
+ .side .box>.tabs{display:flex!important;flex-direction:row!important;overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:none!important;margin:10px 0 8px!important;padding:4px!important}
+ .side .box>.tabs::-webkit-scrollbar{display:none}
+ .side .box>.tabs button{flex:0 0 auto!important;justify-content:center!important;flex-direction:row!important;gap:6px!important;padding:9px 13px!important;min-height:40px!important;text-align:center!important}
+ .side .box>.pane{padding:0 2px 24px 0!important}
+}
 </style><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;500;700&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;display=swap"></head><body class="ld">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="srch" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></symbol>
@@ -856,7 +883,7 @@ body.edit #study .sfnote{outline:1px dashed var(--mut);outline-offset:3px}
 <div id="fbar" role="toolbar" aria-label="Text style"><div class="g"><button type="button" id="fb" aria-label="Bold" title="Bold (Ctrl+B)"><b style="font-weight:800">B</b></button><label class="cus" title="Custom color"><input type="color" id="fcol" value="#facc15" aria-label="Custom color"></label><button type="button" id="fclr" title="Remove bold and color from the selected word">Clear</button></div><div class="g sw" id="fsw"><button type="button" data-c="#facc15" style="background:#facc15" aria-label="Color #facc15"></button><button type="button" data-c="#fb923c" style="background:#fb923c" aria-label="Color #fb923c"></button><button type="button" data-c="#f87171" style="background:#f87171" aria-label="Color #f87171"></button><button type="button" data-c="#f472b6" style="background:#f472b6" aria-label="Color #f472b6"></button><button type="button" data-c="#a78bfa" style="background:#a78bfa" aria-label="Color #a78bfa"></button><button type="button" data-c="#60a5fa" style="background:#60a5fa" aria-label="Color #60a5fa"></button><button type="button" data-c="#22d3ee" style="background:#22d3ee" aria-label="Color #22d3ee"></button><button type="button" data-c="#4ade80" style="background:#4ade80" aria-label="Color #4ade80"></button></div></div>
 <div class="modal" id="m1"><div class="box"><div class="top"><span class="chip"><svg class="i"><use href="#lock"></use></svg></span><div><h3>Admin sign-in</h3><p class="sub">Enter your password to edit this site.</p></div></div>
 <label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password"><div class="row"><button class="solid" id="login" style="flex:1">Sign in</button><button data-close="">Cancel</button></div><p class="note" style="margin-top:14px;text-align:center"><a href="#" id="forgot" style="color:var(--fg)">Forgot password?</a></p></div></div>
-<div class="modal side" id="m2"><div class="box"><div class="top"><span class="chip"><svg class="i"><use href="#gear"></use></svg></span><div><h3>Admin</h3><p class="sub">Edit mode</p></div><button class="lo"><svg class="i"><use href="#out"></use></svg>Log out</button><button class="ib x" data-close="" aria-label="Close"><svg class="i"><use href="#x"></use></svg></button></div>
+<div class="modal side" id="m2"><div class="box"><div class="top"><span class="chip"><svg class="i"><use href="#gear"></use></svg></span><div><h3>Admin Control Center</h3><p class="sub">Manage your site</p></div><button class="lo"><svg class="i"><use href="#out"></use></svg>Log out</button><button class="ib x" data-close="" aria-label="Close"><svg class="i"><use href="#x"></use></svg></button></div>
 <div class="tabs"><button data-t="p" class=""><svg class="i"><use href="#user"></use></svg>Profile</button><button data-t="j" class=""><svg class="i"><use href="#work"></use></svg>Projects</button><button data-t="g" class=""><svg class="i"><use href="#image"></use></svg>Gallery</button><button data-t="t"><svg class="i"><use href="#edit"></use></svg>Texts</button><button data-t="e" class="act"><svg class="i"><use href="#down"></use></svg>Publish</button><button data-t="m" class=""><svg class="i"><use href="#mail"></use></svg>Inbox</button><button data-t="c"><svg class="i"><use href="#book"></use></svg>Study</button><button data-t="s" class=""><svg class="i"><use href="#gear"></use></svg>Settings</button><button data-t="a"><svg class="i"><use href="#lock"></use></svg>Account</button></div>
 <div class="pane" data-p="p"><label for="aIn">About text <span style="opacity:.6;text-transform:none">(typing here removes per-word styling; style words from Texts → Edit texts on the page)</span></label><textarea id="aIn" rows="5"></textarea><label for="pIn">Profile photo</label><div class="pv"><img id="pv" alt=""><input type="file" id="pIn" accept="image/*"></div><div class="row"><button id="rmP"><svg class="i"><use href="#trash"></use></svg>Remove photo</button></div><label for="fIn">Contact form link (Formspree, optional)</label><input id="fIn" placeholder="https://formspree.io/f/xxxx"></div>
 <div class="pane" data-p="j"><label for="ptT">Title</label><input id="ptT"><label for="ptD">Description</label><textarea id="ptD" rows="3"></textarea><label for="ptI">Photo (optional)</label><input type="file" id="ptI" accept="image/*"><p class="note" id="epNote" style="display:none"></p><div class="row"><button class="solid" id="addP" style="flex:1"><svg class="i"><use href="#plus"></use></svg><span id="addPT">Add project</span></button><button id="rmPI" style="display:none"><svg class="i"><use href="#trash"></use></svg>Remove photo</button><button id="cancelP" style="display:none">Cancel</button></div><div id="alist"></div></div>
