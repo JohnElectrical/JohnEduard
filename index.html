@@ -2700,6 +2700,20 @@ var raf=window.requestAnimationFrame||function(f){return setTimeout(f,16)};
 #aboutText{color:color-mix(in srgb,var(--fg) 80%,var(--bg))!important}
 /* per-word colours follow the theme (edit mode shows the real saved colour) */
 body:not(.edit) i.fx{color:var(--fxc,inherit)!important;-webkit-text-fill-color:var(--fxc,inherit)!important}
+
+/* ===== Fix 3: admin panel scrolls reliably on phones ===== */
+@media(max-width:899px){
+ /* panel fills the screen (no dvh / JS-height guessing) and is a simple column */
+ #m2.modal.side{position:fixed;inset:0;height:auto;padding:8px!important;align-items:stretch!important;overflow:hidden}
+ html.kbd #m2.modal.side{inset:var(--vvt,0px) 0 auto 0;height:var(--vvh)}
+ #m2.side .box{display:flex!important;flex-direction:column;width:100%!important;height:100%!important;max-height:none!important;min-height:0;overflow:hidden!important;grid-template-rows:none!important}
+ #m2.side .box>.top,#m2.side .box>.tabs,#m2.side .box>.sv{flex:0 0 auto!important}
+ /* the one scrolling area */
+ #m2.side .box>.pane{flex:1 1 0px!important;min-height:0!important;height:auto;overflow-x:hidden!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;scroll-behavior:auto!important;transform:none!important;padding-bottom:28px!important}
+ #m2.side .box>.pane:not(.on){display:none!important}
+ #m2.side .box>.pane.on{display:block!important}
+ #m2.side .box>.tabs{touch-action:pan-x;-webkit-overflow-scrolling:touch}
+}
 </style>
 <script id="fix-ui-js">
 (function(){
