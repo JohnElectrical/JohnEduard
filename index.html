@@ -2647,13 +2647,13 @@ var raf=window.requestAnimationFrame||function(f){return setTimeout(f,16)};
   function place(){
     var a=$('button.act',tabs);
     if(!a||!a.offsetWidth){ind.style.opacity='0';tabs.classList.remove('hasind');return}
-    tabs.classList.add('hasind');
+    if(!tabs.classList.contains('hasind'))tabs.classList.add('hasind');
     ind.style.opacity='1';
     ind.style.width=a.offsetWidth+'px';
     ind.style.height=a.offsetHeight+'px';
     ind.style.transform='translate('+a.offsetLeft+'px,'+a.offsetTop+'px)';
-    if(tabs.scrollWidth>tabs.clientWidth+2){
-      var to=a.offsetLeft-(tabs.clientWidth-a.offsetWidth)/2;
+    if(tabs.scrollWidth>tabs.clientWidth+2&&place.la!==a){
+      place.la=a;var to=a.offsetLeft-(tabs.clientWidth-a.offsetWidth)/2;
       try{tabs.scrollTo({left:Math.max(0,to),behavior:noMo()?'auto':'smooth'})}catch(e){tabs.scrollLeft=Math.max(0,to)}
     }
   }
