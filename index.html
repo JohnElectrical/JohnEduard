@@ -895,17 +895,6 @@ html.mlock #bg{visibility:hidden}
 <style id="upg-css">
 .skip{position:fixed;left:12px;top:-60px;z-index:100;background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:99px;text-decoration:none;font-size:.85rem;transition:top .2s}.skip:focus{top:calc(10px + env(safe-area-inset-top,0px))}
 .x-hide{display:none!important}
-.abx{display:grid;grid-template-columns:1.2fr 1fr;gap:16px;margin-top:34px}
-.abx h3{margin:0 0 14px;font-size:1.05rem}
-.tl,.sk{background:var(--card);border:1px solid var(--ln);border-radius:20px;padding:22px}
-.tl>div{position:relative;padding:0 0 18px 22px;border-left:1px solid var(--ln);margin-left:5px}
-.tl>div:last-child{padding-bottom:0}
-.tl>div::before{content:"";position:absolute;left:-5px;top:4px;width:9px;height:9px;border-radius:50%;background:var(--fg)}
-.tl b{display:block;line-height:1.3}.tl span{display:block;color:var(--mut);font-size:.9rem;margin-top:3px;line-height:1.45}
-.sk ul{list-style:none;margin:0 0 18px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.sk li{border:1px solid var(--ln);border-radius:99px;padding:7px 14px;font-size:.88rem}
-.sk .btn[hidden]{display:none}
-@media(max-width:760px){.abx{grid-template-columns:1fr}.tl,.sk{padding:18px}}
 button,.btn,.chip+*{min-height:40px}
 @media(pointer:coarse){button,.btn{min-height:44px}.ib{min-width:44px;min-height:44px}}
 </style>
@@ -966,14 +955,7 @@ button,.btn,.chip+*{min-height:40px}
 
 <section id="about" class="rv"><div class="hd"><span class="chip"><svg class="i"><use href="#user"></use></svg></span><h2 data-k="h-about">About</h2></div><div>
 <p id="aboutText" data-k="about" style="max-width:680px;color:var(--mut);font-size:1.15rem;line-height:1.7;margin:0;white-space:pre-wrap"></p>
-</div><div class="abx"><div class="tl" role="list" aria-label="Timeline"><h3>Journey</h3>
-<div role="listitem"><b>Taganito National High School</b><span>SSLG Officer · first steps in leadership</span></div>
-<div role="listitem"><b>Caraga State University – Cabadbaran</b><span>BSEE, first year</span></div>
-<div role="listitem"><b>IIEE, CSUCC</b><span>1st Representative</span></div>
-<div role="listitem"><b>Teachers’ Day project</b><span>October 5, 2026 · gifts and thanks for our teachers</span></div></div>
-<div class="sk"><h3>Strengths</h3><ul><li>Leadership</li><li>Teamwork</li><li>Electrical engineering</li><li>Calculus</li><li>Student governance</li></ul>
-<a class="btn solid" id="cv" href="resume.pdf" download hidden><svg class="i"><use href="#down"></use></svg>Download résumé (PDF)</a></div></div>
-</section>
+</div></section>
 
 <section id="games" class="rv"><div class="hd"><span class="chip"><svg class="i"><use href="#game"></use></svg></span><h2 data-k="h-games">Mini games</h2></div><div><div class="grid">
 <div class="card gt" role="button" tabindex="0" aria-label="Open Spark Reflex"><span class="chip"><svg class="i"><use href="#bolt"></use></svg></span><h3>Spark Reflex</h3><p>Wait for the spark, then click as fast as you can.</p><span class="play mono"><svg class="i"><use href="#plus"></use></svg>Tap to play</span><div class="gbody"><div class="row"><button id="rb" class="g big">Start</button></div><div class="res mono" id="rr" aria-live="polite"></div></div></div>
@@ -2122,8 +2104,6 @@ var last=0;document.addEventListener('click',function(e){var b=e.target.closest&
  var hp=$('#hp');if(hp&&hp.value){e.stopPropagation();e.preventDefault();return}
  if(Date.now()-last<20000){e.stopPropagation();e.preventDefault();var t=$('#toast');if(t){t.textContent='Please wait a moment before sending again.';t.classList.add('on');setTimeout(function(){t.classList.remove('on')},2600)}return}
  last=Date.now()},true);
-/* résumé button appears only when resume.pdf exists next to this page */
-fetch('resume.pdf',{method:'HEAD'}).then(function(r){if(r.ok&&/pdf/i.test(r.headers.get('content-type')||'')){var c=$('#cv');if(c)c.hidden=false}}).catch(function(){});
 /* hide the Study section from visitors while every file is closed */
 function study(){var s=$('#study');if(!s)return;var adm=document.body.classList.contains('adm'),fs=A('#slist .sf');
  var open=fs.some(function(f){var t=f.querySelector('.sft');return !t||!/closed/i.test(t.textContent)});
