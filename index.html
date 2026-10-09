@@ -2652,7 +2652,7 @@ var raf=window.requestAnimationFrame||function(f){return setTimeout(f,16)};
     ind.style.width=a.offsetWidth+'px';
     ind.style.height=a.offsetHeight+'px';
     ind.style.transform='translate('+a.offsetLeft+'px,'+a.offsetTop+'px)';
-    if(tabs.scrollWidth>tabs.clientWidth+2&&place.la!==a){
+    if(false){
       place.la=a;var to=a.offsetLeft-(tabs.clientWidth-a.offsetWidth)/2;
       try{tabs.scrollTo({left:Math.max(0,to),behavior:noMo()?'auto':'smooth'})}catch(e){tabs.scrollLeft=Math.max(0,to)}
     }
@@ -2714,6 +2714,11 @@ body:not(.edit) i.fx{color:var(--fxc,inherit)!important;-webkit-text-fill-color:
  #m2.side .box>.pane.on{display:block!important}
  #m2.side .box>.tabs{touch-action:pan-x;-webkit-overflow-scrolling:touch}
 }
+
+/* tab row: manual drag scroll (JS below drives it), no automatic scrolling */
+#m2.side .box>.tabs{touch-action:none!important;scroll-behavior:auto!important;-webkit-user-select:none;user-select:none;cursor:grab}
+#m2.side .box>.tabs.dragging{cursor:grabbing}
+#m2.side .box>.tabs.dragging button{pointer-events:none}
 </style>
 <script id="fix-ui-js">
 (function(){
@@ -2740,6 +2745,38 @@ body:not(.edit) i.fx{color:var(--fxc,inherit)!important;-webkit-text-fill-color:
  new MutationObserver(soon).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
  new MutationObserver(soon).observe(document.body,{childList:true,subtree:true});
  run();
+})();
+</script>
+<script id="fix-tabs-js">
+(function(){
+ var tabs=document.querySelector('#m2 .tabs');if(!tabs)return;
+ var id=null,sx=0,sl=0,lx=0,lt=0,vx=0,drag=false,raf=0,blockUntil=0;
+ function stop(){cancelAnimationFrame(raf)}
+ tabs.addEventListener('pointerdown',function(e){
+  if(e.pointerType==='mouse'&&e.button!==0)return;
+  stop();id=e.pointerId;sx=lx=e.clientX;sl=tabs.scrollLeft;lt=performance.now();vx=0;drag=false;
+ });
+ tabs.addEventListener('pointermove',function(e){
+  if(e.pointerId!==id)return;
+  var dx=e.clientX-sx;
+  if(!drag&&Math.abs(dx)>6){drag=true;tabs.classList.add('dragging');try{tabs.setPointerCapture(id)}catch(_){}}
+  if(!drag)return;
+  tabs.scrollLeft=sl-dx;
+  var n=performance.now(),dt=n-lt||1;vx=.8*vx+.2*((e.clientX-lx)/dt);lx=e.clientX;lt=n;
+ });
+ function end(e){
+  if(e.pointerId!==id)return;
+  var was=drag;id=null;drag=false;tabs.classList.remove('dragging');
+  if(!was)return;
+  blockUntil=Date.now()+300;
+  var v=vx*16;
+  (function step(){tabs.scrollLeft-=v;v*=.95;if(Math.abs(v)>.4)raf=requestAnimationFrame(step)})();
+ }
+ tabs.addEventListener('pointerup',end);tabs.addEventListener('pointercancel',end);
+ /* a drag must not count as a tap on a tab */
+ tabs.addEventListener('click',function(e){if(Date.now()<blockUntil){e.stopPropagation();e.preventDefault()}},true);
+ /* mouse wheel / trackpad sideways */
+ tabs.addEventListener('wheel',function(e){if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){tabs.scrollLeft+=e.deltaY;e.preventDefault()}},{passive:false});
 })();
 </script>
 </body></html>
