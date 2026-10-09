@@ -888,6 +888,13 @@ html.mlock #bg{visibility:hidden}
 @keyframes mckeys{0%{stroke-dashoffset:0}50%{stroke-dashoffset:2.6}}
 @media(prefers-reduced-motion:reduce){#mst *{animation:none!important}}
 </style>
+<style id="capy-kb">
+/* phone keyboard: chat sits inside the visible area, Capy shrinks so the messages and input stay on screen */
+#cpan.kb{bottom:auto}
+#cpan.kb #mst{height:72px}
+#cpan.kb .cn{display:none}
+#cpan.kb .ch{padding:8px 12px}
+</style>
 </head><body class="ld">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="srch" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></symbol>
@@ -2050,6 +2057,28 @@ inp.addEventListener('input',function(){
 inp.addEventListener('blur',stop);
 inp.addEventListener('keydown',function(e){if(e.key==='Enter')stop()});
 if(snd)snd.addEventListener('click',stop);
+})();
+</script>
+<script id="capy-kb-js">
+(function(){
+var pan=document.getElementById('cpan'),inp=document.getElementById('cin'),log=document.getElementById('clog'),vv=window.visualViewport;
+if(!pan||!inp)return;
+var mq=matchMedia('(max-width:899px)'),y0=0,focused=false,raf=0;
+function reset(){pan.classList.remove('kb');pan.style.removeProperty('top');pan.style.removeProperty('height');pan.style.removeProperty('bottom')}
+function fit(){raf=0;
+ if(!focused||!mq.matches||!vv||!pan.classList.contains('on')){reset();return}
+ pan.classList.add('kb');
+ pan.style.top=(vv.offsetTop+8)+'px';pan.style.bottom='auto';
+ pan.style.height=Math.max(220,vv.height-16)+'px';
+ log.scrollTop=log.scrollHeight}
+function ask(){if(!raf)raf=requestAnimationFrame(fit)}
+inp.addEventListener('focus',function(){focused=true;y0=window.scrollY;ask();setTimeout(ask,120);setTimeout(ask,350)});
+inp.addEventListener('blur',function(){focused=false;ask();setTimeout(function(){if(Math.abs(window.scrollY-y0)>2)window.scrollTo({top:y0,behavior:'instant'})},120)});
+/* keep the page where it was while the keyboard is up (it was jumping to the top) */
+addEventListener('scroll',function(){if(focused&&mq.matches&&Math.abs(window.scrollY-y0)>2)window.scrollTo({top:y0,behavior:'instant'})},{passive:true});
+if(vv){vv.addEventListener('resize',ask);vv.addEventListener('scroll',ask)}
+addEventListener('resize',ask);
+new MutationObserver(ask).observe(pan,{attributes:true,attributeFilter:['class']});
 })();
 </script>
 </body></html>
