@@ -7,7 +7,7 @@
 <title>John Eduard Bonilo | Electrical Engineering</title>
 <meta name="description" content="Portfolio of John Eduard Bonilo, BSEE student at Caraga State University – Cabadbaran Campus.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23fff'/%3E%3Cpath d='M18 5L8 18h7l-1 9 10-13h-7z' fill='%23000'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link rel="preconnect" href="https://jrnlacbcuarpkxbbbero.supabase.co" crossorigin=""><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin=""><link rel="preload" as="script" href="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"></noscript>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link rel="preconnect" href="https://jrnlacbcuarpkxbbbero.supabase.co" crossorigin=""><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin=""><link rel="preload" as="script" href="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet" media="all" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"></noscript>
 <style>
 :root{--bg:#070707;--fg:#f5f5f5;--mut:#9a9a9a;--ln:#262626;--card:#101010;--chip:#f1f1f1;color-scheme:dark;box-sizing:border-box}
 :root[data-theme=light]{--bg:#f5f5f4;--fg:#0a0a0a;--mut:#666;--ln:#d6d6d3;--card:#fff;--chip:#fff;color-scheme:light}
@@ -829,111 +829,7 @@ body.edit #study .sfnote{outline:1px dashed var(--mut);outline-offset:3px}
 @keyframes adminPaneIn{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:none}}
 @keyframes adminGroupIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){.side .box,.side .top,.side .tabs button.act,.side .pane.on,.side .pane[data-p="s"] .sgrp{animation:none!important}.side .tabs button,.side .pane button,.side .pane input,.side .pane textarea,.side .pane select{transition:none!important}}
-</style><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;500;700&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;display=swap"><style id="fixes">
-/* ===== fixes: speed, blur glitches, admin layout list ===== */
-button,a,[role=button],input,label,.sh{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-#m1{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(0,0,0,.82)}
-#m1 .box{max-height:none}
-#admbar{animation:none}
-@media (pointer:coarse),(max-width:820px){
- .modal,#cmdk{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(0,0,0,.84)}
- nav{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:color-mix(in srgb,var(--bg) 95%,transparent)!important}
- .side .box,.side .top,.side .tabs button.act,.side .pane.on,.side .pane[data-p="s"] .sgrp{animation:none!important}
- .side .tabs button,.side .pane button,.side .pane input,.side .pane textarea{transition:none!important}
- .side .tabs button:hover,.side .pane button:hover{transform:none!important}
- .modal{transition:opacity .18s,visibility 0s .18s}.modal.on{transition:opacity .18s}
- .box{transition:transform .22s ease}
- .rv,.rv .card,.rv .hd h2,.rv .hd .chip{will-change:auto}
-}
-html.mlock #bg{visibility:hidden}
-#study{min-height:min(60vh,480px)}
-#sOrder .tord{list-style:none;margin:10px 0 6px;padding:0;display:grid;gap:6px}
-#sOrder .tord li{display:flex;align-items:center;gap:10px;padding:6px 8px;border:1px solid var(--ln);border-radius:12px;background:var(--card);user-select:none;-webkit-user-select:none}
-#sOrder .tord li.drg{border-color:var(--fg);box-shadow:0 8px 22px rgba(0,0,0,.35);position:relative;z-index:2}
-#sOrder .grip{cursor:grab;touch-action:none;padding:8px 6px;font-size:1.15rem;line-height:1;color:var(--mut);letter-spacing:-2px}
-#sOrder .tord li.drg .grip{cursor:grabbing}
-#sOrder .tord .nm{flex:1;font-size:.82rem;display:flex;align-items:center;gap:8px;min-width:0}
-#sOrder .tord .nm .i{width:16px;height:16px}
-#sOrder .tord .mv{width:32px;height:32px;min-height:0;padding:0;display:grid;place-items:center;border-radius:9px;font-size:.8rem}
-#sOrder .tord .mv:disabled{opacity:.3}
-</style>
-<style id="fixes2">
-#sfList .sfg{cursor:grab;touch-action:none;padding:8px 4px;font-size:1.15rem;line-height:1;color:var(--mut);letter-spacing:-2px;user-select:none;-webkit-user-select:none;flex:none}
-#sfList .sfa,#sOrder .tord li{transition:box-shadow .2s,border-color .2s,transform .2s}
-#sfList .sfa.drg,#sOrder .tord li.drg{transform:scale(1.02)}
-#sfList .sfa.drg{border-color:var(--fg);box-shadow:0 8px 22px rgba(0,0,0,.35);position:relative;z-index:2}
-#sfList .sfa.drg .sfg{cursor:grabbing}
-#sfList .sfmv{width:30px;height:30px;min-height:0;padding:0;font-size:.7rem;display:grid;place-items:center}
-#sfList .sfmv:disabled{opacity:.3}
-</style>
-<style id="capy-emo">
-#mst{cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
-#mst .emo>*,#mst .fx>*{opacity:0;pointer-events:none;transform-box:fill-box;transform-origin:center}
-#mst .mlab{position:absolute;left:50%;bottom:7px;transform:translate(-50%,6px);background:var(--chip);color:#000;border:1px solid var(--ln);border-radius:99px;padding:3px 11px;font:700 .68rem/1.2 'JetBrains Mono',ui-monospace,monospace;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;white-space:nowrap}
-#mst .mlab.show{opacity:1;transform:translate(-50%,0)}
-/* faces */
-#mst:is([data-emo=joy],[data-emo=laugh]) .x-hap,#mst[data-emo=shy] .x-hap,
-#mst:is([data-emo=joy],[data-emo=laugh]) .x-bigsmile,#mst[data-emo=love] .x-heart,
-#mst[data-emo=sleepy] .x-closed,#mst:is([data-emo=sleepy],[data-emo=shy]) .x-tiny,
-#mst[data-emo=sad] :is(.x-brow-sad,.x-frown,.x-tear),#mst[data-emo=wink] .x-winkr,
-#mst[data-emo=confused] :is(.x-brow-conf,.x-wavy),#mst[data-emo=grumpy] :is(.x-brow-ang,.x-frown),
-#mst[data-emo=cool] :is(.x-shades,.x-smirk),#mst[data-emo=shy] .x-sweat{opacity:1}
-#mst:is([data-emo=joy],[data-emo=laugh],[data-emo=love],[data-emo=sleepy],[data-emo=shy],[data-emo=cool]) .mpu{opacity:0}
-#mst[data-emo=wink] .mpr{opacity:0}
-#mst:is([data-emo=joy],[data-emo=laugh],[data-emo=sleepy],[data-emo=sad],[data-emo=confused],[data-emo=grumpy],[data-emo=cool],[data-emo=shy],[data-emo=surprised]) .ms{opacity:0}
-#mst[data-emo=surprised] .mmo{opacity:1;transform-box:fill-box;transform-origin:center;transform:scale(1.7)}
-#mst[data-emo=surprised] .ey{animation:none;transform:scale(1.35)}
-#mst:is([data-emo=shy],[data-emo=love]) .mh>circle{transform-box:fill-box;transform-origin:center;transform:scale(1.3)}
-/* effects around the head */
-#mst[data-emo=joy] .fx-note,#mst[data-emo=love] .fx-heart,#mst[data-emo=sleepy] .fx-z,#mst[data-emo=surprised] .fx-bang,#mst[data-emo=confused] .fx-q,#mst[data-emo=grumpy] .fx-anger{opacity:1;animation:mcfloat 1.6s ease-in-out infinite}
-#mst[data-emo=love] .fx-heart:nth-child(2),#mst[data-emo=sleepy] .fx-z:nth-child(2){animation-delay:.35s}
-#mst[data-emo=love] .fx-heart:nth-child(3),#mst[data-emo=sleepy] .fx-z:nth-child(3){animation-delay:.7s}
-#mst[data-emo=surprised] .fx-bang,#mst[data-emo=confused] .fx-q{animation:mcpopfx .5s cubic-bezier(.3,1.6,.5,1) both}
-#mst[data-emo=grumpy] .fx-anger{animation:mcpulse .5s ease-in-out infinite}
-#mst[data-emo=sad] .x-tear{animation:mcdrop 1.3s ease-in infinite}
-#mst[data-emo=shy] .x-sweat{animation:mcdrop 1.8s ease-in infinite}
-#mst[data-emo=love] .x-heart{animation:mcpulse .8s ease-in-out infinite}
-/* body motion */
-#mst[data-emo=joy] .mo{animation:mchop .7s cubic-bezier(.3,1.6,.5,1) infinite}
-#mst[data-emo=laugh] .mo{animation:mcshake .32s ease-in-out infinite}
-#mst[data-emo=love] .mo{animation:mcsway 1.6s ease-in-out infinite}
-#mst[data-emo=sleepy] .mh{animation:mcnod 3s ease-in-out infinite}
-#mst[data-emo=surprised] .mo{animation:mchop .5s cubic-bezier(.3,1.6,.5,1) 1}
-#mst[data-emo=sad] .mh{animation:none;transform:translateY(3px) rotate(-3deg)}
-#mst[data-emo=confused] .mh{animation:mctilt 1.6s ease-in-out infinite}
-#mst[data-emo=grumpy] .mo{animation:mcshake .6s ease-in-out infinite}
-#mst[data-emo=cool] .mh{animation:mcnod 2.2s ease-in-out infinite}
-#mst[data-emo=shy] .mh{animation:mcsway 2s ease-in-out infinite}
-@keyframes mcfloat{0%{transform:translateY(7px) scale(.6);opacity:0}30%{opacity:1}100%{transform:translateY(-9px) scale(1);opacity:0}}
-@keyframes mcpopfx{from{transform:scale(.2);opacity:0}to{transform:scale(1);opacity:1}}
-@keyframes mcpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
-@keyframes mcdrop{0%{transform:translateY(-3px);opacity:0}25%{opacity:1}100%{transform:translateY(12px);opacity:0}}
-@keyframes mcshake{0%,100%{transform:translateX(0) rotate(0)}25%{transform:translateX(-1.5px) rotate(-2deg)}75%{transform:translateX(1.5px) rotate(2deg)}}
-@keyframes mcsway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
-@keyframes mcnod{0%,100%{transform:rotate(5deg) translateY(2px)}50%{transform:rotate(8deg) translateY(4px)}}
-@media(prefers-reduced-motion:reduce){#mst .emo>*,#mst .fx>*{animation:none!important}}
-
-/* typing + picker */
-#mst .fx-kb{transform-box:fill-box}
-#mst[data-emo=typing] .fx-kb{opacity:1}
-#mst[data-emo=typing] .mpu{transform:translate(0,2.4px)}
-#mst[data-emo=typing] .mh{animation:mctype .5s ease-in-out infinite}
-#mst[data-emo=typing] .mla{transform-origin:46px 94px;animation:mctapL .26s ease-in-out infinite}
-#mst[data-emo=typing] .mw{animation:mctapR .26s .13s ease-in-out infinite}
-@keyframes mctapL{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(3px) rotate(-6deg)}}
-@keyframes mctapR{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(3px) rotate(6deg)}}
-@keyframes mctype{0%,100%{transform:rotate(0) translateY(1px)}50%{transform:rotate(-1.5deg) translateY(2.4px)}}
-#emoBtn{position:absolute;right:10px;width:30px;height:30px;min-height:0;padding:0;border-radius:50%;display:grid;place-items:center;background:var(--chip);color:#000;border:1px solid var(--ln);box-shadow:0 3px 10px rgba(0,0,0,.25);z-index:3;cursor:pointer;transition:transform .2s}
-#emoBtn:hover{transform:scale(1.1)}#emoBtn:active{transform:scale(.94)}
-#emoBtn[aria-expanded=true]{background:#000;color:#fff}
-#emoBtn .i{width:18px;height:18px}
-#emoPop{position:absolute;right:10px;z-index:4;width:226px;max-width:calc(100% - 20px);background:var(--card);border:1px solid var(--ln);border-radius:16px;padding:8px;box-shadow:0 12px 30px rgba(0,0,0,.4);display:none;grid-template-columns:repeat(5,1fr);gap:4px}
-#emoPop.on{display:grid;animation:pop .18s both}
-#emoPop button{display:grid;place-items:center;gap:1px;padding:6px 0 4px;min-height:0;border-radius:11px;border:1px solid transparent;background:transparent;color:var(--fg);font-size:1.15rem;line-height:1.1}
-#emoPop button small{font-size:.5rem;font-family:'JetBrains Mono',ui-monospace,monospace;color:var(--mut);letter-spacing:.02em}
-#emoPop button:hover,#emoPop button.act{background:var(--bg);border-color:var(--ln)}
-</style>
-</head><body class="ld">
+</style><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;500;700&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;display=swap"></head><body class="ld">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="srch" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></symbol>
 <symbol id="rfsh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-3-6.7L21 8"></path><path d="M21 3v5h-5"></path></symbol>
@@ -1006,7 +902,7 @@ html.mlock #bg{visibility:hidden}
 <div class="card"><label style="margin-top:0" for="cn">Your name</label><input id="cn" autocomplete="name"><label for="ce">Your email (so I can reply)</label><input id="ce" type="email" autocomplete="email"><label for="cm">Message</label><textarea id="cm" rows="4"></textarea>
 <div class="row"><button class="solid" id="send"><svg class="i"><use href="#plane"></use></svg>Send message</button><a class="btn" href="mailto:bonillojohneduard@gmail.com"><svg class="i"><use href="#mail"></use></svg>Open mail app</a></div></div>
 </div></section>
-<footer class="mono"><span data-k="foot" style="">© 2026 John Eduard Bonilo · BSEE</span><button data-go="hero"><svg class="i"><use href="#up"></use></svg>Back to top</button></footer>
+<footer class="mono"><span data-k="foot" style="">© 2026 John Eduard Bonilo · BSEE · Caraga State University – Cabadbaran Campus</span><button data-go="hero"><svg class="i"><use href="#up"></use></svg>Back to top</button></footer>
 
 <div id="admbar"><button id="admcmd" title="Command palette (Ctrl+K)"><svg class="i"><use href="#bolt"></use></svg>Commands</button><button id="admopen"><svg class="i"><use href="#gear"></use></svg>Admin</button><button class="lo2"><svg class="i"><use href="#out"></use></svg>Log out</button></div>
 <div id="ebar"><svg class="i"><use href="#edit"></use></svg>Tap to edit · select a word to style it<button class="solid" id="edone">Done</button></div>
@@ -1014,7 +910,7 @@ html.mlock #bg{visibility:hidden}
 <div class="modal" id="m1"><div class="box"><div class="top"><span class="chip"><svg class="i"><use href="#lock"></use></svg></span><div><h3>Admin sign-in</h3><p class="sub">Enter your password to edit this site.</p></div></div>
 <label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password"><div class="row"><button class="solid" id="login" style="flex:1">Sign in</button><button data-close="">Cancel</button></div><p class="note" style="margin-top:14px;text-align:center"><a href="#" id="forgot" style="color:var(--fg)">Forgot password?</a></p></div></div>
 <div class="modal side" id="m2"><div class="box"><div class="top"><span class="chip"><svg class="i"><use href="#gear"></use></svg></span><div><h3>Admin Control Center</h3><p class="sub">Manage your site</p></div><button class="ib x" data-close="" aria-label="Close"><svg class="i"><use href="#x"></use></svg></button></div>
-<div class="tabs"><button data-t="p" class=""><svg class="i"><use href="#user"></use></svg>Profile</button><button data-t="j" class=""><svg class="i"><use href="#work"></use></svg>Projects</button><button data-t="g" class=""><svg class="i"><use href="#image"></use></svg>Gallery</button><button data-t="t"><svg class="i"><use href="#edit"></use></svg>Texts</button><button data-t="e"><svg class="i"><use href="#down"></use></svg>Publish</button><button data-t="m" class=""><svg class="i"><use href="#mail"></use></svg>Inbox</button><button data-t="c"><svg class="i"><use href="#book"></use></svg>Study</button><button data-t="s" class=""><svg class="i"><use href="#gear"></use></svg>Settings</button><button data-t="a"><svg class="i"><use href="#lock"></use></svg>Account</button></div>
+<div class="tabs"><button data-t="p" class=""><svg class="i"><use href="#user"></use></svg>Profile</button><button data-t="j" class=""><svg class="i"><use href="#work"></use></svg>Projects</button><button data-t="g" class=""><svg class="i"><use href="#image"></use></svg>Gallery</button><button data-t="t"><svg class="i"><use href="#edit"></use></svg>Texts</button><button data-t="e" class="act"><svg class="i"><use href="#down"></use></svg>Publish</button><button data-t="m" class=""><svg class="i"><use href="#mail"></use></svg>Inbox</button><button data-t="c"><svg class="i"><use href="#book"></use></svg>Study</button><button data-t="s" class=""><svg class="i"><use href="#gear"></use></svg>Settings</button><button data-t="a"><svg class="i"><use href="#lock"></use></svg>Account</button></div>
 <div class="pane" data-p="p"><label for="aIn">About text <span style="opacity:.6;text-transform:none">(typing here removes per-word styling; style words from Texts → Edit texts on the page)</span></label><textarea id="aIn" rows="5"></textarea><label for="pIn">Profile photo</label><div class="pv"><img id="pv" alt=""><input type="file" id="pIn" accept="image/*"></div><div class="row"><button id="rmP"><svg class="i"><use href="#trash"></use></svg>Remove photo</button></div><label for="fIn">Contact form link (Formspree, optional)</label><input id="fIn" placeholder="https://formspree.io/f/xxxx"></div>
 <div class="pane" data-p="j"><label for="ptT">Title</label><input id="ptT"><label for="ptD">Description</label><textarea id="ptD" rows="3"></textarea><label for="ptI">Photo (optional)</label><input type="file" id="ptI" accept="image/*"><p class="note" id="epNote" style="display:none"></p><div class="row"><button class="solid" id="addP" style="flex:1"><svg class="i"><use href="#plus"></use></svg><span id="addPT">Add project</span></button><button id="rmPI" style="display:none"><svg class="i"><use href="#trash"></use></svg>Remove photo</button><button id="cancelP" style="display:none">Cancel</button></div><div id="alist"></div></div>
 <div class="pane" data-p="g"><label for="gIn">Add photos</label><input type="file" id="gIn" accept="image/*" multiple=""><div class="thumbs" id="agl"></div></div>
@@ -1115,13 +1011,13 @@ function render(){
  $('#plist').innerHTML=S.projects.length?S.projects.map(x=>`<article class="card pj" data-pj="${x.id}" tabindex="0" role="button" aria-label="View project">${x.img?`<img src="${x.img}" alt="" loading="lazy" decoding="async">`:`<span class="chip">${ic('work')}</span>`}<h3>${esc(x.t)}</h3><p>${esc(x.d)}</p><span class="hint mono">Tap to view</span>${X('data-dp',x.id)}<button class="del edt" data-ep="${x.id}" aria-label="Edit project">${ic('edit')}</button></article>`).join(''):`<div class="empty mono"><span class="chip">${ic('work')}</span><span>John has not added any projects yet. Please check back soon.</span></div>`;
  $('#glist').innerHTML=S.gallery.length?S.gallery.map(x=>`<figure class="card ph" data-lb style="margin:0"><img src="${x.img}" alt="Gallery photo" loading="lazy" decoding="async">${x.c?`<figcaption class="mono" style="padding:8px 6px 2px;color:var(--mut);font-size:.8rem">${esc(x.c)}</figcaption>`:''}${X('data-dg',x.id)}</figure>`).join(''):`<div class="empty mono"><span class="chip">${ic('image')}</span><span>John has not shared any photos yet. Please check back soon.</span></div>`;
  const T=(a,v)=>`<button class="ib" ${a}="${v}" aria-label="Remove">${ic('trash')}</button>`;
- $('#alist').innerHTML=S.projects.map(x=>`<div class="it">${x.img?`<img src="${x.img}" alt="" loading="lazy" decoding="async">`:`<span class="chip">${ic('work')}</span>`}<span>${esc(x.t)}</span><button class="ib" data-ep="${x.id}" aria-label="Edit">${ic('edit')}</button>${T('data-dp',x.id)}</div>`).join('');
- $('#agl').innerHTML=S.gallery.map((x,i,a)=>`<div data-gi="${x.id}"><img src="${x.img}" alt="" draggable="true" loading="lazy" decoding="async"><button type="button" class="gm" data-gm="-1" data-id="${x.id}" aria-label="Move photo earlier" title="Move earlier"${i===0?' disabled':''}>‹</button><button type="button" class="gm r" data-gm="1" data-id="${x.id}" aria-label="Move photo later" title="Move later"${i===a.length-1?' disabled':''}>›</button>${T('data-dg',x.id)}<input class="gc" data-gc="${x.id}" placeholder="Caption (optional)" value="${esc(x.c||'')}" maxlength="120" aria-label="Photo caption"></div>`).join('')||'<p class="note">No photos yet.</p>';
+ $('#alist').innerHTML=S.projects.map(x=>`<div class="it">${x.img?`<img src="${x.img}" alt="">`:`<span class="chip">${ic('work')}</span>`}<span>${esc(x.t)}</span><button class="ib" data-ep="${x.id}" aria-label="Edit">${ic('edit')}</button>${T('data-dp',x.id)}</div>`).join('');
+ $('#agl').innerHTML=S.gallery.map((x,i,a)=>`<div data-gi="${x.id}"><img src="${x.img}" alt="" draggable="true"><button type="button" class="gm" data-gm="-1" data-id="${x.id}" aria-label="Move photo earlier" title="Move earlier"${i===0?' disabled':''}>‹</button><button type="button" class="gm r" data-gm="1" data-id="${x.id}" aria-label="Move photo later" title="Move later"${i===a.length-1?' disabled':''}>›</button>${T('data-dg',x.id)}<input class="gc" data-gc="${x.id}" placeholder="Caption (optional)" value="${esc(x.c||'')}" maxlength="120" aria-label="Photo caption"></div>`).join('')||'<p class="note">No photos yet.</p>';
  if(window.__applySet)window.__applySet();
 }
 render();
 document.addEventListener('click',e=>{
- const g=e.target.closest('[data-go]');if(g&&window.__goSec)window.__goSec(g.dataset.go);
+ const g=e.target.closest('[data-go]');if(g)$('#'+g.dataset.go).scrollIntoView({behavior:'smooth'});
  const ep=e.target.closest('[data-ep]');if(ep){startEdit(ep.dataset.ep);return}
  const dp=e.target.closest('[data-dp]');if(dp){if(!confirm('Delete this project? This cannot be undone.'))return;if(editId!=null&&editId==dp.dataset.dp)resetPF();S.projects=S.projects.filter(x=>x.id!=dp.dataset.dp);render();persist();toast('Project removed')}
  const dg=e.target.closest('[data-dg]');if(dg){if(!confirm('Delete this photo?'))return;S.gallery=S.gallery.filter(x=>x.id!=dg.dataset.dg);render();persist();toast('Photo removed')}
@@ -1150,7 +1046,7 @@ const DW=['Circuits & Electronics','Power Systems','Signals & Control','Energy &
 const bg=$('#bg'),bx=bg.getContext('2d');let P=[],bw,bh;
 function bsize(){bw=bg.width=bg.offsetWidth;bh=bg.height=bg.offsetHeight;P=[];for(let i=0;i<26;i++)P.push(np())}
 function np(){const h=Math.random()<.5,g=60;return{h,x:Math.round(Math.random()*bw/g)*g,y:Math.round(Math.random()*bh/g)*g,v:(Math.random()*1.5+.6)*(Math.random()<.5?1:-1),t:[]}}
-function bdraw(){if(document.hidden||scrollY>bh||document.documentElement.classList.contains('mlock')){requestAnimationFrame(bdraw);return}const th=document.documentElement.dataset.theme==='light'?'0,0,0':'255,255,255';bx.clearRect(0,0,bw,bh);bx.strokeStyle=`rgba(${th},.05)`;bx.lineWidth=1;
+function bdraw(){if(document.hidden||scrollY>bh){requestAnimationFrame(bdraw);return}const th=document.documentElement.dataset.theme==='light'?'0,0,0':'255,255,255';bx.clearRect(0,0,bw,bh);bx.strokeStyle=`rgba(${th},.05)`;bx.lineWidth=1;
  for(let x=0;x<bw;x+=60){bx.beginPath();bx.moveTo(x,0);bx.lineTo(x,bh);bx.stroke()}for(let y=0;y<bh;y+=60){bx.beginPath();bx.moveTo(0,y);bx.lineTo(bw,y);bx.stroke()}
  P.forEach((p,i)=>{p.h?p.x+=p.v:p.y+=p.v;p.t.push([p.x,p.y]);if(p.t.length>40)p.t.shift();
   bx.beginPath();p.t.forEach((q,k)=>k?bx.lineTo(q[0],q[1]):bx.moveTo(q[0],q[1]));bx.strokeStyle=`rgba(${th},.35)`;bx.stroke();
@@ -1201,7 +1097,7 @@ $('#asend').onclick=Busy($('#asend'),'Sending…',async()=>{const n=$('#an').val
  if(error){toast('Could not send. Please try again.');return}
  lastSend=Date.now();$('#amt').value='';$('#am').classList.remove('on');toast('Message sent. Thank you!')});
 {const ids=['hero','about','games','projects','gallery','contact'];
-const o=new IntersectionObserver(a=>a.forEach(x=>{if(x.isIntersecting)$$('nav [data-go],#tabs [data-go],#dots [data-go]').forEach(b=>b.classList.toggle('act',b.dataset.go===x.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
+const o=new IntersectionObserver(a=>a.forEach(x=>{if(x.isIntersecting)$$('nav [data-go],#tabs [data-go],#dots [data-go]').forEach(b=>b.classList.toggle('act',b.dataset.go===x.target.id))}),{rootMargin:'-45% 0px -50% 0px'});ids.forEach(i=>o.observe($('#'+i)));
 let __pt=0;addEventListener('scroll',()=>{if(__pt)return;__pt=requestAnimationFrame(()=>{__pt=0;const h=document.documentElement;$('#prog').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight||1)*100)+'%'})},{passive:true})}
 // ===== AI chat =====
 (()=>{const fab=$('#cfab'),pan=$('#cpan'),log=$('#clog'),inp=$('#cin'),snd=$('#csnd');const hist=[];let busy=false,last=0;const mc=$('#mst');
@@ -1209,11 +1105,11 @@ const add=(role,text)=>{const d=document.createElement('div');d.className='cm '+
 const toggle=on=>{pan.classList.toggle('on',on);fab.setAttribute('aria-expanded',on);if(on){mc.classList.add('wave');setTimeout(()=>mc.classList.remove('wave'),2700);setTimeout(()=>inp.focus(),50)}};
 fab.onclick=()=>toggle(!pan.classList.contains('on'));$('#cx').onclick=()=>toggle(false);
 async function send(){const t=inp.value.trim();if(!t||busy)return;if(Date.now()-last<3000){toast('Please wait a moment');return}
- busy=true;last=Date.now();window.__capyUser=t;window.__capyEmo&&window.__capyEmo('');mc.classList.add('think');snd.disabled=true;inp.value='';add('me',t);hist.push({role:'user',content:t});
+ busy=true;last=Date.now();mc.classList.add('think');snd.disabled=true;inp.value='';add('me',t);hist.push({role:'user',content:t});
  const w=add('bot','Typing…');w.classList.add('wait');
  try{const{data,error}=await sb.functions.invoke('chat',{body:{messages:hist.slice(-8)}});if(error||!data||!data.reply)throw error||new Error('no reply');
-  w.textContent=data.reply;window.__capyReact&&window.__capyReact(data.reply);hist.push({role:'assistant',content:data.reply})}
- catch(e){window.__capyEmo&&window.__capyEmo('sad',3600);w.textContent='Sorry, the assistant is not available right now. Please try again later or email John.';hist.pop()}
+  w.textContent=data.reply;hist.push({role:'assistant',content:data.reply})}
+ catch(e){w.textContent='Sorry, the assistant is not available right now. Please try again later or email John.';hist.pop()}
  w.classList.remove('wait');mc.classList.remove('think');mc.classList.add('hap');setTimeout(()=>mc.classList.remove('hap'),900);busy=false;snd.disabled=false;log.scrollTop=log.scrollHeight}
 snd.onclick=send;inp.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();send()}});
 addEventListener('keydown',e=>{if(e.key==='Escape')toggle(false)});
@@ -1824,7 +1720,7 @@ function rs(){const el=$('#slist');if(!el)return;const A=adm(),list=L(),lock=!A&
  const vis=A?list:list.filter(x=>x.ap!==false);
  el.innerHTML=vis.length?vis.map(x=>{const ok=/^https:\/\//.test(x.u||''),u=ok?esc(x.u):'#',d=ok?esc(x.u+'?download='+encodeURIComponent(x.n+(x.e?'.'+x.e:''))):'#',cl=x.cl===true,pe=x.ap===false,can=A||!cl,tag=pe?'Pending':cl?'Closed':'';
   return '<article class="card sf'+(pe?' pend':'')+'" data-sid="'+x.id+'"><button type="button" class="sfh" aria-expanded="false"><span class="chip">'+ic('file')+'</span><span class="sfn">'+esc(x.n)+'</span>'+(tag?'<span class="sft mono">'+tag+'</span>':'')+'<svg class="i sfv" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></button><div class="sfb"><div><div class="sfi">'+(A&&(pe||cl)?'<p>'+esc([pe?'Waiting for your approval':'',cl?'Closed to visitors':''].filter(Boolean).join(' · '))+'</p>':'')+(!A&&cl?'<p>This file is closed right now.</p>':'')+'<div class="acts">'+(can?'<a class="btn solid" href="'+u+'" target="_blank" rel="noopener noreferrer">'+ic('ext')+'Open</a><a class="btn" href="'+d+'" download>'+ic('down')+'Download</a>':'')+'<button type="button" class="btn" data-sx>'+ic('x')+'Close</button>'+(A?'<button type="button" class="btn" data-se="'+x.id+'">'+ic('edit')+'Rename</button><button type="button" class="btn" data-sd="'+x.id+'">'+ic('trash')+'Delete</button>':'')+'</div></div></div></div></article>'}).join(''):''}
-function al(){$('#sfList').innerHTML=L().map(x=>{const pe=x.ap===false,cl=x.cl===true;return '<div class="it sfa" data-sid="'+x.id+'"><span class="grip sfg" role="img" aria-label="Drag to reorder" title="Drag to reorder">⋮⋮</span><span class="chip">'+ic('file')+'</span><div class="sfm"><b>'+esc(x.n)+'</b><small>'+(pe?'Pending approval · hidden from visitors':'Approved')+(cl?' · Closed (visitors cannot open it)':'')+'</small></div><button type="button" class="ib sfmv" data-mv="-1" aria-label="Move up">▲</button><button type="button" class="ib sfmv" data-mv="1" aria-label="Move down">▼</button><button class="ib" data-se="'+x.id+'" aria-label="Rename">'+ic('edit')+'</button><button class="ib" data-sd="'+x.id+'" aria-label="Delete">'+ic('trash')+'</button><div class="sfx"><button type="button" class="btn'+(pe?' solid':'')+'" data-sa="'+x.id+'">'+ic('check')+(pe?'Approve':'Unapprove')+'</button><button type="button" class="btn" data-sc="'+x.id+'">'+ic(cl?'ext':'lock')+(cl?'Reopen file':'Close file')+'</button></div></div>'}).join('')||'<p class="note">No files yet.</p>'}
+function al(){$('#sfList').innerHTML=L().map(x=>{const pe=x.ap===false,cl=x.cl===true;return '<div class="it sfa"><span class="chip">'+ic('file')+'</span><div class="sfm"><b>'+esc(x.n)+'</b><small>'+(pe?'Pending approval · hidden from visitors':'Approved')+(cl?' · Closed (visitors cannot open it)':'')+'</small></div><button class="ib" data-se="'+x.id+'" aria-label="Rename">'+ic('edit')+'</button><button class="ib" data-sd="'+x.id+'" aria-label="Delete">'+ic('trash')+'</button><div class="sfx"><button type="button" class="btn'+(pe?' solid':'')+'" data-sa="'+x.id+'">'+ic('check')+(pe?'Approve':'Unapprove')+'</button><button type="button" class="btn" data-sc="'+x.id+'">'+ic(cl?'ext':'lock')+(cl?'Reopen file':'Close file')+'</button></div></div>'}).join('')||'<p class="note">No files yet.</p>'}
 function hl(){$$('#spane [data-sk]').forEach(b=>{const k=b.dataset.sk;if(k in D)b.classList.toggle('act',String(g(k))===b.dataset.v)});
  $('#vwCus').style.display=g('vw')==='custom'?'grid':'none';
  $('#sCodeBox').style.display=g('studyLock')==='on'?'':'none';
@@ -1849,7 +1745,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='sUi')
 $('#spane').addEventListener('click',e=>{const b=e.target.closest('[data-sk]');if(b&&b.dataset.sk==='studyLock'&&b.dataset.v==='on'&&!g('studyHash'))toast('Now set an access code below');setTimeout(sync,0)});
 $('#spane').addEventListener('input',()=>setTimeout(sync,0));
 new MutationObserver(rs).observe(document.body,{attributes:true,attributeFilter:['class']});
-
+new IntersectionObserver(a=>a.forEach(x=>{if(x.isIntersecting)$$('nav [data-go],#tabs [data-go],#dots [data-go]').forEach(b=>b.classList.toggle('act',b.dataset.go==='study'))}),{rootMargin:'-45% 0px -50% 0px'}).observe($('#study'));
 
 $('#sfAdd').onclick=async()=>{const f=$('#sfIn').files[0];if(!f){toast('Choose a file first');return}if(f.size>52428800){toast('That file is over 50 MB');return}
  const e=(f.name.split('.').pop()||'').toLowerCase().replace(/[^a-z0-9]/g,'').slice(0,6),n=$('#sfName').value.trim()||f.name.replace(/\.[^.]+$/,''),p='study/'+Date.now()+'-'+Math.random().toString(36).slice(2,6)+'.'+(e||'bin'),b=$('#sfAdd'),h=b.innerHTML;
@@ -1922,8 +1818,8 @@ const stack=[];let trig=null,pushed=false,skip=0,lockY=0;
 addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('button,[role=button],a,.imc');if(t)trig=t},true);
 /* viewport + keyboard vars */
 const vv=window.visualViewport,upd=()=>{const h=vv?vv.height:innerHeight,t=vv?vv.offsetTop:0,kb=Math.max(0,innerHeight-h-t);R.style.setProperty('--vvh',h+'px');R.style.setProperty('--vvt',t+'px');R.style.setProperty('--kbh',kb+'px');R.classList.toggle('kbd',kb>120)};
-let ur=0;const updT=()=>{if(ur)return;ur=requestAnimationFrame(()=>{ur=0;upd()})};if(vv){vv.addEventListener('resize',updT)}addEventListener('resize',updT);upd();
-addEventListener('focusin',e=>{const t=e.target;if(t.matches&&t.matches('input,textarea')&&t.closest('.modal')&&!t.closest('#m1,#m3')&&matchMedia('(pointer:coarse)').matches)setTimeout(()=>{try{t.scrollIntoView({block:'nearest',behavior:'auto'})}catch(_){}},250)});
+if(vv){vv.addEventListener('resize',upd);vv.addEventListener('scroll',upd)}addEventListener('resize',upd);upd();
+addEventListener('focusin',e=>{const t=e.target;if(t.matches&&t.matches('input,textarea')&&t.closest('.modal')&&matchMedia('(pointer:coarse)').matches)setTimeout(()=>{try{t.scrollIntoView({block:'center',behavior:RM()?'auto':'smooth'})}catch(_){}},300)});
 /* per-modal setup */
 function setup(m){
  m.setAttribute('role',m.id==='mconf'?'alertdialog':'dialog');m.setAttribute('aria-modal','true');
@@ -1992,146 +1888,6 @@ const NM={x:'Close',trash:'Delete',edit:'Edit',plus:'Add',up:'Back to top',down:
 $$('button').forEach(b=>{if(b.textContent.trim()||b.getAttribute('aria-label')||b.title)return;const u=b.querySelector('use'),k=u&&(u.getAttribute('href')||'').slice(1);if(NM[k])b.setAttribute('aria-label',NM[k])});
 $$('.res,#rr,#sr,#wr,#br').forEach(e=>e.setAttribute('aria-live','polite'));
 sync();
-})();
-</script>
-<script id="fixes-js">
-(function(){
-const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const flip=(get,key,fn)=>{const rm=matchMedia('(prefers-reduced-motion: reduce)').matches,B=new Map();get().forEach(e=>B.set(key(e),e.getBoundingClientRect()));fn();if(rm)return;get().forEach(e=>{const o=B.get(key(e));if(!o)return;const n=e.getBoundingClientRect(),dx=o.left-n.left,dy=o.top-n.top;if(!dx&&!dy)return;e.animate([{transform:'translate('+dx+'px,'+dy+'px)'},{transform:'none'}],{duration:260,easing:'cubic-bezier(.2,.8,.2,1)'})})};
-/* ---------- one reliable nav + scroll-spy ---------- */
-const SEC=['hero','about','games','projects','gallery','study','contact'],BTN='nav [data-go],#tabs [data-go],#dots [data-go]';
-const vis=e=>!!(e&&e.getClientRects().length);
-const setAct=id=>$$(BTN).forEach(b=>b.classList.toggle('act',b.dataset.go===id));
-const topOf=e=>{let y=0;while(e){y+=e.offsetTop;e=e.offsetParent}return y};
-let lock=0,timer=0,want=null,wantY=0;
-window.__goSec=id=>{const e=document.getElementById(id);if(!e||!vis(e))return;
- const y=()=>id==='hero'?0:Math.max(0,topOf(e)-($('nav')?$('nav').offsetHeight:0)-8);
- const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
- want=id;setAct(id);lock=Date.now()+1500;
- scrollTo({top:y(),behavior:rm?'auto':'smooth'});
- clearTimeout(timer);timer=setTimeout(()=>{if(Math.abs(scrollY-y())>6)scrollTo({top:y(),behavior:rm?'auto':'smooth'});setTimeout(()=>{wantY=scrollY},700)},1100)};
-let sp=0;
-const spy=()=>{sp=0;if(Date.now()<lock+700)return;
- if(want&&Math.abs(scrollY-wantY)<=40){setAct(want);return}want=null;
- const line=innerHeight*.35;let cur='hero';
- for(const id of SEC){const e=document.getElementById(id);if(vis(e)&&e.getBoundingClientRect().top<=line)cur=id}
- setAct(cur)};
-const ask=()=>{if(!sp)sp=requestAnimationFrame(spy)};
-addEventListener('scroll',ask,{passive:true});addEventListener('resize',ask);spy();
-
-/* ---------- admin panel: drag & drop section order ---------- */
-const TABS=[['p','Profile','user'],['j','Projects','work'],['g','Gallery','image'],['t','Texts','edit'],['e','Publish','down'],['m','Inbox','mail'],['c','Study','book'],['s','Settings','gear'],['a','Account','lock']];
-const KEYS=TABS.map(t=>t[0]);
-const parse=v=>{const u=[];String(v||'').split(',').forEach(k=>{if(KEYS.includes(k)&&!u.includes(k))u.push(k)});KEYS.forEach(k=>{if(!u.includes(k))u.push(k)});return u};
-const cloud=()=>{try{return window.__get('tabOrder')||''}catch(e){return ''}};
-const order=()=>{let v=cloud();if(!v){try{v=localStorage.getItem('ej_tabs')||''}catch(e){}}return parse(v)};
-const apply=arr=>{const b=$('#m2 .box>.tabs');if(!b)return;flip(()=>[...b.children],e=>e.dataset.t,()=>{(arr||order()).forEach(k=>{const x=b.querySelector('[data-t="'+k+'"]');if(x)b.appendChild(x)})});
- if(!$('#m2 .pane.on')&&typeof openTab==='function')openTab((arr||order())[0])};
-const save=arr=>{const v=arr.join(',');try{localStorage.setItem('ej_tabs',v)}catch(e){}window.__setSet('tabOrder',v);apply(arr)};
-
-const P=$('#spane');
-if(P){
- const g=document.createElement('div');g.className='sgrp';g.id='sOrder';
- g.innerHTML='<p class="sh" role="button" tabindex="0" aria-expanded="true"><svg class="i" aria-hidden="true"><use href="#gridv"></use></svg>Customize admin panel (drag &amp; drop)</p><div class="sgb"><div class="sgi"><div class="srow"><p class="sl">Section order<small>Drag the ⋮⋮ handle (or use the arrows) to arrange your admin sections. It is saved to the cloud, so it stays the same after you log out and in again.</small></p><ul class="tord" id="tOrd"></ul><div class="row"><button type="button" id="tOrdReset">Reset to default order</button></div></div></div></div>';
- const none=$('#sNone');none?P.insertBefore(g,none):P.appendChild(g);
- const ul=$('#tOrd');let drag=null;
- const render=()=>{if(drag)return;const o=order();
-  ul.innerHTML=o.map((k,i)=>{const t=TABS.find(x=>x[0]===k);return '<li data-k="'+k+'"><span class="grip" aria-hidden="true">⋮⋮</span><span class="nm"><svg class="i" aria-hidden="true"><use href="#'+t[2]+'"></use></svg>'+t[1]+'</span><button type="button" class="mv" data-d="-1" aria-label="Move '+t[1]+' up"'+(i===0?' disabled':'')+'>▲</button><button type="button" class="mv" data-d="1" aria-label="Move '+t[1]+' down"'+(i===o.length-1?' disabled':'')+'>▼</button></li>'}).join('')};
- const read=()=>[...ul.children].map(l=>l.dataset.k);
- ul.addEventListener('pointerdown',e=>{const h=e.target.closest('.grip');if(!h)return;e.preventDefault();drag=h.closest('li');drag.classList.add('drg');try{ul.setPointerCapture(e.pointerId)}catch(_){}});
- ul.addEventListener('pointermove',e=>{if(!drag)return;let before=null;for(const s of ul.children){if(s===drag)continue;const r=s.getBoundingClientRect();if(e.clientY<r.top+r.height/2){before=s;break}}
-  if(before!==drag.nextElementSibling&&before!==drag)flip(()=>[...ul.children],e=>e.dataset.k,()=>ul.insertBefore(drag,before))});
- const end=()=>{if(!drag)return;drag.classList.remove('drg');drag=null;save(read());render()};
- ul.addEventListener('pointerup',end);ul.addEventListener('pointercancel',end);
- ul.addEventListener('click',e=>{const b=e.target.closest('.mv');if(!b)return;const li=b.closest('li'),d=+b.dataset.d;
-  flip(()=>[...ul.children],e=>e.dataset.k,()=>{if(d<0&&li.previousElementSibling)ul.insertBefore(li,li.previousElementSibling);else if(d>0&&li.nextElementSibling)ul.insertBefore(li.nextElementSibling,li);
-  save(read());render()})});
- $('#tOrdReset').addEventListener('click',()=>{try{localStorage.removeItem('ej_tabs')}catch(e){}window.__setSet('tabOrder','');apply(KEYS);render();const t=$('#toast');if(t){t.textContent='Order reset';t.classList.add('on');setTimeout(()=>t.classList.remove('on'),1800)}});
- document.addEventListener('click',e=>{if(e.target.closest('#sReset'))setTimeout(()=>{try{localStorage.removeItem('ej_tabs')}catch(_){}apply();render()},80)});
- const o=window.__applySet;window.__applySet=function(){if(o)o.apply(this,arguments);apply();render()};
- render();
- /* shortcut at the top of Settings so the option is easy to find */
- const go=document.createElement('div');go.className='row';go.style.marginTop='14px';
- go.innerHTML='<button type="button" class="solid" id="tOrdGo" style="flex:1"><svg class="i" aria-hidden="true"><use href="#gridv"></use></svg>Customize admin panel order</button>';
- P.insertBefore(go,P.firstChild);
- $('#tOrdGo').addEventListener('click',()=>{g.classList.remove('shut','hid');const h=g.querySelector('.sh');if(h)h.setAttribute('aria-expanded','true');setTimeout(()=>g.scrollIntoView({block:'start',behavior:'auto'}),30)});
-}
-apply();
-/* phone repaint fix */
-const kick=()=>requestAnimationFrame(()=>{const b=$('#m2 .box'),pn=$('#m2 .pane.on');if(!b||!pn)return;pn.style.willChange='transform';void pn.offsetHeight;b.scrollTop=b.scrollTop;requestAnimationFrame(()=>{pn.style.willChange=''})});
-document.addEventListener('click',e=>{if(e.target.closest('#m2 [data-t],#admopen,#tOrdGo'))kick()},true);
-new MutationObserver(()=>{if($('#m2').classList.contains('on')){kick();setTimeout(kick,350)}}).observe($('#m2'),{attributes:true,attributeFilter:['class']});
-})();
-</script>
-<script id="fixes2-js">
-(function(){
-const $=s=>document.querySelector(s),L=$('#sfList');if(!L)return;let drag=null;
-const flip=(get,key,fn)=>{const rm=matchMedia('(prefers-reduced-motion: reduce)').matches,B=new Map();get().forEach(e=>B.set(key(e),e.getBoundingClientRect()));fn();if(rm)return;get().forEach(e=>{const o=B.get(key(e));if(!o)return;const n=e.getBoundingClientRect(),dx=o.left-n.left,dy=o.top-n.top;if(!dx&&!dy)return;e.animate([{transform:'translate('+dx+'px,'+dy+'px)'},{transform:'none'}],{duration:260,easing:'cubic-bezier(.2,.8,.2,1)'})})};
-
-const kids=()=>[...L.querySelectorAll('.sfa')];
-const mark=()=>{const k=kids();k.forEach((e,i)=>{const u=e.querySelector('[data-mv="-1"]'),d=e.querySelector('[data-mv="1"]');if(u)u.disabled=i===0;if(d)d.disabled=i===k.length-1})};
-const save=()=>{const ids=kids().map(e=>e.dataset.sid);const cur=S.study||[];const out=ids.map(id=>cur.find(x=>String(x.id)===id)).filter(Boolean);cur.forEach(x=>{if(!out.includes(x))out.push(x)});S.study=out;persist();if(window.__applySet)window.__applySet();toast('Order saved')};
-new MutationObserver(mark).observe(L,{childList:true});mark();
-L.addEventListener('pointerdown',e=>{const h=e.target.closest('.sfg');if(!h)return;e.preventDefault();drag=h.closest('.sfa');drag.classList.add('drg');try{L.setPointerCapture(e.pointerId)}catch(_){}});
-L.addEventListener('pointermove',e=>{if(!drag)return;let before=null;for(const s of kids()){if(s===drag)continue;const r=s.getBoundingClientRect();if(e.clientY<r.top+r.height/2){before=s;break}}
- if(before!==drag.nextElementSibling&&before!==drag)flip(()=>kids(),e=>e.dataset.sid,()=>L.insertBefore(drag,before))});
-const end=()=>{if(!drag)return;drag.classList.remove('drg');drag=null;mark();save()};
-L.addEventListener('pointerup',end);L.addEventListener('pointercancel',end);
-L.addEventListener('click',e=>{const b=e.target.closest('.sfmv');if(!b)return;const li=b.closest('.sfa'),d=+b.dataset.mv;
- flip(()=>kids(),e=>e.dataset.sid,()=>{if(d<0&&li.previousElementSibling)L.insertBefore(li,li.previousElementSibling);else if(d>0&&li.nextElementSibling)L.insertBefore(li.nextElementSibling,li);
- mark();save()})});
-})();
-</script>
-<script id="capy-emo-js">
-(function(){
-const $=s=>document.querySelector(s),mc=$('#mst'),pan=$('#cpan'),inp=$('#cin');if(!mc||!pan)return;
-const svg=mc.querySelector('svg'),head=mc.querySelector('.mh');if(!svg||!head)return;
-const mp=mc.querySelectorAll('.mpu');if(mp[1])mp[1].classList.add('mpr');
-const la=[...svg.querySelectorAll('path')].find(x=>x.getAttribute('d')==='M46 94L52 114');if(la&&la.parentNode)la.parentNode.classList.add('mla');
-head.insertAdjacentHTML('beforeend',`<g class="emo"><path class="x-hap" d="M48 54Q53 47 58 54M82 54Q87 47 92 54" fill="none" stroke="#4a2a1c" stroke-width="2.6" stroke-linecap="round"/><path class="x-winkr" d="M82 54Q87 48 92 54" fill="none" stroke="#4a2a1c" stroke-width="2.6" stroke-linecap="round"/><path class="x-closed" d="M48 52Q53 57 58 52M82 52Q87 57 92 52" fill="none" stroke="#4a2a1c" stroke-width="2.4" stroke-linecap="round"/><g class="x-heart"><path transform="translate(53,52)" d="M0 5C-7 -1 -7 -8 -3 -8C-1 -8 0 -6.5 0 -5.5C0 -6.5 1 -8 3 -8C7 -8 7 -1 0 5Z" fill="#ef4b6c"/><path transform="translate(87,52)" d="M0 5C-7 -1 -7 -8 -3 -8C-1 -8 0 -6.5 0 -5.5C0 -6.5 1 -8 3 -8C7 -8 7 -1 0 5Z" fill="#ef4b6c"/></g><path class="x-brow-ang" d="M45 44L60 49M95 44L80 49" fill="none" stroke="#5a3320" stroke-width="2.6" stroke-linecap="round"/><path class="x-brow-sad" d="M46 49L59 44M94 49L81 44" fill="none" stroke="#5a3320" stroke-width="2.4" stroke-linecap="round"/><path class="x-brow-conf" d="M47 46L59 46M81 41Q87 37 93 42" fill="none" stroke="#5a3320" stroke-width="2.4" stroke-linecap="round"/><path class="x-bigsmile" d="M59 68Q70 84 81 68Z" fill="#4a2a1c" stroke="#4a2a1c" stroke-width="1.6" stroke-linejoin="round"/><path class="x-bigsmile" d="M65 75Q70 80 75 75Q70 73 65 75Z" fill="#f09478"/><path class="x-frown" d="M63 76Q70 68 77 76" fill="none" stroke="#4a2a1c" stroke-width="1.9" stroke-linecap="round"/><path class="x-wavy" d="M62 73q4 -4 8 0t8 0" fill="none" stroke="#4a2a1c" stroke-width="1.9" stroke-linecap="round"/><path class="x-tiny" d="M66 72Q70 75 74 72" fill="none" stroke="#4a2a1c" stroke-width="1.9" stroke-linecap="round"/><path class="x-smirk" d="M63 73Q71 77 79 70" fill="none" stroke="#4a2a1c" stroke-width="2" stroke-linecap="round"/><path class="x-tear" d="M91 58Q95 64 91 68Q87 64 91 58Z" fill="#7cc4ff" stroke="#3b8fd6" stroke-width="1"/><path class="x-sweat" d="M100 44Q104 50 100 54Q96 50 100 44Z" fill="#7cc4ff" stroke="#3b8fd6" stroke-width="1"/><g class="x-shades"><path d="M43 47h20v9q0 4-4 4h-12q-4 0-4-4z" fill="#17171b"/><path d="M77 47h20v9q0 4-4 4h-12q-4 0-4-4z" fill="#17171b"/><path d="M63 49h14" stroke="#17171b" stroke-width="2.4"/><path d="M47 50l5 0M81 50l5 0" stroke="#fff" stroke-width="1.5" stroke-linecap="round" opacity=".6"/></g></g>`);svg.insertAdjacentHTML('beforeend',`<g class="fx"><g class="fx-heart"><path transform="translate(112,40)" d="M0 5C-7 -1 -7 -8 -3 -8C-1 -8 0 -6.5 0 -5.5C0 -6.5 1 -8 3 -8C7 -8 7 -1 0 5Z" fill="#ef4b6c"/></g><g class="fx-heart"><path transform="translate(124,28) scale(.8)" d="M0 5C-7 -1 -7 -8 -3 -8C-1 -8 0 -6.5 0 -5.5C0 -6.5 1 -8 3 -8C7 -8 7 -1 0 5Z" fill="#f472b6"/></g><g class="fx-heart"><path transform="translate(26,34) scale(.9)" d="M0 5C-7 -1 -7 -8 -3 -8C-1 -8 0 -6.5 0 -5.5C0 -6.5 1 -8 3 -8C7 -8 7 -1 0 5Z" fill="#ef4b6c"/></g><text class="fx-z" x="108" y="38" font-size="11" font-weight="700" font-family="system-ui,sans-serif" fill="#6b7fd7">z</text><text class="fx-z" x="118" y="28" font-size="14" font-weight="700" font-family="system-ui,sans-serif" fill="#6b7fd7">z</text><text class="fx-z" x="128" y="16" font-size="17" font-weight="700" font-family="system-ui,sans-serif" fill="#6b7fd7">Z</text><text class="fx-note" x="108" y="34" font-size="16" font-weight="700" font-family="system-ui,sans-serif" fill="#f0a43a">♪</text><text class="fx-note" x="22" y="30" font-size="14" font-weight="700" font-family="system-ui,sans-serif" fill="#f09478">♫</text><text class="fx-bang" x="112" y="38" font-size="30" font-weight="800" font-family="system-ui,sans-serif" fill="#e5484d">!</text><text class="fx-q" x="110" y="38" font-size="30" font-weight="800" font-family="system-ui,sans-serif" fill="#6b7fd7">?</text><g class="fx-anger" fill="none" stroke="#e5484d" stroke-width="2.6" stroke-linecap="round"><path d="M104 24l3 6 6-3M122 24l-3 6-6-3M104 42l3-6 6 3M122 42l-3-6-6 3"/></g><g class="fx-kb"><rect x="42" y="120" width="56" height="12" rx="3" fill="#33333b" stroke="#17171b" stroke-width="1.2"/><path d="M47 124h46M47 128h46" stroke="#9a9aa8" stroke-width="2" stroke-dasharray="3 2" stroke-linecap="round"/></g></g>`);
-const lab=document.createElement('span');lab.className='mlab';mc.appendChild(lab);
-const NAMES={joy:'Yay!',laugh:'Haha!',love:'Love it!',sleepy:'Zzz…',surprised:'Whoa!',sad:'Aww…',wink:'Wink!',confused:'Hmm?',grumpy:'Grr!',cool:'Cool!',shy:'Hehe…',typing:'Typing…'};
-const ALL=Object.keys(NAMES).filter(k=>k!=='typing');let tm=0,lastEmo='',act=0;
-function setEmo(n,ms,label){clearTimeout(tm);lab.classList.remove('show');
- if(!n||!NAMES[n]){mc.removeAttribute('data-emo');syncPick();return}
- mc.dataset.emo=n;lastEmo=n;if(label){lab.textContent=NAMES[n];lab.classList.add('show')}
- syncPick();tm=setTimeout(()=>{mc.removeAttribute('data-emo');lab.classList.remove('show');syncPick()},ms||2600)}
-const wave=()=>{mc.classList.add('wave');setTimeout(()=>mc.classList.remove('wave'),2700)};
-window.__capyEmo=(n,ms)=>{act=Date.now();setEmo(n,ms)};
-const RULES=[[/<3|❤|♥|\b(love|loved|thank|thanks|thx|cute|adorable|best)\b/i,'love'],[/:'?D\b|\b(haha|hehe|lol|lmao|funny|joke)\b|😂/i,'laugh'],[/:-?o\b|\b(wow|omg|whoa|no way|incredible)\b/i,'surprised'],[/:-?\(|\b(sorry|sad|unfortunately|unable|not available|error|failed?)\b/i,'sad'],[/\bzzz+\b|\b(sleep|sleepy|tired|night|bored)\b/i,'sleepy'],[/\bB-?\)|\b(cool|epic|dope|awesome|amazing)\b/i,'cool'],[/\b(angry|mad|annoy\w*|hate)\b|>:-?\(/i,'grumpy'],[/\b(shy|blush|pretty|compliment)\b|\^_?\^/i,'shy'],[/;-?\)/,'wink'],[/:-?\)|\b(yay|congrat\w*|excited|happy|great|win|welcome)\b/i,'joy'],[/:-?\/|\b(huh|confused|not sure|unsure)\b/i,'confused']];
-const pick=t=>{for(const r of RULES)if(r[0].test(t||''))return r[1];return ''};
-window.__capyReact=reply=>{act=Date.now();setEmo(pick(reply)||pick(window.__capyUser)||'joy',3000)};
-/* chat opens: little hello */
-{let was=false;new MutationObserver(()=>{const on=pan.classList.contains('on');if(on&&!was){act=Date.now();setEmo('joy',1500);place()}was=on}).observe(pan,{attributes:true,attributeFilter:['class']})}
-/* typing: Capy types too, then reacts to what was written */
-let pt=0;
-if(inp){inp.addEventListener('input',()=>{act=Date.now();clearTimeout(pt);
- if(mc.classList.contains('think'))return;
- const v=inp.value;if(!v.trim()){setEmo('');return}
- setEmo('typing',1200);
- pt=setTimeout(()=>{if(mc.classList.contains('think')||!inp.value.trim())return;const e=pick(inp.value);setEmo(e||'',2600)},800)});
- inp.addEventListener('blur',()=>{clearTimeout(pt);if(mc.dataset.emo==='typing')setEmo('')})}
-/* tap Capy: random mood */
-mc.addEventListener('click',()=>{act=Date.now();const o=ALL.filter(x=>x!==lastEmo);setEmo(o[Math.floor(Math.random()*o.length)],2800,true)});
-/* idle moods while chat is open */
-setInterval(()=>{if(!pan.classList.contains('on')||document.hidden||mc.classList.contains('think')||mc.dataset.emo||Date.now()-act<5000)return;
- const o=['wink','joy','love','sleepy','shy','cool','surprised','laugh'].filter(x=>x!==lastEmo);setEmo(o[Math.floor(Math.random()*o.length)],2400)},7000);
-/* ---- public emote picker (small icon, bottom right of Capy) ---- */
-const LIST=[['joy','😄','Joy'],['laugh','😂','Haha'],['love','😍','Love'],['wink','😉','Wink'],['cool','😎','Cool'],['shy','😊','Shy'],['surprised','😮','Wow'],['confused','🤔','Hmm'],['sad','😢','Sad'],['grumpy','😠','Grr'],['sleepy','😴','Sleep'],['typing','⌨️','Type'],['wave','👋','Wave']];
-const btn=document.createElement('button');btn.type='button';btn.id='emoBtn';btn.setAttribute('aria-label','Choose an emote for Capy');btn.setAttribute('aria-expanded','false');btn.title='Emotes';
-btn.innerHTML='<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.2q3.5 3.4 7 0"/><path d="M9 9.5h.01M15 9.5h.01"/></svg>';
-const pop=document.createElement('div');pop.id='emoPop';pop.setAttribute('role','group');pop.setAttribute('aria-label','Capy emotes');
-pop.innerHTML=LIST.map(e=>'<button type="button" data-e="'+e[0]+'" aria-label="'+e[2]+'" title="'+e[2]+'">'+e[1]+'<small>'+e[2]+'</small></button>').join('');
-pan.appendChild(btn);pan.appendChild(pop);
-function place(){const t=mc.offsetTop,h=mc.offsetHeight;btn.style.top=(t+h-38)+'px';pop.style.top=(t+h+4)+'px'}
-function syncPick(){pop.querySelectorAll('button').forEach(b=>b.classList.toggle('act',b.dataset.e===mc.dataset.emo))}
-const closePop=()=>{pop.classList.remove('on');btn.setAttribute('aria-expanded','false')};
-btn.addEventListener('click',e=>{e.stopPropagation();place();const on=pop.classList.toggle('on');btn.setAttribute('aria-expanded',on);syncPick()});
-pop.addEventListener('click',e=>{const b=e.target.closest('button[data-e]');if(!b)return;e.stopPropagation();act=Date.now();const n=b.dataset.e;
- if(n==='wave'){wave();setEmo('joy',1800,false)}else setEmo(n,n==='typing'?3500:4000,true);closePop()});
-document.addEventListener('click',e=>{if(pop.classList.contains('on')&&!pop.contains(e.target)&&e.target!==btn&&!btn.contains(e.target))closePop()});
-addEventListener('keydown',e=>{if(e.key==='Escape'&&pop.classList.contains('on')){closePop();btn.focus()}},true);
-addEventListener('resize',place);place();
 })();
 </script>
 </body></html>
