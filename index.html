@@ -2684,4 +2684,48 @@ var raf=window.requestAnimationFrame||function(f){return setTimeout(f,16)};
 })();
 
 </script>
+<style id="fix-ui">
+/* ===== Fix 1: icon buttons stay perfect circles (the global button min-height was stretching them) ===== */
+.del,#glist .del,#plist .del{width:34px;height:34px;min-width:34px;min-height:34px;max-width:34px;max-height:34px;aspect-ratio:1/1;padding:0;line-height:0;border-radius:50%;flex:none;align-items:center;justify-content:center}
+#glist.sm .del{width:30px;height:30px;min-width:30px;min-height:30px;max-width:30px;max-height:30px}
+.del .i{width:16px;height:16px}
+.thumbs button{min-width:0;aspect-ratio:1/1;flex:none}
+#lbz,#lbx,#totop{aspect-ratio:1/1;flex:none}
+@media(max-width:899px){
+ .del,#glist .del,#plist .del{width:36px;height:36px;min-width:36px;min-height:36px;max-width:36px;max-height:36px}
+ #glist.sm .del{width:32px;height:32px;min-width:32px;min-height:32px;max-width:32px;max-height:32px}
+}
+/* ===== Fix 2: readable text in both themes ===== */
+:root[data-theme=light]{--mut:#52525b}
+#aboutText{color:color-mix(in srgb,var(--fg) 80%,var(--bg))!important}
+/* per-word colours follow the theme (edit mode shows the real saved colour) */
+body:not(.edit) i.fx{color:var(--fxc,inherit)!important;-webkit-text-fill-color:var(--fxc,inherit)!important}
+</style>
+<script id="fix-ui-js">
+(function(){
+ var BG={light:[245,245,244],dark:[7,7,7]};
+ function lin(v){v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)}
+ function L(c){return .2126*lin(c[0])+.7152*lin(c[1])+.0722*lin(c[2])}
+ function cr(a,b){var x=L(a),y=L(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
+ function parse(c){var m=(c||'').match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);return m?[+m[1],+m[2],+m[3]]:null}
+ function fit(c,bg,light){
+  var t=light?0:255,out=c.slice(),i=0;
+  while(cr(out,bg)<4.5&&i<20){out=out.map(function(v){return Math.round(v+(t-v)*.12)});i++}
+  return out
+ }
+ function run(){
+  var theme=document.documentElement.getAttribute('data-theme')==='light'?'light':'dark',light=theme==='light',bg=BG[theme];
+  document.querySelectorAll('i.fx').forEach(function(el){
+   if(!el.dataset.fxc)el.dataset.fxc=el.style.color||'';
+   var c=parse(el.dataset.fxc);if(!c)return;
+   var o=fit(c,bg,light);
+   el.style.setProperty('--fxc','rgb('+o.join(',')+')');
+  });
+ }
+ var q=0;function soon(){if(q)return;q=requestAnimationFrame(function(){q=0;run()})}
+ new MutationObserver(soon).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+ new MutationObserver(soon).observe(document.body,{childList:true,subtree:true});
+ run();
+})();
+</script>
 </body></html>
