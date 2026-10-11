@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>John Eduard Bonillo</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0b0d16;--glass:rgba(28,30,42,.55);--fg:#f4f5f9;--mut:#a7abbd;--line:rgba(255,255,255,.14);--acc:#7aa8ff;--wp1:#3b2a7a;--wp2:#e0705f;--wp3:#1f6fa8;--e:cubic-bezier(.16,1,.3,1);--dk:54px;--px:0;--py:0;
+:root{--bg:#0b0d16;--glass:rgba(28,30,42,.55);--fg:#f4f5f9;--mut:#a7abbd;--line:rgba(255,255,255,.14);--acc:#7aa8ff;--wp1:#3b2a7a;--wp2:#e0705f;--wp3:#1f6fa8;--e:cubic-bezier(.16,1,.3,1);--dk:44px;--px:0;--py:0;
 --cur:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='26' height='26'><path d='M5 3l13 9.5-5.6 1.2 3.2 6.3-2.6 1.2-3.1-6.3L5 18.5z' fill='black' stroke='white' stroke-width='1.6' stroke-linejoin='round'/></svg>") 5 3,auto;
 --hand:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='26' height='26'><path d='M10 3a1.6 1.6 0 013.2 0v6.5l1.2-.3a1.6 1.6 0 012 .9l1.3.1a1.6 1.6 0 012 1.3V17c0 3.2-2.2 5.2-5.2 5.2h-2c-2.2 0-3.4-1-4.4-2.6L4.600 14.500a1.600 1.600 0 012.500-1.900L10 15z' fill='white' stroke='black' stroke-width='1.4' stroke-linejoin='round'/></svg>") 12 3,pointer}
 :root[data-t=light]{--bg:#e9ecf5;--glass:rgba(255,255,255,.62);--fg:#15171f;--mut:#555b6e;--line:rgba(0,0,0,.12);--wp1:#9bb8ff;--wp2:#ffc4a8;--wp3:#a8e0ff}
@@ -34,7 +34,7 @@ html,body{height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--
 #top{position:fixed;top:calc(12px + env(safe-area-inset-top));right:14px;display:flex;gap:8px;z-index:50}
 #top button{all:unset;cursor:var(--hand);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;transition:transform .35s var(--e)}
 #top button:hover{transform:scale(1.1) rotate(15deg)}#top svg{width:20px;height:20px;fill:none;stroke:var(--fg);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-#dock{touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;align-items:flex-end;gap:8px;padding:8px 10px;border-radius:24px;z-index:60;animation:dk 1.2s var(--e) 1.6s both}
+#dock{touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;align-items:flex-end;gap:8px;padding:6px 9px;border-radius:22px;z-index:60;animation:dk 1.2s var(--e) 1.6s both}
 @keyframes dk{from{opacity:0;transform:translate(-50%,60px)}}
 .di{all:unset;cursor:var(--hand);position:relative;width:var(--sz);height:var(--sz);transform-origin:50% 100%;will-change:transform}
 .tile{width:100%;height:100%;border-radius:23%;display:grid;place-items:center;position:relative;background:linear-gradient(180deg,color-mix(in srgb,var(--c),#fff 26%),var(--c) 55%,color-mix(in srgb,var(--c),#000 40%));box-shadow:0 8px 18px #0007,inset 0 1px 0 #fff7,inset 0 -1px 0 #0004}.tile::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,#fff5,#fff0 50%)}
@@ -72,7 +72,7 @@ input:focus,textarea:focus{outline:0;border-color:var(--acc);box-shadow:0 0 0 3p
 .ph{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}.ph img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;transition:transform .5s var(--e)}.ph img:hover{transform:scale(1.07) rotate(1deg)}
 :root[data-s=dark]{--glass:rgba(16,17,24,.97)}:root[data-s=dark][data-t=light]{--glass:rgba(246,247,251,.98)}:root[data-s=dark] .gl{backdrop-filter:none;-webkit-backdrop-filter:none}:root[data-s=dark] .bl{opacity:.3}
 :focus-visible{outline:2px solid var(--acc);outline-offset:2px}
-@media (max-width:700px){#hero{padding-bottom:120px}.win{left:20px!important;right:20px!important;top:0!important;bottom:0!important;margin:auto!important;width:auto!important;height:min(420px,58vh)!important;height:min(420px,58dvh)!important;border-radius:22px}.win.fs{top:calc(60px + env(safe-area-inset-top))!important;bottom:calc(100px + env(safe-area-inset-bottom))!important;margin:0!important;height:auto!important}.rz{display:none}.tb{height:44px}.tl{gap:10px}.tl button{width:15px;height:15px;font-size:10px;position:relative}.tl button::after{content:"";position:absolute;inset:-5px}.bd{padding:14px 14px 20px;overscroll-behavior:contain}#dock{--dk:48px;gap:8px;padding:8px 10px}#sub{letter-spacing:.08em}#top{right:10px}}
+@media (max-width:700px){#hero{padding-bottom:120px}.win{left:20px!important;right:20px!important;top:0!important;bottom:0!important;margin:auto!important;width:auto!important;height:min(420px,58vh)!important;height:min(420px,58dvh)!important;border-radius:22px}.win.fs{top:calc(60px + env(safe-area-inset-top))!important;bottom:calc(100px + env(safe-area-inset-bottom))!important;margin:0!important;height:auto!important}.rz{display:none}.tb{height:44px}.tl{gap:10px}.tl button{width:15px;height:15px;font-size:10px;position:relative}.tl button::after{content:"";position:absolute;inset:-5px}.bd{padding:14px 14px 20px;overscroll-behavior:contain}#dock{--dk:40px;gap:8px;padding:7px 9px}#sub{letter-spacing:.08em}#top{right:10px}}
 @media (hover:none){.di:hover::before{display:none}}
 @media (prefers-reduced-motion:reduce){.bl{animation:none!important}#name .wd span{animation:li 1.3s var(--e) forwards!important}}
 
@@ -226,7 +226,7 @@ html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 input,textarea,select,button{font-family:inherit}
 h2{font-size:1.6em;line-height:1.2;font-weight:650}h3{font-size:.78em;font-weight:600}p{font-size:.96em;line-height:1.6}.tag{font-size:.8em}.tt{font-size:.9em}
 #name{font-size:clamp(40px,10vw,124px);line-height:1}:root[data-nf=sans] #name{font-weight:700;letter-spacing:-.045em}:root[data-nf=sans] #name .wd>.w{letter-spacing:-.045em}
-#hero{padding:0 16px 96px}#sub{font-size:clamp(11px,1.5vw,14px);font-weight:500}
+#hero{padding:0 16px 76px}#sub{font-size:clamp(11px,1.5vw,14px);font-weight:500}
 /* window buttons on the right */
 .tl{order:2;width:70px;flex-direction:row-reverse;justify-content:flex-start}.tt{order:1;padding:0 0 0 70px}
 /* dock: size from one variable, always symmetric */
@@ -246,11 +246,11 @@ h2{font-size:1.6em;line-height:1.2;font-weight:650}h3{font-size:.78em;font-weigh
 .abt{object-fit:cover}.abi{display:grid;place-items:center;background:linear-gradient(135deg,var(--acc),#a66bff);color:#fff;font:600 30px var(--nf)}
 /* phone layout: windows fill the space between the top and the dock */
 @media (max-width:700px){
-.win{left:12px!important;right:12px!important;top:calc(64px + env(safe-area-inset-top))!important;bottom:calc(96px + env(safe-area-inset-bottom))!important;margin:0!important;width:auto!important;height:auto!important;max-height:min(540px,calc(100dvh - 176px - env(safe-area-inset-top) - env(safe-area-inset-bottom)))}
+.win{left:12px!important;right:12px!important;top:calc(64px + env(safe-area-inset-top))!important;bottom:calc(84px + env(safe-area-inset-bottom))!important;margin:0!important;width:auto!important;height:auto!important;max-height:min(540px,calc(100dvh - 164px - env(safe-area-inset-top) - env(safe-area-inset-bottom)))}
 .win[data-app]:not(.fs){height:auto!important}
 .win.fs{top:calc(64px + env(safe-area-inset-top))!important;max-height:none!important}
 #name{font-size:clamp(38px,12vw,64px)}
-#dock{padding:8px}
+#dock{padding:7px}
 }
 .cr{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:16px;background:#000b;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);animation:fu .4s var(--e)}
 .cb{--fg:#eef0f7;--mut:#a7abbd;color:var(--fg);padding:18px;border-radius:22px;text-align:center;max-width:100%;background:rgba(20,22,32,.96);border:1px solid #ffffff1f;box-shadow:0 30px 80px #000a}
@@ -269,10 +269,12 @@ h2{font-size:1.6em;line-height:1.2;font-weight:650}h3{font-size:.78em;font-weigh
 .pg{align-items:center}.pg img{aspect-ratio:auto!important;height:auto;max-height:62vh;object-fit:contain!important}
 .pth{object-fit:contain!important;background:#00000026}
 .jp img,.pc img{object-fit:contain!important;background:#00000026}
+#adm{width:auto!important;padding:0 14px;gap:6px;grid-auto-flow:column;font-weight:600;font-size:13px;border-radius:99px!important}#adm span{color:var(--fg)}
+.win[data-app=contact] label{display:block;font-weight:600;font-size:12px;color:var(--mut)}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script></head><body>
 <div id="desk"><i class="bl"></i><i class="bl"></i><i class="bl"></i>
 <div id="hero"><h1 id="name" aria-label=""></h1><div id="sub"></div><div id="soc"></div></div>
-<div id="top"><button class="gl" id="snd" aria-label="Toggle sound"></button><button class="gl" id="thm" aria-label="Toggle light or dark"></button></div>
+<div id="top"><button class="gl" id="snd" aria-label="Toggle sound"></button><button class="gl" id="adm" aria-label="Open admin" style="display:none"></button><button class="gl" id="thm" aria-label="Toggle light or dark"></button></div>
 <div id="av" role="button" aria-label="About me"></div><div id="hi"></div><div id="wins"></div><nav id="dock" class="gl" aria-label="Apps"></nav>
 <span id="sec" style="position:fixed;left:8px;bottom:6px;width:22px;height:22px;opacity:.01;z-index:70" aria-hidden="true"></span></div>
 <script>
@@ -308,6 +310,7 @@ function look(){const r=document.documentElement,s=r.style;WP[S.wp]&&S.wp>0?WP[S
  if(S.st=="dark"){r.dataset.s="dark";s.removeProperty("--glass")}else{delete r.dataset.s;S.gt==null?s.removeProperty("--glass"):s.setProperty("--glass",S.t=="dark"?`rgba(28,30,42,${S.gt})`:`rgba(255,255,255,${S.gt})`)}}
 /* sound (synthesised, off by default) */
 let AC;const beep=(f,d=.12,g=.05,to)=>{if(!S.snd)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state=="suspended")AC.resume();const o=AC.createOscillator(),v=AC.createGain();o.frequency.setValueAtTime(f,AC.currentTime);if(to)o.frequency.exponentialRampToValueAtTime(to,AC.currentTime+d);v.gain.setValueAtTime(g,AC.currentTime);v.gain.exponentialRampToValueAtTime(.0001,AC.currentTime+d);o.connect(v).connect(AC.destination);o.start();o.stop(AC.currentTime+d)}catch(e){}};
+const syncAdm=()=>{const b=$("#adm");b.style.display=admin?"":"none"};$("#adm").innerHTML=svg("lock")+"<span>Admin</span>";$("#adm").onclick=()=>openApp("admin");
 $("#thm").onclick=()=>{S.t=S.t=="dark"?"light":"dark";S.tu=true;ui();beep(520,.15,.05,780)};
 $("#snd").onclick=()=>{S.snd=!S.snd;ui();beep(660,.12)};
 /* big animated name */
@@ -323,7 +326,9 @@ const APPS=[
 {id:"projects",t:"Projects",i:"fold",c:"#8b5cf6",fx:"fxB",r:w=>{w.innerHTML=`<input placeholder="Search projects" aria-label="Search projects"><div></div>`;const q=$("input",w),l=$("div",w);const d=()=>{const v=q.value.toLowerCase(),a=SITE.projects.filter(p=>(p.name+p.desc+p.tech.join()).toLowerCase().includes(v));l.innerHTML=a.length?a.map(p=>`<div class=card tabindex=0 role=button data-p=${p.id}>${(p.imgs||[]).length?`<img class=pth src="${E(p.imgs[0].url)}" alt="" loading=lazy>`:""}<b>${E(p.name)}</b> ${p.status?`<span class=tag>${E(p.status)}</span>`:""}<p style="margin:6px 0 0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">${E(p.desc)}</p></div>`).join(""):'<div class=empty>No projects match.</div>'};q.oninput=d;d();l.onclick=l.onkeydown=e=>{if(e.type=="keydown"&&e.key!="Enter")return;const c=e.target.closest("[data-p]");if(c)openApp("pd"+c.dataset.p,{t:"Project",fx:"fxC",html:proj(+c.dataset.p)})}}},
 {id:"photos",t:"Photos",i:"img",c:"#ec4899",fx:"fxC",w:560,h:520,r:w=>photosUI(w)},
 {id:"study",t:"Study Files",i:"book",c:"#10b981",fx:"fxD",r:()=>SITE.study.open?(SITE.study.files.length?SITE.study.files.map(f=>`<div class=row><span>${E(f.name)}</span><a class=tag href="${E(f.url)}" target=_blank rel=noopener>Open</a></div>`).join(""):'<div class=empty>No files published yet.</div>'):`<div class=lk>${svg("lock")}<h2>Study Files are closed</h2><p>The owner has locked this folder. Check back later.</p></div>`},
-{id:"contact",t:"Contact",i:"mail",c:"#0ea5e9",fx:"fxE",r:w=>{w.innerHTML=`<div class=warn><b>Message delivery is not configured.</b> Nothing can be sent until a backend endpoint is connected.</div><label>Name<input autocomplete=name></label><label>Email<input type=email autocomplete=email></label><label>Message<textarea rows=4></textarea></label><button class=pb disabled>Send (unavailable)</button>`}},
+{id:"contact",t:"Contact",i:"mail",c:"#0ea5e9",fx:"fxE",r:w=>{const M="jolouvsyou@gmail.com";w.innerHTML=`<h2>Contact</h2><p>The best way to reach me is by email.</p><a class=card href="mailto:${M}" style="display:block;text-decoration:none;color:var(--fg)"><b>${M}</b><p style="margin:2px 0 0">Tap to open your email app</p></a><h3>Write a message</h3><label>Your name<input autocomplete=name></label><label>Message<textarea rows=4></textarea></label><button class=pb id=cs>Send email</button> <button class=pb id=cc style="background:#ffffff1c">Copy email</button>`;
+const [n,m]=$$("input,textarea",w);$("#cs",w).onclick=()=>{location.href="mailto:"+M+"?subject="+encodeURIComponent("Message from "+(n.value.trim()||"your website"))+"&body="+encodeURIComponent(m.value)};
+$("#cc",w).onclick=async e=>{try{await navigator.clipboard.writeText(M);e.target.textContent="Copied"}catch(x){e.target.textContent=M}setTimeout(()=>e.target.textContent="Copy email",1800)}}},
 {id:"ai",t:"Sid",i:"ai",c:"#6d5dfc",fx:"fxC",w:460,h:600,r:w=>aiUI(w)},
 {id:"admin",t:"Admin",i:"lock",c:"#dc2626",fx:"fxF",hide:1,w:760,h:540,r:w=>adminUI(w)}];
 const shrink=f=>new Promise((ok,no)=>{const im=new Image(),u=URL.createObjectURL(f);im.onload=()=>{const k=Math.min(1,1600/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*k;c.height=im.height*k;c.getContext("2d").drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(b=>b?ok(b):no(),"image/jpeg",.85)};im.onerror=no;im.src=u});
@@ -339,16 +344,16 @@ box.onpointermove=e=>{if(!P.has(e.pointerId))return;const o=P.get(e.pointerId);i
 box.onpointerup=box.onpointercancel=e=>{P.delete(e.pointerId);pd=0};
 const close=()=>{ov.remove();URL.revokeObjectURL(u)};$(".cx",ov).onclick=()=>{close();no(new Error("cancelled"))};
 $(".cs",ov).onclick=()=>{const O=document.createElement("canvas");O.width=O.height=800;const r=800/V,w=im.width*base*k*r,h=im.height*base*k*r;O.getContext("2d").drawImage(im,400+x*r-w/2,400+y*r-h/2,w,h);O.toBlob(b=>{close();b?ok(b):no(new Error("could not crop"))},"image/jpeg",.9)}};im.src=u})}
-const ADMIN_EMAIL="";/* PASTE YOUR ADMIN EMAIL BETWEEN THE QUOTES. Then the admin screen asks for the password only. */
+const ADMIN_EMAIL="jolouvsyou@gmail.com";/* the admin screen asks for the password only; this email is used behind the scenes */
 const TABS=[["ov","Overview","M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"],["pf","Profile",P.user],["md","Photos",P.img],["pr","Projects","M4 5h16v14H4zM4 9h16M8 13h6"],["fl","Files",P.fold],["lk","Look","M12 3a9 9 0 100 18c1.600 0 2.200-1 1.700-2.100-.5-1.100.1-2.400 1.500-2.400H17a4 4 0 004-4c0-5-4-9.500-9-9.500z"],["dk","Dock","M3 15h18v4H3zM6 8h4v4H6zM13 8h4v4h-4z"],["ai","AI","M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"],["sc","Security",P.lock]];
 const cu=el=>{const n=+el.dataset.c;let t0;const f=t=>{t0=t0||t;const p=Math.min((t-t0)/800,1);el.textContent=Math.round(n*(1-Math.pow(1-p,3)));p<1&&requestAnimationFrame(f)};requestAnimationFrame(f)};
 function adminUI(w){
  if(!sb){w.innerHTML=`<div class=warn style="margin:20px"><b>Backend not connected.</b> ${SB.url&&!window.supabase?"The Supabase library could not load.":"Add your Supabase URL and anon key to the SB setting at the top of the file."}</div>`;return}
- if(!admin){const em=ADMIN_EMAIL||(()=>{try{return localStorage.getItem("ae")||""}catch(e){return""}})(),ar='<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+ if(!admin){const em=(()=>{try{return localStorage.getItem("ae")||""}catch(e){return""}})()||ADMIN_EMAIL,ar='<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
   w.innerHTML=`<div class=lg><div class=lc><small>Admin</small>${em?"":'<div class=f><input type=email id=em placeholder=Email autocomplete=username aria-label=Email></div>'}<div class=f id=fp><input type=password id=pw placeholder=Password autocomplete=current-password aria-label=Password></div><button class=pb id=go style="width:100%;min-height:50px;margin-top:20px;font-weight:600;font-size:16px">Unlock</button><p id=ms style="margin-top:14px;min-height:20px;font-size:12px;color:var(--mut)"></p></div></div>`;
   const m0=t=>$("#ms",w).textContent=t,go=$("#go",w),pw=$("#pw",w),lc=$(".lc",w),fp=$("#fp",w);pw.oninput=()=>fp.classList.toggle("has",!!pw.value);
-  const run=async()=>{const e=em||$("#em",w).value.trim();if(!e||!pw.value)return m0("Enter your "+(e?"password":"email")+".");go.disabled=true;m0("");const r=await sb.auth.signInWithPassword({email:e,password:pw.value});
-   if(r.error){m0(em?"Incorrect password.":"Incorrect email or password.");lc.classList.remove("sk2");void lc.offsetWidth;lc.classList.add("sk2");go.disabled=false;return}try{localStorage.setItem("ae",e)}catch(x){}admin=true;fp.classList.add("ok");beep(700,.2,.05,1000);setTimeout(()=>adminUI(w),600)};
+  const run=async()=>{const x2=$("#em2",w)||$("#em",w),e=(x2&&x2.value.trim())||em;if(!e||!pw.value)return m0("Enter your "+(e?"password":"email")+".");go.disabled=true;m0("");const r=await sb.auth.signInWithPassword({email:e,password:pw.value});
+   if(r.error){m0(em&&!$("#em2",w)?"Incorrect password.":"Incorrect email or password.");if(em&&!$("#em2",w)&&!$("#ae2",w)){const l=document.createElement("button");l.id="ae2";l.textContent="Use a different email";l.style.cssText="all:unset;cursor:pointer;color:var(--acc);font-size:12px;margin-top:6px;display:block;text-align:center;width:100%";l.onclick=()=>{l.remove();$(".f",w).insertAdjacentHTML("beforebegin",'<div class=f><input type=email id=em2 placeholder=Email autocomplete=username aria-label=Email></div>');$("#em2",w).focus()};$("#ms",w).after(l)};lc.classList.remove("sk2");void lc.offsetWidth;lc.classList.add("sk2");go.disabled=false;return}try{localStorage.setItem("ae",e)}catch(x){}admin=true;syncAdm();fp.classList.add("ok");beep(700,.2,.05,1000);setTimeout(()=>adminUI(w),600)};
   go.onclick=run;pw.onkeydown=e=>{if(e.key=="Enter")run()};return}
  w.innerHTML=`<div class=ad><nav class=nv><i class=ind></i>${TABS.map(t=>`<button data-t=${t[0]} aria-label="${t[1]}"><svg viewBox="0 0 24 24"><path d="${t[2]}"/></svg>${t[1]}</button>`).join("")}</nav><div class=pn></div><div class=ts></div></div>`;
  const nav=$(".nv",w),pn=$(".pn",w),ts=$(".ts",w),q=id=>$("#"+id,pn),on=(id,f)=>{const e=q(id);if(e)e.onclick=f};let tt;
@@ -404,7 +409,7 @@ function adminUI(w){
   $$("[data-pe]",pn).forEach(b=>b.onclick=()=>{w._pe=b.dataset.pe;show("pr");pn.scrollTop=0});
   $$("[data-pdel]",pn).forEach(b=>b.onclick=async()=>{if(!confirm("Delete this project?"))return;const old=SITE.projects,it=old.find(x=>x.id==b.dataset.pdel);SITE.projects=old.filter(x=>x.id!=b.dataset.pdel);if(await saveProjects("Project deleted")){const ps=((it&&it.imgs)||[]).map(x=>x.path);if(ps.length)stg().remove(ps);if(w._pe==b.dataset.pdel){w._pe=null;w._pd=null}show("pr")}else SITE.projects=old});
   on("cp",async()=>{const v=q("np").value;if(v.length<8)return toast("Use at least 8 characters.",1);const r=await sb.auth.updateUser({password:v});r.error?toast(r.error.message,1):(q("np").value="",toast("Password changed"))});
-  on("lo",async()=>{await sb.auth.signOut();admin=false;adminUI(w)});
+  on("lo",async()=>{await sb.auth.signOut();admin=false;syncAdm();adminUI(w)});
   $$("[data-cap]",pn).forEach(i=>i.onchange=()=>upd("photos",i.dataset.cap,"caption",i.value.trim(),SITE.photos.find(x=>x.id==i.dataset.cap),"cap"));
   $$("[data-ti]",pn).forEach(i=>i.onchange=()=>upd("study_files",i.dataset.ti,"name",i.value.trim(),SITE.study.files.find(x=>x.id==i.dataset.ti),"name"));
   $$("[data-mv]",pn).forEach(b=>b.onclick=()=>{const[t,id,d]=b.dataset.mv.split(":");if(t=="a"){const ids=dockAll().map(a=>a.id),i=ids.indexOf(id),j=i+ +d;if(j<0||j>=ids.length)return;ids.splice(j,0,ids.splice(i,1)[0]);S.ord=ids;buildDock();ui();pushLook();return keep()}
@@ -422,7 +427,7 @@ const fmt=s=>E(s).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/`(.+?)`/g,"<cod
 function words(el){const tw=document.createTreeWalker(el,NodeFilter.SHOW_TEXT),ns=[];while(tw.nextNode())ns.push(tw.currentNode);const n=el.textContent.split(/\s+/).length,st=Math.min(.04,2.4/n);let i=0;
  ns.forEach(t=>{const f=document.createDocumentFragment();t.textContent.split(/(\s+)/).forEach(p=>{if(!p.trim()){f.append(p);return}const s=document.createElement("span");s.className="wr";s.textContent=p;s.style.animationDelay=i++*st+"s";f.append(s)});t.replaceWith(f)});return n*st*1000}
 const localAI=q=>{q=q.toLowerCase();const n=SITE.name;if(/contact|email|reach|hire/.test(q))return`You can reach ${n} through the **Contact** app in the dock, or through his social links on the home screen.`;if(/project|work|built/.test(q))return`${n}'s projects: ${SITE.projects.map(p=>p.name).join(", ")}. Open the **Projects** app for details.`;if(/who|about|john/.test(q))return`**${n}** — ${SITE.title}. ${SITE.intro}`;return"I couldn't reach the free AI service just now. Please try again in a moment. Meanwhile, I can point you to John's projects, background, or contact options."};
-async function ask(H){const A=SITE.ai,sys=`You are Sid, the friendly, professional AI assistant on the personal portfolio website of ${SITE.name}. Keep answers concise (under 120 words). Facts about ${SITE.name}: title: ${SITE.title}. Intro: ${SITE.intro}. Story: ${SITE.story}. Goals: ${SITE.goals}. Projects: ${SITE.projects.map(p=>p.name+" ("+p.desc+")").join("; ")}. Social links: ${SITE.links.map(l=>l.label).join(", ")}. ${A.notes?"Extra notes from the owner: "+A.notes:""} Never invent facts about ${SITE.name}; if unsure, say so and suggest the Contact app. You may also help with general questions.`;
+async function ask(H){const A=SITE.ai,sys=`You are Sid, the friendly, professional AI assistant on the personal portfolio website of ${SITE.name}. Keep answers concise (under 120 words). Facts about ${SITE.name}: title: ${SITE.title}. Intro: ${SITE.intro}. Story: ${SITE.story}. Goals: ${SITE.goals}. Projects: ${SITE.projects.map(p=>p.name+" ("+p.desc+")").join("; ")}. Social links: ${SITE.links.map(l=>l.label).join(", ")}. ${A.notes?"Extra notes from the owner: "+A.notes:""} Contact email: jolouvsyou@gmail.com. Never invent facts about ${SITE.name}; if unsure, say so and suggest the Contact app. You may also help with general questions.`;
  try{const c=new AbortController(),tm=setTimeout(()=>c.abort(),25000),r=await fetch("https://text.pollinations.ai/openai",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"openai",messages:[{role:"system",content:sys},...H.slice(-8)]}),signal:c.signal});clearTimeout(tm);if(!r.ok)throw 0;const j=await r.json(),x=j.choices&&j.choices[0]&&j.choices[0].message.content;if(!x)throw 0;return x}catch(e){return localAI(H[H.length-1].content)}}
 const POOL=["Who is John?","His projects","Contact him","Fun fact","His goals","Career tips","Explain AI simply","Motivate me","Tell me a joke","Portfolio tips"];
 function aiUI(w){const A=SITE.ai;
@@ -468,7 +473,7 @@ function openApp(id,o){if(W[id]){restore(id);return}
  $(".y",el).onclick=()=>mini(id);
  $(".g",el).onclick=()=>{const f=el.getBoundingClientRect();
  if(isM())el.classList.toggle("fs");
- else if(el._p){Object.assign(el.style,el._p);el._p=null}else{el._p={left:el.style.left,top:el.style.top,width:el.style.width,height:el.style.height};Object.assign(el.style,{left:"12px",top:TOP+"px",width:innerWidth-24+"px",height:innerHeight-TOP-106+"px"})}
+ else if(el._p){Object.assign(el.style,el._p);el._p=null}else{el._p={left:el.style.left,top:el.style.top,width:el.style.width,height:el.style.height};Object.assign(el.style,{left:"12px",top:TOP+"px",width:innerWidth-24+"px",height:innerHeight-TOP-92+"px"})}
  flip(el,f);beep(500,.1)};
  $(".tb",el).ondblclick=e=>{if(!e.target.closest("button"))$(".g",el).click()};drag($(".tb",el),el);resz($(".rz",el),el);foc(id);sync()}
 const foc=id=>{W[id].el.style.zIndex=++z;Object.keys(W).forEach(k=>W[k].el.classList.toggle("ia",k!=id))};
@@ -501,7 +506,7 @@ let n=0,tm;$("#sec").onclick=()=>{clearTimeout(tm);if(++n>=5){n=0;openApp("admin
 addEventListener("keydown",e=>{if(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()=="a"){e.preventDefault();openApp("admin")}if(e.key=="Escape"){const k=Object.keys(W).pop();k&&shut(k)}});
 addEventListener("resize",()=>{if(!isM())$$(".win").forEach(e=>{e.style.left=Math.min(parseInt(e.style.left)||0,innerWidth-90)+"px";e.style.top=Math.max(TOP,parseInt(e.style.top)||0)+"px";if(e._p){e.style.left="12px";e.style.top=TOP+"px";e.style.width=innerWidth-24+"px";e.style.height=innerHeight-TOP-106+"px"}})});
 ui();
-if(sb)sb.auth.getSession().then(r=>{admin=!!(r.data&&r.data.session)});
+if(sb){sb.auth.getSession().then(r=>{admin=!!(r.data&&r.data.session);syncAdm()});sb.auth.onAuthStateChange((ev,se)=>{admin=!!se;syncAdm()})}
 Promise.race([loadData(),new Promise(r=>setTimeout(r,1400))]).then(()=>{buildName();fit();intro()});
 document.fonts&&document.fonts.ready.then(fit);
 async function refreshSite(){if(!sb||admin||document.hidden)return;const k=()=>JSON.stringify([SITE.name,SITE.title,SITE.avatar,SITE.hello]),b=k();await loadData();if(b!=k()){buildName();fit();setAv();$("#sub").textContent=SITE.title}}
