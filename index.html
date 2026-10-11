@@ -252,6 +252,10 @@ h2{font-size:1.6em;line-height:1.2;font-weight:650}h3{font-size:.78em;font-weigh
 #name{font-size:clamp(38px,12vw,64px)}
 #dock{padding:8px}
 }
+.cr{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:16px;background:#000b;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);animation:fu .4s var(--e)}
+.cb{--fg:#eef0f7;--mut:#a7abbd;color:var(--fg);padding:18px;border-radius:22px;text-align:center;max-width:100%;background:rgba(20,22,32,.96);border:1px solid #ffffff1f;box-shadow:0 30px 80px #000a}
+.cv{position:relative;margin:12px auto;border-radius:16px;overflow:hidden;touch-action:none;background:#000;cursor:grab}.cv canvas{display:block}.cv i{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle closest-side,transparent calc(100% - 1.5px),#fff calc(100% - 1.5px),#fff 100%,#000a 100%)}
+.cz{margin:4px 0 14px}.cbt{display:flex;gap:10px;justify-content:center}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script></head><body>
 <div id="desk"><i class="bl"></i><i class="bl"></i><i class="bl"></i>
 <div id="hero"><h1 id="name" aria-label=""></h1><div id="sub"></div><div id="soc"></div></div>
@@ -311,6 +315,18 @@ const APPS=[
 {id:"ai",t:"Sid",i:"ai",c:"#6d5dfc",fx:"fxC",w:460,h:600,r:w=>aiUI(w)},
 {id:"admin",t:"Admin",i:"lock",c:"#dc2626",fx:"fxF",hide:1,w:760,h:540,r:w=>adminUI(w)}];
 const shrink=f=>new Promise((ok,no)=>{const im=new Image(),u=URL.createObjectURL(f);im.onload=()=>{const k=Math.min(1,1600/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*k;c.height=im.height*k;c.getContext("2d").drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(b=>b?ok(b):no(),"image/jpeg",.85)};im.onerror=no;im.src=u});
+/* picture cropper */
+function cropPic(file){return new Promise((ok,no)=>{const u=URL.createObjectURL(file),im=new Image();im.onerror=()=>{URL.revokeObjectURL(u);no(new Error("unsupported image"))};
+im.onload=()=>{const V=Math.min(320,innerWidth-64),ov=document.createElement("div");ov.className="cr";
+ov.innerHTML=`<div class=cb><h2>Crop picture</h2><p>Drag to move. Use the slider, mouse wheel or pinch to zoom.</p><div class=cv style="width:${V}px;height:${V}px"><canvas width=${V} height=${V}></canvas><i></i></div><input type=range class=cz min=1 max=4 step=.01 value=1 aria-label=Zoom><div class=cbt><button class="pb cx" style="background:#ffffff1c">Cancel</button><button class="pb cs">Use picture</button></div></div>`;document.body.append(ov);
+const cv=$("canvas",ov),c=cv.getContext("2d"),z=$(".cz",ov),box=$(".cv",ov),base=Math.max(V/im.width,V/im.height);let k=1,x=0,y=0;
+const draw=()=>{const w=im.width*base*k,h=im.height*base*k,mx=(w-V)/2,my=(h-V)/2;x=Math.max(-mx,Math.min(mx,x));y=Math.max(-my,Math.min(my,y));c.clearRect(0,0,V,V);c.drawImage(im,V/2+x-w/2,V/2+y-h/2,w,h)};
+const zoom=v=>{k=Math.max(1,Math.min(4,v));z.value=k;draw()};draw();z.oninput=()=>zoom(+z.value);box.onwheel=e=>{e.preventDefault();zoom(k*(e.deltaY<0?1.06:.94))};
+const P=new Map();let pd=0;box.onpointerdown=e=>{box.setPointerCapture(e.pointerId);P.set(e.pointerId,[e.clientX,e.clientY]);pd=0};
+box.onpointermove=e=>{if(!P.has(e.pointerId))return;const o=P.get(e.pointerId);if(P.size==1){x+=e.clientX-o[0];y+=e.clientY-o[1];P.set(e.pointerId,[e.clientX,e.clientY]);draw()}else{P.set(e.pointerId,[e.clientX,e.clientY]);const a=[...P.values()],d=Math.hypot(a[0][0]-a[1][0],a[0][1]-a[1][1]);if(pd)zoom(k*d/pd);pd=d}};
+box.onpointerup=box.onpointercancel=e=>{P.delete(e.pointerId);pd=0};
+const close=()=>{ov.remove();URL.revokeObjectURL(u)};$(".cx",ov).onclick=()=>{close();no(new Error("cancelled"))};
+$(".cs",ov).onclick=()=>{const O=document.createElement("canvas");O.width=O.height=800;const r=800/V,w=im.width*base*k*r,h=im.height*base*k*r;O.getContext("2d").drawImage(im,400+x*r-w/2,400+y*r-h/2,w,h);O.toBlob(b=>{close();b?ok(b):no(new Error("could not crop"))},"image/jpeg",.9)}};im.src=u})}
 const ADMIN_EMAIL="";/* PASTE YOUR ADMIN EMAIL BETWEEN THE QUOTES. Then the admin screen asks for the password only. */
 const TABS=[["ov","Overview","M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"],["pf","Profile",P.user],["md","Photos",P.img],["fl","Files",P.fold],["lk","Look","M12 3a9 9 0 100 18c1.600 0 2.200-1 1.700-2.100-.5-1.100.1-2.400 1.500-2.400H17a4 4 0 004-4c0-5-4-9.500-9-9.500z"],["dk","Dock","M3 15h18v4H3zM6 8h4v4H6zM13 8h4v4h-4z"],["ai","AI","M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"],["sc","Security",P.lock]];
 const cu=el=>{const n=+el.dataset.c;let t0;const f=t=>{t0=t0||t;const p=Math.min((t-t0)/800,1);el.textContent=Math.round(n*(1-Math.pow(1-p,3)));p<1&&requestAnimationFrame(f)};requestAnimationFrame(f)};
@@ -354,7 +370,7 @@ function adminUI(w){
   $$("button[data-k]",pn).forEach(b=>b.onclick=()=>{const v=b.dataset.v;S[b.dataset.k]=isNaN(v)||v==""?v:+v;$$(`[data-k="${b.dataset.k}"]`,b.parentNode).forEach(x=>x.classList.toggle("on",x==b));if(b.dataset.k=="t")S.tu=false;ui();if(b.dataset.k!="snd")pushLook();beep(560,.08)});
   $$("input[type=range]",pn).forEach(r=>r.oninput=()=>{S[r.dataset.k]=+r.value;ui();pushLook()});
   on("sp",()=>{const ks=["name","hello","title","intro","story","goals"],rows=ks.map(k=>({key:"prof_"+k,value:$("#f_"+k,pn).value.trim()}));sv(rows,"Text saved").then(ok=>{if(ok){ks.forEach((k,i)=>{if(rows[i].value||k=="hello")SITE[k]=rows[i].value});$("#sub").textContent=SITE.title;buildName();fit();setAv()}})});
-  on("au",async()=>{const f=q("af").files[0];if(!f)return toast("Choose a picture.",1);try{toast("Uploading…");const b=await shrink(f),p="profile/avatar-"+Date.now()+".jpg",u=await sb.storage.from("public-files").upload(p,b,{contentType:"image/jpeg"});if(u.error)throw u.error;const url=sb.storage.from("public-files").getPublicUrl(p).data.publicUrl;if(await sv({key:"avatar_url",value:url},"Picture updated")){SITE.avatar=url;setAv()}}catch(e){toast("Upload failed: "+(e.message||"error"),1)}});
+  on("au",async()=>{const f=q("af").files[0];if(!f)return toast("Choose a picture.",1);try{const b=await cropPic(f);toast("Uploading…");const p="profile/avatar-"+Date.now()+".jpg",u=await sb.storage.from("public-files").upload(p,b,{contentType:"image/jpeg"});if(u.error)throw u.error;const url=sb.storage.from("public-files").getPublicUrl(p).data.publicUrl;if(await sv({key:"avatar_url",value:url},"Picture updated")){SITE.avatar=url;setAv()}}catch(e){e.message=="cancelled"?toast("Cancelled"):toast("Upload failed: "+(e.message||"error"),1)}});
   on("sa",()=>sv([{key:"ai_hi",value:q("a_hi").value.trim()},{key:"ai_notes",value:q("a_no").value.trim()}],"AI settings saved").then(ok=>{if(ok){SITE.ai.hi=q("a_hi").value.trim();SITE.ai.notes=q("a_no").value.trim()}}));
   on("ta",()=>openApp("ai"));
   on("pu",async()=>{const fs=[...q("pf").files];if(!fs.length)return toast("Choose at least one photo.",1);for(const f of fs){if(!f.type.startsWith("image/")||f.size>25e6){toast("Skipped "+f.name+": not an image or over 25 MB.",1);continue}try{toast("Uploading "+f.name+"…");const b=await shrink(f),p="photos/"+Date.now()+"-"+Math.random().toString(36).slice(2,8)+".jpg",u=await sb.storage.from("public-files").upload(p,b,{contentType:"image/jpeg"});if(u.error)throw u.error;const url=sb.storage.from("public-files").getPublicUrl(p).data.publicUrl,r=await sb.from("photos").insert({url,path:p,caption:q("pc").value.trim()});if(r.error)throw r.error}catch(e){return toast("Upload failed: "+(e.message||"unsupported image"),1)}}toast("Photos uploaded");beep(700,.2,.05,1000);again()});
