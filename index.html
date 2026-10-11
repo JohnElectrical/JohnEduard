@@ -246,9 +246,9 @@ h2{font-size:1.6em;line-height:1.2;font-weight:650}h3{font-size:.78em;font-weigh
 .abt{object-fit:cover}.abi{display:grid;place-items:center;background:linear-gradient(135deg,var(--acc),#a66bff);color:#fff;font:600 30px var(--nf)}
 /* phone layout: windows fill the space between the top and the dock */
 @media (max-width:700px){
-.win{left:12px!important;right:12px!important;top:calc(60px + env(safe-area-inset-top))!important;bottom:calc(96px + env(safe-area-inset-bottom))!important;margin:0!important;width:auto!important;height:auto!important;max-height:min(540px,calc(100dvh - 176px - env(safe-area-inset-top) - env(safe-area-inset-bottom)))}
+.win{left:12px!important;right:12px!important;top:calc(64px + env(safe-area-inset-top))!important;bottom:calc(96px + env(safe-area-inset-bottom))!important;margin:0!important;width:auto!important;height:auto!important;max-height:min(540px,calc(100dvh - 176px - env(safe-area-inset-top) - env(safe-area-inset-bottom)))}
 .win[data-app]:not(.fs){height:auto!important}
-.win.fs{top:calc(62px + env(safe-area-inset-top))!important;max-height:none!important}
+.win.fs{top:calc(64px + env(safe-area-inset-top))!important;max-height:none!important}
 #name{font-size:clamp(38px,12vw,64px)}
 #dock{padding:8px}
 }
@@ -263,6 +263,12 @@ h2{font-size:1.6em;line-height:1.2;font-weight:650}h3{font-size:.78em;font-weigh
 .jp>span{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;padding:3px 4px;background:linear-gradient(transparent,#000a)}.jp>span button{all:unset;color:#fff;width:24px;height:20px;text-align:center;font-size:16px;line-height:20px;cursor:var(--hand)}
 .pg{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;margin:10px 0;scrollbar-width:none}.pg::-webkit-scrollbar{display:none}.pg img{flex:0 0 88%;max-width:88%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;scroll-snap-align:center}.pg img:only-child{flex-basis:100%;max-width:100%}
 .pth{width:100%;height:130px;object-fit:cover;border-radius:10px;margin-bottom:8px;display:block}
+/* photos keep their original shape */
+.trk img{object-fit:contain!important;background:transparent}
+.ph{align-items:start}.ph img{aspect-ratio:auto!important;height:auto!important;object-fit:contain!important}
+.pg{align-items:center}.pg img{aspect-ratio:auto!important;height:auto;max-height:62vh;object-fit:contain!important}
+.pth{object-fit:contain!important;background:#00000026}
+.jp img,.pc img{object-fit:contain!important;background:#00000026}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script></head><body>
 <div id="desk"><i class="bl"></i><i class="bl"></i><i class="bl"></i>
 <div id="hero"><h1 id="name" aria-label=""></h1><div id="sub"></div><div id="soc"></div></div>
@@ -339,7 +345,7 @@ const cu=el=>{const n=+el.dataset.c;let t0;const f=t=>{t0=t0||t;const p=Math.min
 function adminUI(w){
  if(!sb){w.innerHTML=`<div class=warn style="margin:20px"><b>Backend not connected.</b> ${SB.url&&!window.supabase?"The Supabase library could not load.":"Add your Supabase URL and anon key to the SB setting at the top of the file."}</div>`;return}
  if(!admin){const em=ADMIN_EMAIL||(()=>{try{return localStorage.getItem("ae")||""}catch(e){return""}})(),ar='<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
-  w.innerHTML=`<div class=lg><div class=lc><small>Admin</small>${em?"":'<div class=f><input type=email id=em placeholder=Email autocomplete=username aria-label=Email></div>'}<div class=f id=fp><input type=password id=pw placeholder=Password autocomplete=current-password aria-label=Password><button class=go id=go aria-label=Unlock>${ar}</button></div><p id=ms style="margin-top:14px;min-height:20px;font-size:12px;color:var(--mut)"></p></div></div>`;
+  w.innerHTML=`<div class=lg><div class=lc><small>Admin</small>${em?"":'<div class=f><input type=email id=em placeholder=Email autocomplete=username aria-label=Email></div>'}<div class=f id=fp><input type=password id=pw placeholder=Password autocomplete=current-password aria-label=Password></div><button class=pb id=go style="width:100%;min-height:50px;margin-top:20px;font-weight:600;font-size:16px">Unlock</button><p id=ms style="margin-top:14px;min-height:20px;font-size:12px;color:var(--mut)"></p></div></div>`;
   const m0=t=>$("#ms",w).textContent=t,go=$("#go",w),pw=$("#pw",w),lc=$(".lc",w),fp=$("#fp",w);pw.oninput=()=>fp.classList.toggle("has",!!pw.value);
   const run=async()=>{const e=em||$("#em",w).value.trim();if(!e||!pw.value)return m0("Enter your "+(e?"password":"email")+".");go.disabled=true;m0("");const r=await sb.auth.signInWithPassword({email:e,password:pw.value});
    if(r.error){m0(em?"Incorrect password.":"Incorrect email or password.");lc.classList.remove("sk2");void lc.offsetWidth;lc.classList.add("sk2");go.disabled=false;return}try{localStorage.setItem("ae",e)}catch(x){}admin=true;fp.classList.add("ok");beep(700,.2,.05,1000);setTimeout(()=>adminUI(w),600)};
@@ -445,7 +451,7 @@ function intro(){const av=$("#av"),hi=$("#hi");setAv();hi.textContent=SITE.hello
  if(!S.in){av.classList.add("in");fin();return}
  requestAnimationFrame(()=>requestAnimationFrame(()=>{av.classList.add("in");hi.classList.add("in")}));setTimeout(fin,3000);addEventListener("pointerdown",fin,{once:true})}
 /* window manager */
-let z=10,off=0;const W={};const isM=()=>matchMedia("(max-width:700px)").matches;
+let z=10,off=0;const TOP=64;const W={};const isM=()=>matchMedia("(max-width:700px)").matches;
 const sync=()=>{const o=new Set($$(".win:not(.cl)").map(w=>w.dataset.app));$$(".di").forEach(d=>d.classList.toggle("run",o.has(d.dataset.id)));document.body.classList.toggle("dim",$$(".win:not(.cl):not(.mn)").length>0)};
 function flip(el,f){const l=el.getBoundingClientRect();if(!l.width||!l.height||!el.animate)return;el.style.transformOrigin="0 0";
  const a=el.animate([{transform:`translate(${f.left-l.left}px,${f.top-l.top}px) scale(${f.width/l.width},${f.height/l.height})`},{transform:"none"}],{duration:560,easing:"cubic-bezier(.22,1,.36,1)"});
@@ -454,7 +460,7 @@ function flip(el,f){const l=el.getBoundingClientRect();if(!l.width||!l.height||!
 function restore(id){const e=W[id].el,was=e.classList.contains("mn");e.style.transform="";e.classList.remove("mn");if(was){const k=[e,...e.children];k.forEach(c=>c.style.animation="none");void e.offsetWidth;k.forEach(c=>c.style.animation="");beep(420,.18,.04,640)}foc(id);sync()}
 function openApp(id,o){if(W[id]){restore(id);return}
  const a=APPS.find(x=>x.id==id)||o,el=document.createElement("section");el.className="win gl";el.dataset.app=id.startsWith("pd")?"projects":id;el.setAttribute("role","dialog");el.setAttribute("aria-label",a.t);el.style.setProperty("--fx",S.wf=="auto"?a.fx||"fxA":S.wf||"fxA");
- const w=Math.min(a.w||640,innerWidth-32),h=Math.min(a.h||470,innerHeight-150);off=(Object.keys(W).length%4)*28;Object.assign(el.style,{width:w+"px",height:h+"px",left:(innerWidth-w)/2+off+"px",top:Math.max(20,(innerHeight-h-80)/2+off)+"px"});
+ const w=Math.min(a.w||640,innerWidth-32),h=Math.min(a.h||470,innerHeight-TOP-110);off=(Object.keys(W).length%4)*28;Object.assign(el.style,{width:w+"px",height:h+"px",left:(innerWidth-w)/2+off+"px",top:Math.max(TOP+8,(innerHeight-h-80)/2+off)+"px"});
  el.innerHTML=`<div class=tb><div class=tl><button class=r aria-label=Close>✕</button><button class=y aria-label=Minimize>–</button><button class=g aria-label="Maximize or restore">+</button></div><div class=tt>${E(a.t)}</div></div><div class=bd></div><div class=rz></div>`;
  const bd=$(".bd",el),r=a.r?a.r(bd):a.html;if(typeof r=="string")bd.innerHTML=r;else if(o?.html)bd.innerHTML=o.html;
  $("#wins").append(el);W[id]={el,t:a.t};beep(420,.18,.04,640);const di=$(`.di[data-id="${id}"]`);if(di){di.classList.add("bn");setTimeout(()=>di.classList.remove("bn"),650)}
@@ -462,7 +468,7 @@ function openApp(id,o){if(W[id]){restore(id);return}
  $(".y",el).onclick=()=>mini(id);
  $(".g",el).onclick=()=>{const f=el.getBoundingClientRect();
  if(isM())el.classList.toggle("fs");
- else if(el._p){Object.assign(el.style,el._p);el._p=null}else{el._p={left:el.style.left,top:el.style.top,width:el.style.width,height:el.style.height};Object.assign(el.style,{left:"12px",top:"64px",width:innerWidth-24+"px",height:innerHeight-170+"px"})}
+ else if(el._p){Object.assign(el.style,el._p);el._p=null}else{el._p={left:el.style.left,top:el.style.top,width:el.style.width,height:el.style.height};Object.assign(el.style,{left:"12px",top:TOP+"px",width:innerWidth-24+"px",height:innerHeight-TOP-106+"px"})}
  flip(el,f);beep(500,.1)};
  $(".tb",el).ondblclick=e=>{if(!e.target.closest("button"))$(".g",el).click()};drag($(".tb",el),el);resz($(".rz",el),el);foc(id);sync()}
 const foc=id=>{W[id].el.style.zIndex=++z;Object.keys(W).forEach(k=>W[k].el.classList.toggle("ia",k!=id))};
@@ -470,7 +476,7 @@ function mini(id){const e=W[id].el,d=$(`.di[data-id="${id.replace(/^pd.*/,"proje
  e.classList.add("tr","mn");e.style.transform=`translate(${b.left+b.width/2-r.left-r.width/2}px,${b.top-r.top-r.height/2}px) scale(.1)`;setTimeout(()=>e.classList.remove("tr"),520);beep(600,.15,.04,300);sync()}
 function shut(id){const e=W[id]?.el;if(!e)return;delete W[id];const tp=Object.keys(W).sort((a,b)=>W[b].el.style.zIndex-W[a].el.style.zIndex)[0];tp&&foc(tp);e.classList.add("cl");beep(500,.16,.04,250);let d=0;const f=()=>{if(!d){d=1;e.remove();sync()}};e.onanimationend=f;setTimeout(f,450);sync()}
 function drag(h,el){h.onpointerdown=e=>{if(e.target.closest("button")||isM()||el._p)return;h.setPointerCapture(e.pointerId);const dx=e.clientX-el.offsetLeft,dy=e.clientY-el.offsetTop;let lx=e.clientX,ly=e.clientY;
- h.onpointermove=m=>{el.style.left=Math.min(Math.max(m.clientX-dx,-el.offsetWidth+90),innerWidth-90)+"px";el.style.top=Math.min(Math.max(m.clientY-dy,0),innerHeight-44)+"px";const v=Math.hypot(m.clientX-lx,m.clientY-ly);lx=m.clientX;ly=m.clientY;$(".bd",el).style.filter=v>6?`blur(${Math.min(v/14,2.2)}px)`:"";clearTimeout(el._b);el._b=setTimeout(()=>$(".bd",el).style.filter="",80)};
+ h.onpointermove=m=>{el.style.left=Math.min(Math.max(m.clientX-dx,-el.offsetWidth+90),innerWidth-90)+"px";el.style.top=Math.min(Math.max(m.clientY-dy,TOP),innerHeight-44)+"px";const v=Math.hypot(m.clientX-lx,m.clientY-ly);lx=m.clientX;ly=m.clientY;$(".bd",el).style.filter=v>6?`blur(${Math.min(v/14,2.2)}px)`:"";clearTimeout(el._b);el._b=setTimeout(()=>$(".bd",el).style.filter="",80)};
  h.onpointerup=h.onpointercancel=()=>{h.onpointermove=h.onpointerup=h.onpointercancel=null;$(".bd",el).style.filter=""}}}
 function resz(h,el){h.onpointerdown=e=>{e.stopPropagation();h.setPointerCapture(e.pointerId);const sx=e.clientX,sy=e.clientY,w=el.offsetWidth,hh=el.offsetHeight;h.onpointermove=m=>{el.style.width=Math.max(300,w+m.clientX-sx)+"px";el.style.height=Math.max(220,hh+m.clientY-sy)+"px"};h.onpointerup=h.onpointercancel=()=>{h.onpointermove=h.onpointerup=null}}}
 /* dock */
@@ -493,7 +499,7 @@ dk.addEventListener("click",e=>{if(mv){e.stopPropagation();e.preventDefault();mv
    This only hides the door; real protection is the server-side password. */
 let n=0,tm;$("#sec").onclick=()=>{clearTimeout(tm);if(++n>=5){n=0;openApp("admin")}tm=setTimeout(()=>n=0,1500)};
 addEventListener("keydown",e=>{if(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()=="a"){e.preventDefault();openApp("admin")}if(e.key=="Escape"){const k=Object.keys(W).pop();k&&shut(k)}});
-addEventListener("resize",()=>{if(!isM())$$(".win").forEach(e=>e.style.left=Math.min(parseInt(e.style.left)||0,innerWidth-90)+"px")});
+addEventListener("resize",()=>{if(!isM())$$(".win").forEach(e=>{e.style.left=Math.min(parseInt(e.style.left)||0,innerWidth-90)+"px";e.style.top=Math.max(TOP,parseInt(e.style.top)||0)+"px";if(e._p){e.style.left="12px";e.style.top=TOP+"px";e.style.width=innerWidth-24+"px";e.style.height=innerHeight-TOP-106+"px"}})});
 ui();
 if(sb)sb.auth.getSession().then(r=>{admin=!!(r.data&&r.data.session)});
 Promise.race([loadData(),new Promise(r=>setTimeout(r,1400))]).then(()=>{buildName();fit();intro()});
